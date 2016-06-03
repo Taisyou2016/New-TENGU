@@ -1,0 +1,160 @@
+fileFormatVersion: 2
+guid: 36a02d6030745de4db41ee953503c317
+timeCreated: 1463724004
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: chest
+    100002: head
+    100004: hip
+    100006: imagePlane3
+    100008: L_ankle
+    100010: L_ball
+    100012: L_clavicle
+    100014: L_elbow
+    100016: L_finger1
+    100018: L_finger2
+    100020: L_finger3
+    100022: L_kinee
+    100024: L_o_finger1
+    100026: L_o_finger2
+    100028: L_pelvis
+    100030: L_shoulder
+    100032: L_toe
+    100034: L_wrist
+    100036: neck
+    100038: nose
+    100040: //RootNode
+    100042: pPlane1
+    100044: pSphere2
+    100046: pSphere3
+    100048: R_ankle
+    100050: R_ball
+    100052: R_clavicle
+    100054: R_elbow
+    100056: R_finger1
+    100058: R_finger2
+    100060: R_finger3
+    100062: R_kinee
+    100064: R_o_finger1
+    100066: R_o_finger2
+    100068: R_pelvis
+    100070: R_shoulder
+    100072: R_toe
+    100074: R_wrist
+    100076: root
+    100078: waist
+    400000: chest
+    400002: head
+    400004: hip
+    400006: imagePlane3
+    400008: L_ankle
+    400010: L_ball
+    400012: L_clavicle
+    400014: L_elbow
+    400016: L_finger1
+    400018: L_finger2
+    400020: L_finger3
+    400022: L_kinee
+    400024: L_o_finger1
+    400026: L_o_finger2
+    400028: L_pelvis
+    400030: L_shoulder
+    400032: L_toe
+    400034: L_wrist
+    400036: neck
+    400038: nose
+    400040: //RootNode
+    400042: pPlane1
+    400044: pSphere2
+    400046: pSphere3
+    400048: R_ankle
+    400050: R_ball
+    400052: R_clavicle
+    400054: R_elbow
+    400056: R_finger1
+    400058: R_finger2
+    400060: R_finger3
+    400062: R_kinee
+    400064: R_o_finger1
+    400066: R_o_finger2
+    400068: R_pelvis
+    400070: R_shoulder
+    400072: R_toe
+    400074: R_wrist
+    400076: root
+    400078: waist
+    2300000: pPlane1
+    2300002: pSphere3
+    3300000: pPlane1
+    3300002: pSphere3
+    4300000: pSphere2
+    4300002: pSphere3
+    4300004: pPlane1
+    9500000: //RootNode
+    13700000: pSphere2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 15
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: 92ab35d351dd75b4fb1cc56b79f13bdb
+timeCreated: 1464330041
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: body
+    100002: chest
+    100004: elbow
+    100006: elbow 1
+    100008: finger1
+    100010: finger1 1
+    100012: finger2
+    100014: finger2 1
+    100016: finger3
+    100018: finger3 1
+    100020: hair
+    100022: hand
+    100024: head
+    100026: hip
+    100028: joint1
+    100030: L_ankle
+    100032: L_ball
+    100034: L_clavicle
+    100036: L_knee
+    100038: L_pelvis
+    100040: L_toe
+    100042: L_wing1
+    100044: L_wing2
+    100046: L_wing3
+    100048: neck
+    100050: nose
+    100052: O_finger1
+    100054: O_finger1 1
+    100056: O_finger2
+    100058: O_finger2 1
+    100060: pCube10
+    100062: pCube11
+    100064: pCube13
+    100066: pCube14
+    100068: pCube15
+    100070: pCube4
+    100072: pCube9
+    100074: pCylinder1
+    100076: polySurface2
+    100078: polySurface3
+    100080: polySurface4
+    100082: pPlane10
+    100084: pPlane11
+    100086: pPlane6
+    100088: pPlane7
+    100090: pSphere1
+    100092: R_ankle
+    100094: R_ball
+    100096: R_clavicle
+    100098: R_knee
+    100100: R_pelvis
+    100102: R_toe
+    100104: R_wing1
+    100106: R_wing2
+    100108: R_wing3
+    100110: root
+    100112: shoulder
+    100114: shoulder 1
+    100116: //RootNode
+    100118: transform1
+    100120: transform2
+    100122: waist
+    100124: wrist
+    100126: wrist1
+    400000: body
+    400002: chest
+    400004: elbow
+    400006: elbow 1
+    400008: finger1
+    400010: finger1 1
+    400012: finger2
+    400014: finger2 1
+    400016: finger3
+    400018: finger3 1
+    400020: hair
+    400022: hand
+    400024: head
+    400026: hip
+    400028: joint1
+    400030: L_ankle
+    400032: L_ball
+    400034: L_clavicle
+    400036: L_knee
+    400038: L_pelvis
+    400040: L_toe
+    400042: L_wing1
+    400044: L_wing2
+    400046: L_wing3
+    400048: neck
+    400050: nose
+    400052: O_finger1
+    400054: O_finger1 1
+    400056: O_finger2
+    400058: O_finger2 1
+    400060: pCube10
+    400062: pCube11
+    400064: pCube13
+    400066: pCube14
+    400068: pCube15
+    400070: pCube4
+    400072: pCube9
+    400074: pCylinder1
+    400076: polySurface2
+    400078: polySurface3
+    400080: polySurface4
+    400082: pPlane10
+    400084: pPlane11
+    400086: pPlane6
+    400088: pPlane7
+    400090: pSphere1
+    400092: R_ankle
+    400094: R_ball
+    400096: R_clavicle
+    400098: R_knee
+    400100: R_pelvis
+    400102: R_toe
+    400104: R_wing1
+    400106: R_wing2
+    400108: R_wing3
+    400110: root
+    400112: shoulder
+    400114: shoulder 1
+    400116: //RootNode
+    400118: transform1
+    400120: transform2
+    400122: waist
+    400124: wrist
+    400126: wrist1
+    2300000: pCube10
+    2300002: pCube11
+    2300004: pCube13
+    2300006: pCube14
+    2300008: pCube15
+    2300010: pCube4
+    2300012: pCube9
+    2300014: pCylinder1
+    2300016: polySurface2
+    2300018: polySurface4
+    2300020: pSphere1
+    3300000: pCube10
+    3300002: pCube11
+    3300004: pCube13
+    3300006: pCube14
+    3300008: pCube15
+    3300010: pCube4
+    3300012: pCube9
+    3300014: pCylinder1
+    3300016: polySurface2
+    3300018: polySurface4
+    3300020: pSphere1
+    4300000: polySurface3
+    4300002: pSphere1
+    4300004: pCube9
+    4300006: pCube13
+    4300008: pCylinder1
+    4300010: pCube10
+    4300012: pCube4
+    4300014: pCube11
+    4300016: polySurface2
+    4300018: polySurface4
+    4300020: pCube14
+    4300022: pCube15
+    4300024: pPlane10
+    4300026: pPlane11
+    9500000: //RootNode
+    13700000: polySurface3
+    13700002: pPlane10
+    13700004: pPlane11
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 30
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
