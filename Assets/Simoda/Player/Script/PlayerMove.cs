@@ -25,6 +25,8 @@ public class PlayerMove : MonoBehaviour
     private float velocityY = 0;
     private bool jampState = false;
     private bool windMove = false;
+    private bool knockBackState = false;
+    private bool stop = false;
 
     private List<GameObject> lockEnemyList = new List<GameObject>();
     private GameObject lockEnemy;
@@ -39,6 +41,7 @@ public class PlayerMove : MonoBehaviour
     public PlayerMoveStateWind stateWind = new PlayerMoveStateWind();
     public PlayerMoveStateKnockBackSmall stateKnockBackSmall = new PlayerMoveStateKnockBackSmall();
     public PlayerMoveStateKnockBackLarge stateKnockBackLarge = new PlayerMoveStateKnockBackLarge();
+    public PlayerMoveStateStop stateStop = new PlayerMoveStateStop();
 
     void Start()
     {
@@ -52,10 +55,20 @@ public class PlayerMove : MonoBehaviour
         stateWind.exeDelegate = Wind;
         stateKnockBackSmall.exeDelegate = KnockBackSmall;
         stateKnockBackLarge.exeDelegate = KnockBackLarge;
+        stateStop.exeDelegate = Stop;
     }
 
     void Update()
     {
+        stateProcessor.Execute(); //設定されている移動状態を実行
+
+        if (currentGroundHit == false) velocityY -= gravity * Time.deltaTime;
+        velocity.y = velocityY;
+
+        controller.Move(velocity * Time.deltaTime);
+
+        if (stop == true) return;
+
         /******************** ロックオン処理 ********************/
         foreach (var e in lockEnemyList)
         {
@@ -87,10 +100,6 @@ public class PlayerMove : MonoBehaviour
 
 
 
-
-
-        stateProcessor.Execute(); //設定されている移動状態を実行
-
         //地面との判定　ジャンプ処理
         previosGroundHit = currentGroundHit; //ひとつ前の状態
         currentGroundHit = CheckGrounded(); //現在の状態
@@ -111,18 +120,16 @@ public class PlayerMove : MonoBehaviour
         {
             velocityY = 10;
             jampState = true;
+            playerAnimator.SetTrigger("Jump");
         }
 
-        if (currentGroundHit == false) velocityY -= gravity * Time.deltaTime;
-        velocity.y = velocityY;
-
-        controller.Move(velocity * Time.deltaTime);
-
-
-
-        playerAnimator.SetFloat("VectorMagnitude", velocity.magnitude);
+        playerAnimator.SetFloat("VelocityY", velocity.y);
+        Vector3 velocityYzero = velocity;
+        velocityYzero.y = 0;
+        playerAnimator.SetFloat("VelocityMagnitude", velocityYzero.magnitude);
         playerAnimator.SetBool("Lockon", lockOn);
         playerAnimator.SetFloat("LockonAxis", Input.GetAxis("Horizontal"));
+        playerAnimator.SetBool("KnockBackState", knockBackState);
 
         AnimatorStateInfo aniStateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
         if (aniStateInfo.nameHash == Animator.StringToHash("Base Layer.Wait"))
@@ -134,6 +141,7 @@ public class PlayerMove : MonoBehaviour
                 WaitTime = 0.0f;
             }
         }
+        else WaitTime = 0.0f;
     }
 
 
@@ -190,7 +198,7 @@ public class PlayerMove : MonoBehaviour
     public bool CheckGrounded() //地面に接地しているかどうかを調べる
     {
         //controller.isGroundedがtrueならRaycastを使わずに判定終了
-        //if (controller.isGrounded) return true;
+        if (controller.isGrounded) return true;
         //放つ光線の初期位置と姿勢
         //若干体にめり込ませた位置から発射しないと正しく判定できないときがある
         var ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
@@ -268,10 +276,12 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(newDir);
         }
 
-
-
         if (lockOn == true) stateProcessor.State = stateLockOn;
-        if (windPower >= 1) stateProcessor.State = stateWind;
+        if (windPower >= 1)
+        {
+            playerAnimator.SetTrigger("WindMoveOn");
+            stateProcessor.State = stateWind;
+        }
     }
 
     public void LockOn() //ロックオン時移動
@@ -286,6 +296,7 @@ public class PlayerMove : MonoBehaviour
         {
             lockOn = false;
             lockPosition.transform.position = transform.position;
+            playerAnimator.SetTrigger("WindMoveOn");
             stateProcessor.State = stateWind;
             return;
         }
@@ -329,6 +340,7 @@ public class PlayerMove : MonoBehaviour
             {
                 lockOn = false;
                 print("上下の距離が離れすぎたロック終了");
+                return;
             }
         }
         if (lockEnemyList != null && lockEnemy == null)
@@ -401,6 +413,7 @@ public class PlayerMove : MonoBehaviour
             //transform.rotation = Quaternion.AngleAxis(-transform.eulerAngles.z, transform.forward);
             windPower = 0;
             windMove = false;
+            playerAnimator.SetTrigger("WindMoveOff");
             stateProcessor.State = stateDefault;
         }
         //if (windPower <= 0.5 && lockOn == true) stateProcessor.State = stateLockOn;
@@ -408,13 +421,15 @@ public class PlayerMove : MonoBehaviour
 
     public void KnockBackSmall() //ノックバック小が起きた時の移動
     {
-        velocity = Vector3.zero;
+        knockBackState = true;
 
-        Invoke("DefaultOrLockOnChange", 0.5f);
+        velocity = Vector3.zero;
     }
 
     public void KnockBackLarge() //ノックバック大が起きた時の移動
     {
+        knockBackState = true;
+
         velocity =
             transform.forward * -1.0f * knockBackPower;
 
@@ -422,24 +437,41 @@ public class PlayerMove : MonoBehaviour
 
         if (lockOn == true)
             transform.LookAt(lockEnemy.transform.position);
+    }
 
-        Invoke("DefaultOrLockOnChange", 2.0f);
+    public void Stop()
+    {
+        stop = true;
+        velocity = Vector3.zero;
+    }
+
+    public void Joy()
+    {
+
     }
 
     public void ChangeKnockBackSmall()
     {
         stateProcessor.State = stateKnockBackSmall;
+        Invoke("DefaultOrLockOnChange", 0.5f);
     }
 
     public void ChangeKnockBackLarge(float power)
     {
         knockBackPower = power;
         stateProcessor.State = stateKnockBackLarge;
+        Invoke("DefaultOrLockOnChange", 2.0f);
     }
 
     public void DefaultOrLockOnChange()
     {
         if (lockOn == false) stateProcessor.State = stateDefault;
         if (lockOn == true) stateProcessor.State = stateLockOn;
+        knockBackState = false;
+    }
+
+    public void ChangeStop()
+    {
+        stateProcessor.State = stateStop;
     }
 }

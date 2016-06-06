@@ -55,6 +55,13 @@ public class CameraTest : MonoBehaviour
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetTransform.rotation, cameraRotateSpeed * Time.deltaTime);
             }
+            //else
+            //{
+            //    transform.rotation = Quaternion.Slerp(
+            //        transform.rotation,
+            //        Quaternion.Euler(targetTransform.rotation.eulerAngles.x, targetTransform.rotation.eulerAngles.y - 180.0f, targetTransform.rotation.eulerAngles.z),
+            //        cameraRotateSpeed * Time.deltaTime);
+            //}
         }
 
         if (target.GetComponent<PlayerMove>().GetWindMove() == true)

@@ -22,7 +22,7 @@ public class MouseController : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
         playerStatus = GameObject.FindObjectOfType<PlayerStatus>();
         windAura.SetActive(false);
         kamaitachiAura.SetActive(false);
