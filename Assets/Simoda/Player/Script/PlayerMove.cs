@@ -130,6 +130,7 @@ public class PlayerMove : MonoBehaviour
         playerAnimator.SetBool("Lockon", lockOn);
         playerAnimator.SetFloat("LockonAxis", Input.GetAxis("Horizontal"));
         playerAnimator.SetBool("KnockBackState", knockBackState);
+        playerAnimator.SetBool("WindMove", windMove);
 
         AnimatorStateInfo aniStateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
         if (aniStateInfo.nameHash == Animator.StringToHash("Base Layer.Wait"))
@@ -201,13 +202,14 @@ public class PlayerMove : MonoBehaviour
         if (controller.isGrounded) return true;
         //放つ光線の初期位置と姿勢
         //若干体にめり込ませた位置から発射しないと正しく判定できないときがある
-        var ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+        Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
         //探索距離
-        var tolerance = 1.4f;
+        float tolerance = 1.3f;
         Debug.DrawRay(ray.origin, ray.direction * tolerance);
         //Raycastがhitするかどうかで判定
         //地面にのみ衝突するようにレイヤを指定する
-        return Physics.Raycast(ray, tolerance, 1 << 8);
+        //return Physics.Raycast(ray, tolerance, 1 << 8);
+        return Physics.BoxCast(ray.origin, new Vector3(0.25f, 0.05f, 0.25f), ray.direction, transform.rotation, tolerance, 1 << 8);
     }
 
     public bool GetLockOnInfo()
@@ -474,4 +476,17 @@ public class PlayerMove : MonoBehaviour
     {
         stateProcessor.State = stateStop;
     }
+
+    //public void OnDrawGizmos()
+    //{
+    //    Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+
+    //    RaycastHit hitInfo;
+    //    bool hit = Physics.BoxCast(ray.origin, new Vector3(0.25f, 0.05f, 0.25f), ray.direction, out hitInfo, transform.rotation, 100.0f, 1 << 8);
+    //    if (hit)
+    //    {
+    //        Gizmos.DrawRay(transform.position + Vector3.up * 0.1f, ray.direction);
+    //        Gizmos.DrawWireCube(transform.position + -transform.up * hitInfo.distance, new Vector3(0.25f, 0.05f, 0.25f) * 2);
+    //    }
+    //}
 }
