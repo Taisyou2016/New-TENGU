@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: aab2cdbf92437b44b88dc2ebf34361b8
-timeCreated: 1464924197
+guid: 8b66fa24bde07cc4db4e54c63cb2e2a0
+timeCreated: 1465034759
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -198,8 +198,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
-      firstFrame: 1
-      lastFrame: 43
+      firstFrame: 14
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -219,7 +219,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.29500854
+      - time: 0.7054685
         functionName: AniStop
         data: 
         objectReferenceParameter: {instanceID: 0}

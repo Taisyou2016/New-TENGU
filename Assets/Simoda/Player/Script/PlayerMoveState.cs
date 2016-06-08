@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace PlayerMoveState
 {
@@ -67,7 +68,7 @@ namespace PlayerMoveState
         }
     }
 
-    public class PlayerMoveStateKnockBackSmall: PlayerMoveState
+    public class PlayerMoveStateKnockBackSmall : PlayerMoveState
     {
         public override string getStateName()
         {
@@ -80,6 +81,14 @@ namespace PlayerMoveState
         public override string getStateName()
         {
             return "State:KnockBackLarge";
+        }
+    }
+
+    public class PlayerMoveStateStop : PlayerMoveState
+    {
+        public override string getStateName()
+        {
+            return "State:Stop";
         }
     }
 }

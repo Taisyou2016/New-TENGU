@@ -25,6 +25,8 @@ public class PlayerStatus : MonoBehaviour
     private bool alphaZero; //アルファが0以下になったらtreu　1以上になったらfalse
     private float flashingSecond = 0.0f;
 
+    private Animator playerAnimator;
+
     void Start()
     {
         currentHp = maxHp;
@@ -33,6 +35,8 @@ public class PlayerStatus : MonoBehaviour
         originColor = modelMaterial.color;
         //Color alpha = new Color(0, 0, 0, 0.5f);
         //modelMesh.material.color -= alpha;
+
+        playerAnimator = transform.FindChild("Tengu_sotai").GetComponent<Animator>();
     }
 
     void Update()
@@ -51,7 +55,8 @@ public class PlayerStatus : MonoBehaviour
         if (currentMp >= maxMp && mpOver == true) //妖力が100まで回復したらmpOverをfalseに
             mpOver = false;
 
-        currentInvincibleTime -= Time.deltaTime;
+        if (invincible == true)
+            currentInvincibleTime -= Time.deltaTime;
         if (currentInvincibleTime <= 0) //currentInvincibleTimeが0より小さくなったら無敵を解除
             invincible = false;
 
@@ -59,6 +64,11 @@ public class PlayerStatus : MonoBehaviour
             HpDamage(1);
         if (Input.GetKeyDown(KeyCode.L))
             HpDamage(3);
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            playerAnimator.SetTrigger("Joy");
+            gameObject.GetComponent<PlayerMove>().ChangeStop();
+        }
 
         flashingSecond -= Time.deltaTime;
         if (flashingSecond >= 0.0f)
@@ -89,6 +99,8 @@ public class PlayerStatus : MonoBehaviour
         if (currentHp - damage <= 0) //現在のHPが0より小さかったら0に
         {
             currentHp = 0;
+            playerAnimator.SetTrigger("Dead");
+            gameObject.GetComponent<PlayerMove>().ChangeStop();
             print("体力がなくなり死亡しました");
             return;
         }
@@ -100,12 +112,14 @@ public class PlayerStatus : MonoBehaviour
         if (damage == 1) //damageが1だったらknockBackSmallInvincibleTimeを代入
         {
             currentInvincibleTime = knockBackSmallInvincibleTime;
+            playerAnimator.SetTrigger("KnockBackSmall");
             gameObject.GetComponent<PlayerMove>().ChangeKnockBackSmall();
             SetFlashingSecond(1.0f);
         }
         else if (damage >= 2) //damageが2以上だったらknockBackLargeInvincibleTimeを代入
         {
             currentInvincibleTime = knockBackLargeInvincibleTime;
+            playerAnimator.SetTrigger("KnockBackLarge");
             gameObject.GetComponent<PlayerMove>().ChangeKnockBackLarge(10.0f);
             SetFlashingSecond(3.0f);
         }
