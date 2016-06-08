@@ -13,7 +13,7 @@ public class ThirdPoint : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        text.text = "移動の練習3\n実際に敵を倒してみよう";
+        text.text = "移動の練習4\n実際に敵を倒してみよう";
         player = GameObject.FindWithTag("Player");
         player.GetComponent<PlayerMove>().walkSpeed = 5;
     }
@@ -23,7 +23,7 @@ public class ThirdPoint : MonoBehaviour {
         int count = transform.childCount;
         if (count <= 0)
         {
-            print("3　クリア");
+            print("4　クリア");
             NextPoint.gameObject.SetActive(true);
             Destroy(gameObject);
         }
