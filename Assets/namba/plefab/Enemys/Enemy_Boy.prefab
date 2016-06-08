@@ -1324,8 +1324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ohuda: {fileID: 151314, guid: 0435c878a9139894c9bc3d9f1933f87d, type: 2}
   bow: {fileID: 161056, guid: a10d5355590342d4f9456325493f768f, type: 2}
-  punch1: {fileID: 187524, guid: dd1bb46b3c07b3c4c8133ca7d76e368c, type: 2}
-  punch2: {fileID: 187524, guid: dd1bb46b3c07b3c4c8133ca7d76e368c, type: 2}
+  punch1: {fileID: 143792, guid: b5909592960ca7a4aad644677cab263b, type: 2}
+  punch2: {fileID: 143792, guid: b5909592960ca7a4aad644677cab263b, type: 2}
 --- !u!114 &11476108
 MonoBehaviour:
   m_ObjectHideFlags: 1

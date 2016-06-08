@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d6d442ecd322c46a9a6de6a0577b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
+  radius: 1
   power: 10
   dmg: 1
 --- !u!1001 &100100000
