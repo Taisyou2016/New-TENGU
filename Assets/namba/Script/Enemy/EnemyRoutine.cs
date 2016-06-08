@@ -128,6 +128,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         if (life <= 0)
         {
             ChangeState(EnemyState.Died);
+            return;
         }
         print("HP :" + life);
         ChangeState(EnemyState.Hit);
@@ -160,7 +161,8 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         public override void Execute()
         {
             owner.PSeach();
-            if(owner.Pflag)
+
+            if (owner.Pflag)
             {
                 owner.Switch(0);
                 owner.ChangeState(EnemyState.Pursuit);

@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 36abdec1a7f5fb3468a885754ee52e3e
+timeCreated: 1465325489
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: boss_uchiwa:pCylinder5
+    100004: boss_uchiwa:tengu_sotai4:body
+    100006: boss_uchiwa:tengu_sotai4:hand
+    100008: boss_uchiwa:tengu_sotai4:pPlane6
+    100010: boss_uchiwa:tengu_sotai4:pPlane7
+    100012: boss_uchiwa:tengu_sotai4:transform1
+    100014: boss_uchiwa:tengu_sotai4:transform2
+    100016: boss_uchiwa:tengu_UV:body
+    100018: boss_uchiwa:tengu_UV:hand
+    100020: boss_uchiwa:tengu_UV:pPlane6
+    100022: boss_uchiwa:tengu_UV:pPlane7
+    100024: boss_uchiwa:tengu_UV:transform1
+    100026: boss_uchiwa:tengu_UV:transform2
+    100028: chest
+    100030: head
+    100032: hip
+    100034: imagePlane3
+    100036: L_ankle
+    100038: L_clavicle
+    100040: L_elbow
+    100042: L_knee
+    100044: L_pelvis
+    100046: L_shoulder
+    100048: L_wrist
+    100050: neck
+    100052: nose
+    100054: pCylinder5
+    100056: pSphere3
+    100058: R_ankle
+    100060: R_clavicle
+    100062: R_elbow
+    100064: R_knee
+    100066: R_pelvis
+    100068: R_shoulder
+    100070: R_wrist
+    100072: root
+    100074: waist
+    400000: //RootNode
+    400002: boss_uchiwa:pCylinder5
+    400004: boss_uchiwa:tengu_sotai4:body
+    400006: boss_uchiwa:tengu_sotai4:hand
+    400008: boss_uchiwa:tengu_sotai4:pPlane6
+    400010: boss_uchiwa:tengu_sotai4:pPlane7
+    400012: boss_uchiwa:tengu_sotai4:transform1
+    400014: boss_uchiwa:tengu_sotai4:transform2
+    400016: boss_uchiwa:tengu_UV:body
+    400018: boss_uchiwa:tengu_UV:hand
+    400020: boss_uchiwa:tengu_UV:pPlane6
+    400022: boss_uchiwa:tengu_UV:pPlane7
+    400024: boss_uchiwa:tengu_UV:transform1
+    400026: boss_uchiwa:tengu_UV:transform2
+    400028: chest
+    400030: head
+    400032: hip
+    400034: imagePlane3
+    400036: L_ankle
+    400038: L_clavicle
+    400040: L_elbow
+    400042: L_knee
+    400044: L_pelvis
+    400046: L_shoulder
+    400048: L_wrist
+    400050: neck
+    400052: nose
+    400054: pCylinder5
+    400056: pSphere3
+    400058: R_ankle
+    400060: R_clavicle
+    400062: R_elbow
+    400064: R_knee
+    400066: R_pelvis
+    400068: R_shoulder
+    400070: R_wrist
+    400072: root
+    400074: waist
+    2300000: boss_uchiwa:pCylinder5
+    2300002: pCylinder5
+    3300000: boss_uchiwa:pCylinder5
+    3300002: pCylinder5
+    4300000: boss_uchiwa:pCylinder5
+    4300002: pCylinder5
+    4300004: pSphere3
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: pSphere3
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 25
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

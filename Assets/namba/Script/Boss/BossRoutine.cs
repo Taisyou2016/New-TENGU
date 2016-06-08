@@ -16,14 +16,15 @@ public enum BossState
 public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
     // ボスステータス
-    public int life = 1000;
-    public float speed = 4;
-    public float madnessspeed = 8;
+    public int life = 1000;                             // 最大HP
+    public float speed = 4;                             // 通常時スピード
+    public float madnessspeed = 8;                      // 発狂時スピード
 
-    public Vector2 movedis = new Vector2(2,5);
+    public Vector2 targetdis = new Vector2(2,5);
+            
     public Vector2 tornadoDis = new Vector2(2,4);
-    public Vector2 windSlashDis = new Vector2(1, 4);
-    public float dispelDies = 1;
+    public Vector2 windSlashDis = new Vector2(1, 4); 
+    public float displeDis = 1;
 
     [SerializeField]
     private string state;
@@ -31,17 +32,19 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private int nowlife;
 
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
+    private float angle = 60.0f;
+    private float dt;
 
 
     private Transform player;
-    private Rigidbody rd;
+    private CharacterController charcon;
     private BossAttack attack;
 
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        rd = GetComponent<Rigidbody>();
         attack = GetComponent<BossAttack>();
+        charcon = GetComponent<CharacterController>();
 
         nowlife = life;
 
@@ -67,6 +70,11 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         if (life <= 0)
         {
             ChangeState(BossState.Died);
+            return;
+        }
+        else if(Madness())
+        {
+            speed = madnessspeed;
         }
         print("HP :" + life);
         ChangeState(BossState.Hit);
@@ -76,21 +84,45 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     // プレイヤーとの距離
     public void PDistance()
     {
-        float Distance = Vector3.SqrMagnitude(this.transform.position - player.position);
-        Distance *= 0.1f;
+        float Distance = Vector3.Distance(this.transform.position,player.position);
 
-
-        if(Distance >= dispelDies)
+        if(Distance <= displeDis)
         {
             ChangeState(BossState.Dispel);
         }
-        else if(Distance >= windSlashDis.y && nowlife / life >= 0.3){
+        else if(Distance <= windSlashDis.y && nowlife / life >= 0.3){
             ChangeState(BossState.WindSlash);
         }
         else
         {
             ChangeState(BossState.Tornado);
         }
+    }
+
+    // Playerの方向を向く
+    public void PLookAt()
+    {
+        Vector3 vec = player.position - transform.position;
+        vec.y = 0;
+        Quaternion targetRotate = Quaternion.LookRotation(vec);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotate, Time.deltaTime * rotateSmooth);
+
+    }
+
+    // 移動処理
+    public void Move(Vector3 velocity)
+    {
+        velocity.y += Physics.gravity.y;
+        charcon.Move(velocity * speed * Time.deltaTime);
+    }
+
+    // ジャンプ移動処理
+    public void JumpMove(float Vx, float Vy)
+    {
+        Vector3 vec = transform.forward * Vx + transform.up * (Vy - (9.8f * dt));
+        vec = vec / 2;
+        charcon.Move(vec * speed * Time.deltaTime);
+        dt += Time.deltaTime;
     }
 
     // 覚醒状態
@@ -111,6 +143,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private class IdleState : IState<BossRoutine>
     {
         public IdleState(BossRoutine owner) : base(owner) { }
+        private bool run;
 
         public override void Initialize()
         {
@@ -119,7 +152,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         public override void Execute()
         {
-            owner.StopCoroutine(move());
+            owner.StartCoroutine(move());
         }
 
         public override void End()
@@ -128,57 +161,71 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator move()
         {
+            if (run) { yield break; }
+            run = true;
+
             yield return new WaitForSeconds(2);
             owner.ChangeState(BossState.Move);
+
+            run = false;
         }
     }
 
     // 移動状態
     private class MoveState : IState<BossRoutine>
     {
-        float targetdis;
+        private float targetdis, Distance;
+        private Vector3 destination;
+        private float Vx, Vy;
 
         public MoveState(BossRoutine owner) : base(owner) { }
 
         public override void Initialize()
         {
             owner.state = "Move";
+            targetdis = Random.Range(owner.targetdis.x, owner.targetdis.y);
 
-            targetdis = Random.Range(owner.movedis.x, owner.movedis.y);
-            float Distance = Vector3.SqrMagnitude(owner.transform.position - owner.player.position);
-            Distance /= 10;
-            targetdis = Distance - targetdis;
 
-            owner.StopCoroutine(move());
+            if (owner.Madness())
+            {
+                float subx = Vector3.Distance(owner.player.position, owner.transform.position);
+                float suby = subx / (Mathf.Sin(2 * owner.angle * Mathf.Deg2Rad) / 9.8f);
+                Vx = Mathf.Sqrt(suby) * Mathf.Cos(owner.angle * Mathf.Deg2Rad);
+                Vy = Mathf.Sqrt(suby) * Mathf.Sin(owner.angle * Mathf.Deg2Rad);
+                owner.transform.rotation = Quaternion.LookRotation(owner.player.position - owner.transform.position);
+            }
         }
 
         public override void Execute()
         {
+            owner.PLookAt();
+
+            Distance = Vector3.Distance(owner.player.position, owner.transform.position);
+            destination = (owner.player.position - owner.transform.position).normalized;
+
+            if (Distance > targetdis)
+            {
+                destination.y = 0;
+                if (owner.Madness())
+                {
+                    owner.JumpMove(Vx, Vy);
+                    return;
+                }
+                owner.Move(destination);
+
+                return;
+            }
+
+            // 移動が終わったら
+            owner.PDistance();
+
         }
 
         public override void End()
         {
+            owner.dt = 0;
         }
 
-        IEnumerator move()
-        {
-            // Playerの方向を向く
-            Vector3 vec = owner.player.position - owner.transform.position;
-            vec.y = 0;
-            Quaternion targetRotate = Quaternion.LookRotation(vec);
-
-            owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, targetRotate, Time.deltaTime * owner.rotateSmooth);
-
-            iTween.MoveTo(owner.gameObject, iTween.Hash("position", owner.transform.position + owner.transform.forward * targetdis));
-
-            if (owner.Madness())
-            {
-            }
-
-            yield return new WaitForSeconds(1);
-            // 移動が終わったら
-            owner.PDistance();
-        }
     }
 
     // 六芒星攻撃
@@ -196,6 +243,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             if (enemys.Length > 0)
             {
                 owner.ChangeState(BossState.Move);
+                return;
             }
             owner.StartCoroutine(Attack());
         }
@@ -268,12 +316,13 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         {
             owner.state = "WindSlash";
             vec = owner.transform.position + owner.transform.forward * 4;
+            owner.StartCoroutine(Attack());
         }
 
         public override void Execute()
         {
             // 攻撃終了後移行
-            owner.ChangeState(BossState.Hexagram);
+            //owner.ChangeState(BossState.Hexagram);
         }
 
         public override void End()
@@ -334,6 +383,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         public override void Initialize()
         {
             owner.state = "Died";
+            Destroy(owner.gameObject, 1.0f);
         }
 
         public override void Execute()
