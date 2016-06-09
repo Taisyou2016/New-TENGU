@@ -214,8 +214,8 @@ public class PlayerMove : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * tolerance);
         //Raycastがhitするかどうかで判定
         //地面にのみ衝突するようにレイヤを指定する
-        //return Physics.Raycast(ray, tolerance, 1 << 8);
-        return Physics.BoxCast(ray.origin, new Vector3(0.25f, 0.05f, 0.25f), ray.direction, transform.rotation, tolerance, 1 << 8);
+        return Physics.Raycast(ray, tolerance, 1 << 8);
+        //return Physics.BoxCast(ray.origin, new Vector3(0.1f, 0.05f, 0.1f), ray.direction, transform.rotation, tolerance, 1 << 8);
     }
 
     public bool GetLockOnInfo()
