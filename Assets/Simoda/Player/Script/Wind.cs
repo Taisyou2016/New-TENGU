@@ -15,6 +15,8 @@ public class Wind : MonoBehaviour
     public float playerPower;
     public float objectPower;
     public Vector3 direction;
+    public int generationPattern;
+
 
     private int cost;
 
@@ -39,8 +41,14 @@ public class Wind : MonoBehaviour
         DrawLine();
     }
 
-    public void Move(Vector3 vector, float stopTime)
+    public void Rotate(Quaternion rotation)
     {
+        transform.rotation = rotation; ;
+    }
+
+    public void Move(int pattern, Vector3 vector, float stopTime)
+    {
+        generationPattern = pattern;
         windMotion.GetComponent<Rigidbody>().velocity = vector;
 
         Invoke("WindStop", stopTime);
@@ -58,11 +66,19 @@ public class Wind : MonoBehaviour
             GameObject obj = Instantiate(linePrefab, startPoint, transform.rotation) as GameObject;
             obj.GetComponent<WindBlock>().SetForce(playerPower, objectPower, direction);
             obj.transform.position = windMotion.transform.position;
-            obj.transform.right = (windMotion.transform.position - point).normalized;
-            obj.transform.Rotate(new Vector3(1, 0, 0), obj.transform.eulerAngles.x * -1.0f);
-            obj.transform.localScale = new Vector3((windMotion.transform.position - point).magnitude, scaleY, scaleZ);
-            obj.transform.parent = this.transform;
 
+            obj.transform.right = (windMotion.transform.position - point).normalized;
+            if (generationPattern == 3 || generationPattern == 4) obj.transform.forward = player.transform.forward;
+
+            obj.transform.Rotate(new Vector3(1, 0, 0), obj.transform.eulerAngles.x * -1.0f);
+
+            if (generationPattern == 3 || generationPattern == 4)
+                obj.transform.localScale = new Vector3(scaleY, (windMotion.transform.position - point).magnitude, scaleZ);
+            else
+                obj.transform.localScale = new Vector3((windMotion.transform.position - point).magnitude, scaleY, scaleZ);
+
+
+            obj.transform.parent = this.transform;
             point = obj.transform.position;
         }
     }

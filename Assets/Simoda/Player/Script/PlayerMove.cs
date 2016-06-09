@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     public bool previosGroundHit = false; //ひとつ前の地面に当たっているかどうかの判定
     public bool currentGroundHit = false; //現在の地面に当たっているかどうかの判定
     public float WaitMotinChangeTime = 10.0f;
+    public float blowPower = 0.0f;
 
     private CharacterController controller;
     private GameObject cameraController;
@@ -42,6 +43,7 @@ public class PlayerMove : MonoBehaviour
     public PlayerMoveStateKnockBackSmall stateKnockBackSmall = new PlayerMoveStateKnockBackSmall();
     public PlayerMoveStateKnockBackLarge stateKnockBackLarge = new PlayerMoveStateKnockBackLarge();
     public PlayerMoveStateStop stateStop = new PlayerMoveStateStop();
+    public PlayerMoveStateBlow stateBlow = new PlayerMoveStateBlow();
 
     void Start()
     {
@@ -56,6 +58,7 @@ public class PlayerMove : MonoBehaviour
         stateKnockBackSmall.exeDelegate = KnockBackSmall;
         stateKnockBackLarge.exeDelegate = KnockBackLarge;
         stateStop.exeDelegate = Stop;
+        stateBlow.exeDelegate = Blow;
     }
 
     void Update()
@@ -149,13 +152,13 @@ public class PlayerMove : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) //ロックオン範囲に入った敵をListに追加
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
             lockEnemyList.Add(other.gameObject);
     }
 
     public void OnTriggerExit(Collider other) //ロックオン範囲から出た敵をListから削除
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
         {
             if (lockEnemy == other.gameObject) //範囲外出た敵がロックしている敵だったら　ロックを解除
             {
@@ -168,10 +171,13 @@ public class PlayerMove : MonoBehaviour
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (windMove == false) return;
+        //if (windMove == false) return;
 
         if (hit.gameObject.tag == "Terrain")
+        {
             windPower = 0;
+            blowPower = 0;
+        }
     }
 
     public int LengthSort(GameObject a, GameObject b) //Listを敵との距離が近い順にソート
@@ -238,6 +244,11 @@ public class PlayerMove : MonoBehaviour
         velocityY = velocity;
     }
 
+    public void SetBlowPower(float power)
+    {
+        blowPower = power;
+    }
+
     /******************** プレイヤーの移動状態関係 ********************/
     public void Default() //通常移動
     {
@@ -284,6 +295,10 @@ public class PlayerMove : MonoBehaviour
             playerAnimator.SetTrigger("WindMoveOn");
             stateProcessor.State = stateWind;
         }
+        if (blowPower >= 1)
+        {
+            stateProcessor.State = stateBlow;
+        }
     }
 
     public void LockOn() //ロックオン時移動
@@ -300,6 +315,13 @@ public class PlayerMove : MonoBehaviour
             lockPosition.transform.position = transform.position;
             playerAnimator.SetTrigger("WindMoveOn");
             stateProcessor.State = stateWind;
+            return;
+        }
+        if (blowPower >= 1)
+        {
+            lockOn = false;
+            lockPosition.transform.position = transform.position;
+            stateProcessor.State = stateBlow;
             return;
         }
 
@@ -450,6 +472,14 @@ public class PlayerMove : MonoBehaviour
     public void Joy()
     {
 
+    }
+
+    public void Blow()
+    {
+        velocity = -transform.forward * blowPower;
+        blowPower -= Time.deltaTime;
+
+        if (blowPower <= 0.5f) stateProcessor.State = stateDefault;
     }
 
     public void ChangeKnockBackSmall()
