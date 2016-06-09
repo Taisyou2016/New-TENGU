@@ -17,3 +17,9 @@ EditorBuildSettings:
     path: Assets/Tunoka/Scene/Tuno_TestScene.unity
   - enabled: 1
     path: Assets/Tunoka/Scene/Boss.unity
+  - enabled: 1
+    path: "Assets/Tunoka/Scene/\u03B22.unity"
+  - enabled: 1
+    path: Assets/Tunoka/Scene/GameOver.unity
+  - enabled: 1
+    path: Assets/Tunoka/Scene/GameClear.unity

@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class FadeInOut : MonoBehaviour {
 
 
-    [SerializeField]
-    private string m_scenechange;
+    public string m_scenechange;
     [SerializeField]
     private GameObject m_Fade;
     bool m_tr =true;

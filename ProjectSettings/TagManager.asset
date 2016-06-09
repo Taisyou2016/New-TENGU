@@ -10,6 +10,7 @@ TagManager:
   - EnemyBullet
   - Wind
   - Amulet
+  - Boss
   layers:
   - Default
   - TransparentFX

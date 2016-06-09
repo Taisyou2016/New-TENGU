@@ -22,12 +22,13 @@ public class SeconPoint : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        player.transform.rotation = new Quaternion(0, 0, 0, 0);
         int count = transform.childCount;
         if (count <= 0)
         {
             print("2　クリア");
             NextPoint.gameObject.SetActive(true);
-            iTween.MoveTo(gate, iTween.Hash("y", -15, "time", 3));
+            iTween.MoveTo(gate, iTween.Hash("y", -18, "time", 3));
             Destroy(gameObject);
         }
     }

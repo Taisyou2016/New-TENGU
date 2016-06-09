@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     public bool previosGroundHit = false; //ひとつ前の地面に当たっているかどうかの判定
     public bool currentGroundHit = false; //現在の地面に当たっているかどうかの判定
     public float WaitMotinChangeTime = 10.0f;
+    public float blowPower = 0.0f;
 
     private CharacterController controller;
     private GameObject cameraController;
@@ -42,6 +43,7 @@ public class PlayerMove : MonoBehaviour
     public PlayerMoveStateKnockBackSmall stateKnockBackSmall = new PlayerMoveStateKnockBackSmall();
     public PlayerMoveStateKnockBackLarge stateKnockBackLarge = new PlayerMoveStateKnockBackLarge();
     public PlayerMoveStateStop stateStop = new PlayerMoveStateStop();
+    public PlayerMoveStateBlow stateBlow = new PlayerMoveStateBlow();
 
     void Start()
     {
@@ -56,6 +58,7 @@ public class PlayerMove : MonoBehaviour
         stateKnockBackSmall.exeDelegate = KnockBackSmall;
         stateKnockBackLarge.exeDelegate = KnockBackLarge;
         stateStop.exeDelegate = Stop;
+        stateBlow.exeDelegate = Blow;
     }
 
     void Update()
@@ -130,6 +133,7 @@ public class PlayerMove : MonoBehaviour
         playerAnimator.SetBool("Lockon", lockOn);
         playerAnimator.SetFloat("LockonAxis", Input.GetAxis("Horizontal"));
         playerAnimator.SetBool("KnockBackState", knockBackState);
+        playerAnimator.SetBool("WindMove", windMove);
 
         AnimatorStateInfo aniStateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
         if (aniStateInfo.nameHash == Animator.StringToHash("Base Layer.Wait"))
@@ -148,13 +152,13 @@ public class PlayerMove : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) //ロックオン範囲に入った敵をListに追加
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
             lockEnemyList.Add(other.gameObject);
     }
 
     public void OnTriggerExit(Collider other) //ロックオン範囲から出た敵をListから削除
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
         {
             if (lockEnemy == other.gameObject) //範囲外出た敵がロックしている敵だったら　ロックを解除
             {
@@ -167,10 +171,13 @@ public class PlayerMove : MonoBehaviour
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (windMove == false) return;
+        //if (windMove == false) return;
 
         if (hit.gameObject.tag == "Terrain")
+        {
             windPower = 0;
+            blowPower = 0;
+        }
     }
 
     public int LengthSort(GameObject a, GameObject b) //Listを敵との距離が近い順にソート
@@ -201,13 +208,14 @@ public class PlayerMove : MonoBehaviour
         if (controller.isGrounded) return true;
         //放つ光線の初期位置と姿勢
         //若干体にめり込ませた位置から発射しないと正しく判定できないときがある
-        var ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+        Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
         //探索距離
-        var tolerance = 1.4f;
+        float tolerance = 1.3f;
         Debug.DrawRay(ray.origin, ray.direction * tolerance);
         //Raycastがhitするかどうかで判定
         //地面にのみ衝突するようにレイヤを指定する
-        return Physics.Raycast(ray, tolerance, 1 << 8);
+        //return Physics.Raycast(ray, tolerance, 1 << 8);
+        return Physics.BoxCast(ray.origin, new Vector3(0.25f, 0.05f, 0.25f), ray.direction, transform.rotation, tolerance, 1 << 8);
     }
 
     public bool GetLockOnInfo()
@@ -234,6 +242,11 @@ public class PlayerMove : MonoBehaviour
     public void SetVelocityY(int velocity)
     {
         velocityY = velocity;
+    }
+
+    public void SetBlowPower(float power)
+    {
+        blowPower = power;
     }
 
     /******************** プレイヤーの移動状態関係 ********************/
@@ -282,6 +295,10 @@ public class PlayerMove : MonoBehaviour
             playerAnimator.SetTrigger("WindMoveOn");
             stateProcessor.State = stateWind;
         }
+        if (blowPower >= 1)
+        {
+            stateProcessor.State = stateBlow;
+        }
     }
 
     public void LockOn() //ロックオン時移動
@@ -298,6 +315,13 @@ public class PlayerMove : MonoBehaviour
             lockPosition.transform.position = transform.position;
             playerAnimator.SetTrigger("WindMoveOn");
             stateProcessor.State = stateWind;
+            return;
+        }
+        if (blowPower >= 1)
+        {
+            lockOn = false;
+            lockPosition.transform.position = transform.position;
+            stateProcessor.State = stateBlow;
             return;
         }
 
@@ -450,6 +474,14 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    public void Blow()
+    {
+        velocity = -transform.forward * blowPower;
+        blowPower -= Time.deltaTime;
+
+        if (blowPower <= 0.5f) stateProcessor.State = stateDefault;
+    }
+
     public void ChangeKnockBackSmall()
     {
         stateProcessor.State = stateKnockBackSmall;
@@ -474,4 +506,17 @@ public class PlayerMove : MonoBehaviour
     {
         stateProcessor.State = stateStop;
     }
+
+    //public void OnDrawGizmos()
+    //{
+    //    Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+
+    //    RaycastHit hitInfo;
+    //    bool hit = Physics.BoxCast(ray.origin, new Vector3(0.25f, 0.05f, 0.25f), ray.direction, out hitInfo, transform.rotation, 100.0f, 1 << 8);
+    //    if (hit)
+    //    {
+    //        Gizmos.DrawRay(transform.position + Vector3.up * 0.1f, ray.direction);
+    //        Gizmos.DrawWireCube(transform.position + -transform.up * hitInfo.distance, new Vector3(0.25f, 0.05f, 0.25f) * 2);
+    //    }
+    //}
 }

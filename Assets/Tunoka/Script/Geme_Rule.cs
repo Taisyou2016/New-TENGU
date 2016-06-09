@@ -32,6 +32,8 @@ public class Geme_Rule : MonoBehaviour {
     {
         print("Gameovera");
         _GameOvera.transform.localPosition = Vector3.zero;
+        FadeInOut.GetComponent<FadeInOut>().m_scenechange = "GameOver";
+        FadeInOut.GetComponent<FadeInOut>().FadeIn();
 
     }
     public void GameClear()

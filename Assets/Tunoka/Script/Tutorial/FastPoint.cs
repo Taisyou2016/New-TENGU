@@ -26,7 +26,7 @@ public class FastPoint : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         print("1　クリア");
-        iTween.MoveTo(gate, iTween.Hash("y", -15, "time", 3));
+        iTween.MoveTo(gate, iTween.Hash("y", -18, "time", 3));
         iTween.MoveTo(Offgate, iTween.Hash("y", 0, "time", 3));
         NextPoint.gameObject.SetActive(true);
         Destroy(gameObject);
