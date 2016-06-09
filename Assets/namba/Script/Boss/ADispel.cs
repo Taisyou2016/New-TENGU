@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DispelWave : MonoBehaviour {
+public class ADispel : MonoBehaviour {
 
     public float radius;
     public float power;
+
+    [SerializeField]
+    private int dmg;
     private Rigidbody rd;
 
 	// Use this for initialization
@@ -15,7 +18,18 @@ public class DispelWave : MonoBehaviour {
             rd = hit.GetComponent<Rigidbody>();
             if(rd != null)
             {
-                rd.AddExplosionForce(power, transform.position, radius);
+                rd.AddExplosionForce(power * 100, transform.position, radius, 2);
+            }
+
+            if(hit.gameObject.tag == "Player")
+            {
+                hit.GetComponent<PlayerMove>().SetVelocityY((int)power);
+                hit.GetComponent<PlayerStatus>().HpDamage(dmg);
+            }
+
+            if (hit.gameObject.tag == "Enemy")
+            {
+                hit.GetComponent<EnemyRoutine>().Damage(0);
             }
         }
     }

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Bow : MonoBehaviour {
 
-    private Rigidbody rd;
     private Transform player;
     public int damage = 1;
 
@@ -14,7 +13,6 @@ public class Bow : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //rd = GetComponent<Rigidbody>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         // 距離計算
@@ -23,7 +21,6 @@ public class Bow : MonoBehaviour {
         Vx = Mathf.Sqrt(velo) * Mathf.Cos(angle * Mathf.Deg2Rad);
         Vy = Mathf.Sqrt(velo) * Mathf.Sin(angle * Mathf.Deg2Rad);
 
-        //float flightDuration = subx / Vx;
         transform.rotation = Quaternion.LookRotation(player.position - transform.position);
     }
 
