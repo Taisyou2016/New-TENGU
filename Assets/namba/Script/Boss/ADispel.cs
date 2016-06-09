@@ -24,6 +24,7 @@ public class ADispel : MonoBehaviour {
             if(hit.gameObject.tag == "Player")
             {
                 hit.GetComponent<PlayerMove>().SetVelocityY((int)power);
+                hit.GetComponent<PlayerMove>().SetBlowPower(power);
                 hit.GetComponent<PlayerStatus>().HpDamage(dmg);
             }
 
