@@ -1283,6 +1283,7 @@ MonoBehaviour:
   bow: {fileID: 161056, guid: a10d5355590342d4f9456325493f768f, type: 2}
   punch1: {fileID: 171060, guid: 1952b5f609b539442b1b4ff4bfda7d8c, type: 2}
   punch2: {fileID: 171060, guid: 1952b5f609b539442b1b4ff4bfda7d8c, type: 2}
+  anima: {fileID: 0}
 --- !u!114 &11498408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1300,9 +1301,9 @@ MonoBehaviour:
   LengeType: 2
   life: 0
   Pflag: 0
-  Gflag: 0
-  Hflag: 0
   state: 
+  anima: {fileID: 9567022}
+  vel: 0
 --- !u!137 &13703496
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

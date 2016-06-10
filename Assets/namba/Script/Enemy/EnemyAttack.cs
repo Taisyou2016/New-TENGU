@@ -10,12 +10,10 @@ public class EnemyAttack : MonoBehaviour {
     private bool run = false;
     private bool flag = false;
     private float a;
-    private Animator anima;
+    public Animator anima;
 
     void Start()
     {
-        //anima = transform.FindChild("Onmyouji_man_Default").GetComponent<Animator>();
-
         cooltime_S = 1.0f;
         cooltime_M = 3.0f;
         cooltime_L = 3.0f;
@@ -50,7 +48,7 @@ public class EnemyAttack : MonoBehaviour {
         Vector3 pos = transform.up / 2;
         if (!flag)
         {
-            //anima.SetTrigger("Panch1");
+            anima.SetTrigger("Panch1");
             Instantiate(punch1, transform.position + pos, transform.rotation);
             Vector3 vec = transform.position + transform.forward * 2;
             iTween.MoveTo(gameObject, iTween.Hash("position", vec));
@@ -61,10 +59,10 @@ public class EnemyAttack : MonoBehaviour {
         // ランダムでパンチ
         a = Random.Range(0, 2);
         if (a == 0) {
-            //anima.SetTrigger("Panch1");
+            anima.SetTrigger("Panch1");
             Instantiate(punch1, transform.position + pos, transform.rotation);
         }else {
-            //anima.SetTrigger("Panch2");
+            anima.SetTrigger("Panch2");
             Instantiate(punch2, transform.position + pos, transform.rotation);
         }
 
@@ -78,14 +76,12 @@ public class EnemyAttack : MonoBehaviour {
         run = true;
         //処理
 
-        //anima.SetTrigger("Attack");
-        yield return new WaitForSeconds(0.5f);
+        anima.SetTrigger("Attack");
+        yield return new WaitForSeconds(cooltime_M);
 
         Vector3 vec = transform.up / 2;
         Instantiate(ohuda, transform.position + vec, transform.rotation);
 
-
-        yield return new WaitForSeconds(cooltime_M);
         run = false;
     }
 
@@ -95,10 +91,12 @@ public class EnemyAttack : MonoBehaviour {
         run = true;
         //処理
 
+        anima.SetTrigger("Bow");
+        yield return new WaitForSeconds(cooltime_L);
+
         Instantiate(bow, transform.position, this.transform.rotation);
 
 
-        yield return new WaitForSeconds(cooltime_L);
         run = false;
     }
 }

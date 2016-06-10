@@ -21,8 +21,8 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     [SerializeField]
     private int life;
     public bool Pflag = false;          // プレイヤーを見つけたか
-    public bool Gflag = false;          // 地面に足がついているか
-    public bool Hflag = false;          // 攻撃を受けたか
+    private bool Gflag = false;         // 地面に足がついているか
+    private bool Hflag = false;         // 攻撃を受けたか
     public string state;                // デバッグ用State確認
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
     private float AttackDistance;       // 攻撃移行範囲
@@ -32,7 +32,10 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private NavMeshAgent agent;
     private Rigidbody rd;
     private EnemyAttack attack;
-    private Animator anima;
+    private Collider col;
+
+    public Animator anima;
+    public float vel;
 
     // Use this for initialization
     public void Start()
@@ -42,10 +45,8 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         agent = GetComponent<NavMeshAgent>();
         rd = GetComponent<Rigidbody>();
         attack = GetComponent<EnemyAttack>();
-        //anima = gameObject.transform.FindChild("Onmyouji_man_Default").GetComponent<Animator>();
-
-        if (LengeType == 1) { AttackDistance = 1;
-        }
+        col = GetComponent<Collider>();
+        if (LengeType == 1) { AttackDistance = 1; }
         else if (LengeType == 2) { AttackDistance = 8; }
         else if (LengeType == 3) { AttackDistance = 10; }
         life = maxlife;
@@ -139,7 +140,10 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
     private IEnumerator Lost()
     {
+        anima.SetTrigger("movedown");
         yield return new WaitForSeconds(2);
+
+        anima.SetTrigger("Move");
         agent.SetDestination(StartPos);
     }
 
@@ -190,7 +194,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         {
             owner.Switch(0);
             owner.state = "pursuit";
-            //owner.anima.SetTrigger("move");
+            owner.anima.SetTrigger("Move");
         }
 
         public override void Execute()
@@ -225,7 +229,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         public override void End()
         {
-            //owner.anima.SetTrigger("movedown");
+            owner.anima.SetTrigger("movedown");
         }
     }
 
@@ -240,7 +244,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         {
             owner.lostPos = owner.player.position;
             owner.state = "lost";
-            //owner.anima.SetTrigger("Move");
+            owner.anima.SetTrigger("Move");
         }
 
         public override void Execute()
@@ -327,7 +331,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         {
             owner.Switch(0);
             owner.state = "died";
-            //owner.anima.SetTrigger("Death");
+            owner.anima.SetTrigger("Death");
             Destroy(owner.gameObject, 5.0f);
         }
 
@@ -350,6 +354,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         {
             owner.state = "Hit";
             owner.Switch(0);
+            owner.anima.SetTrigger("Damage2");
         }
 
         public override void Execute()

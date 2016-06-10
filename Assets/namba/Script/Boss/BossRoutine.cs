@@ -33,6 +33,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
     private float angle = 60.0f;
     private float dt;
+    private bool Madness = false;
 
 
     private Transform player;
@@ -71,8 +72,9 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             ChangeState(BossState.Died);
             return;
         }
-        else if(Madness())
+        else if(nowlife / life <= 0.5f)
         {
+            Madness = false;
             speed = madnessspeed;
         }
         print("HP :" + life);
@@ -123,16 +125,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         charcon.Move(vec * speed * Time.deltaTime);
         dt += Time.deltaTime;
     }
-
-    // 覚醒状態
-    public bool Madness()
-    {
-        bool flag = nowlife / life <= 0.5f;
-
-        return flag;
-    }
-
-
 
     /*----------------------------------------------------/
                     ここからState処理
@@ -185,7 +177,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             targetdis = Random.Range(owner.targetdis.x, owner.targetdis.y);
 
 
-            if (owner.Madness())
+            if (owner.Madness)
             {
                 float subx = Vector3.Distance(owner.player.position, owner.transform.position);
                 float suby = subx / (Mathf.Sin(2 * owner.angle * Mathf.Deg2Rad) / 9.8f);
@@ -205,7 +197,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             if (Distance > targetdis)
             {
                 destination.y = 0;
-                if (owner.Madness())
+                if (owner.Madness)
                 {
                     owner.JumpMove(Vx, Vy);
                     return;
