@@ -17,8 +17,8 @@ public class Map : MonoBehaviour {
     void Start()
     {
         player = GameObject.Find("Player");
-        print(player);
         MapPosition = transform.FindChild("Position").transform.gameObject;
+        if (MapPosition.GetComponent<Animator>() == null) return;
         anim = MapPosition.GetComponent<Animator>();
        
     }
@@ -40,13 +40,13 @@ public class Map : MonoBehaviour {
             float rot = 180 - target.transform.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0, 0, rot);
 
-            print(anim.speed);
             if (_distance <= fastSearchRange)
             {
-                anim.Play("Amulet", 0, 0.0f);
+                Anime();
                 MapPosition.transform.localPosition = new Vector3(0, _distance / fastSearchRange * 30, 0);
             }
-            else if (_distance >= secondSearchRange)
+            if (anim == null) return;
+            if (_distance >= secondSearchRange)
             {
                 anim.speed = 0.5f;
             }
@@ -57,6 +57,12 @@ public class Map : MonoBehaviour {
 
         }
     }
-
+    void Anime()
+    {
+        if (anim != null)
+        {
+            anim.Play("Amulet", 0, 0.0f);
+        }
+    }
 
 }
