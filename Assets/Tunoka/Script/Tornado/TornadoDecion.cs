@@ -8,7 +8,6 @@ public class TornadoDecion : MonoBehaviour {
 
     public void OnTriggerStay(Collider other)
     {
-        print("aaaaa");
         if (other.tag == "Player")
         {          
             other.GetComponent<PlayerMove>().SetVelocityY((int)power);

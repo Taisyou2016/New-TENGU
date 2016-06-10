@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ParticleTornado : MonoBehaviour {
+public class ParticleTornado : MonoBehaviour
+{
 
 
     private ParticleSystem[] particles;
@@ -9,7 +10,8 @@ public class ParticleTornado : MonoBehaviour {
     public float power;
     public int damage = 20;
 
-    void Start () {
+    void Start()
+    {
         particles = this.gameObject.GetComponentsInChildren<ParticleSystem>();
         particles[0].startColor = new Color(0, 0, 0, 0);
         iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 2f, "onupdate", "SetValue"));
@@ -34,7 +36,7 @@ public class ParticleTornado : MonoBehaviour {
             if (other.GetComponent<Rigidbody>() != null)
             {
                 other.GetComponent<Rigidbody>().AddForce(direction * 0.1f, ForceMode.Impulse);
-                other.GetComponent<Rigidbody>().AddTorque(new Vector3(10, 0 , 10));
+                other.GetComponent<Rigidbody>().AddTorque(new Vector3(10, 0, 10));
             }
         }
     }
@@ -44,12 +46,16 @@ public class ParticleTornado : MonoBehaviour {
         {
             other.GetComponent<EnemyRoutine>().Damage(damage);
         }
+        else if (other.tag == "Boss")
+        {
+            other.GetComponent<BossRoutine>().Damage(damage);
+        }
     }
-        void SetValue(float alpha)
+    void SetValue(float alpha)
     {
         // iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
         particles[0].startColor = new Color(158, 158, 158, alpha);
-      
+
     }
 
 
