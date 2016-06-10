@@ -9,20 +9,19 @@ public class SeconPoint : MonoBehaviour {
     public GameObject NextPoint;
     public Text text;
 
+    public string talkText;
     void Start ()
     {
-        text.text = "移動の練習2\nターゲットをかまいたちで攻撃しよう";
+        text.text = talkText;
         player = GameObject.FindWithTag("Player");
         player.GetComponent<PlayerStatus>().maxMp = 100;
         player.GetComponent<PlayerStatus>().currentMp = 100;
-        player.GetComponent<PlayerMove>().walkSpeed = 0;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        player.transform.rotation = new Quaternion(0, 0, 0, 0);
         int count = transform.childCount;
         if (count <= 0)
         {

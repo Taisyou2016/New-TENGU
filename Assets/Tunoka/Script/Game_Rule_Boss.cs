@@ -1,30 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
-public class Geme_Rule : MonoBehaviour {
+public class Game_Rule_Boss : MonoBehaviour {
+
 
     private int m_p_Hp = 10;
     private GameObject player;
     private PlayerStatus playerStatus;
     private BossRoutine boss;
-
     public GameObject _GameOvera;
     public GameObject _GameClear;
     public GameObject FadeInOut;
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         player = GameObject.Find("Player");
-        if(GameObject.FindGameObjectWithTag("Boss") != null)
-        {
-            boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossRoutine>();
-        }
+        boss = GameObject.Find("Boss").GetComponent<BossRoutine>();
         playerStatus = player.GetComponent<PlayerStatus>();
     }
-    // Update is called once per frame
-	void Update () {
 
-  
+    // Update is called once per frame
+    void Update()
+    {
+
         m_p_Hp = playerStatus.currentHp;
         if (m_p_Hp <= 0)
         {
@@ -37,6 +35,7 @@ public class Geme_Rule : MonoBehaviour {
                 GameClear();
             }
         }
+       
 
     }
     void Gameovera()

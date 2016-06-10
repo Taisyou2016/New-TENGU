@@ -8,12 +8,13 @@ public class FastPoint : MonoBehaviour {
     public GameObject Offgate;
     public GameObject NextPoint;
     public Text text;
+    public string talkText;
 
     private PlayerStatus player;
 
     void Start () {
 
-        text.text = "移動の練習1\nターゲットの場所まで移動しよう\nスキップするには隣のゲートに";
+        text.text = talkText;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
         player.maxMp = 0;
         player.currentMp = 0;
@@ -21,10 +22,19 @@ public class FastPoint : MonoBehaviour {
     }
     void Update()
     {
+        int count = transform.childCount;
+        if (count <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        if (other.tag != "Player")
+        {
+            return;
+        }
         print("1　クリア");
         iTween.MoveTo(gate, iTween.Hash("y", -18, "time", 3));
         iTween.MoveTo(Offgate, iTween.Hash("y", 0, "time", 3));
