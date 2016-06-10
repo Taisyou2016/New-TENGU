@@ -9,7 +9,7 @@ public class ForthPoint : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        text.text = "お疲れ様です\nそれでは本編をお楽しみください";
+        text.text = "";
 
         Invoke("Scene", 2);
     }

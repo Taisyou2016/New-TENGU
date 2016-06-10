@@ -9,17 +9,20 @@ public class ThirdPoint : MonoBehaviour {
 
     public Text text;
     private GameObject player;
-
+    private PlayerStatus pStatus;
+    public string talkText;
     // Use this for initialization
     void Start ()
     {
-        text.text = "移動の練習4\n実際に敵を倒してみよう";
+        text.text = talkText;
         player = GameObject.FindWithTag("Player");
         player.GetComponent<PlayerMove>().walkSpeed = 5;
+        pStatus = player.GetComponent<PlayerStatus>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        pStatus.currentHp =10;
         int count = transform.childCount;
         if (count <= 0)
         {

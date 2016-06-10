@@ -7,6 +7,7 @@ public class Geme_Rule : MonoBehaviour {
     private int m_p_Hp = 10;
     private GameObject player;
     private PlayerStatus playerStatus;
+    private BossRoutine boss;
 
     public GameObject _GameOvera;
     public GameObject _GameClear;
@@ -14,9 +15,12 @@ public class Geme_Rule : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player");
+        if(GameObject.FindGameObjectWithTag("Boss") != null)
+        {
+            boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossRoutine>();
+        }
         playerStatus = player.GetComponent<PlayerStatus>();
     }
-
     // Update is called once per frame
 	void Update () {
 
@@ -26,7 +30,14 @@ public class Geme_Rule : MonoBehaviour {
         {
             Gameovera();
         }
-        
+        if (boss != null)
+        {
+            //if (boss.nowlife <= 0)
+            //{
+            //    GameClear();
+            //}
+        }
+
     }
     void Gameovera()
     {
