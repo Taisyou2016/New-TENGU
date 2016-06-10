@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Time: 5
   TornadoSize: {x: 2, y: 4, z: 2}
-  damage: 5
+  damage: 4
 --- !u!114 &11438344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Time: 5
   TornadoSize: {x: 2, y: 4, z: 2}
-  damage: 5
+  damage: 4
 --- !u!114 &11493160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Time: 5
   TornadoSize: {x: 2, y: 4, z: 2}
-  damage: 5
+  damage: 4
 --- !u!114 &11495480
 MonoBehaviour:
   m_ObjectHideFlags: 1

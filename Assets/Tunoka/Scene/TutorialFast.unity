@@ -2415,7 +2415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868cc2c26d71c4443a5e25ba7c27c063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextPoint: {fileID: 2010262500}
+  NextPoint: {fileID: 328526567}
   text: {fileID: 1465445297}
   talkText: "\u305D\u308C\u3058\u3083\u30FC\u3001\u66B4\u308C\u308B\u304B\u306E\u3049"
 --- !u!1001 &296196915
@@ -3319,6 +3319,10 @@ Prefab:
     - target: {fileID: 137810, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
       propertyPath: m_Name
       value: TestEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441954, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
+      propertyPath: maxlife
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
@@ -4750,6 +4754,10 @@ Prefab:
       propertyPath: m_Name
       value: TestEnemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 11441954, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
+      propertyPath: maxlife
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
   m_IsPrefabParent: 0
@@ -4835,6 +4843,10 @@ Prefab:
     - target: {fileID: 137810, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
       propertyPath: m_Name
       value: TestEnemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441954, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
+      propertyPath: maxlife
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
@@ -5260,6 +5272,10 @@ Prefab:
     - target: {fileID: 11441954, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
       propertyPath: LengeType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441954, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}
+      propertyPath: maxlife
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d7a63bf4c3ca5f41b1064a81f527539, type: 2}

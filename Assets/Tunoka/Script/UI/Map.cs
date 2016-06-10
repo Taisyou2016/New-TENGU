@@ -16,8 +16,8 @@ public class Map : MonoBehaviour {
     private float secondSearchRange = 40;
     void Start()
     {
-        anim.Play("Amulet", 0, 0.0f);
         player = GameObject.Find("Player");
+        print(player);
         MapPosition = transform.FindChild("Position").transform.gameObject;
         anim = MapPosition.GetComponent<Animator>();
        
@@ -39,6 +39,7 @@ public class Map : MonoBehaviour {
             
             float rot = 180 - target.transform.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0, 0, rot);
+
             print(anim.speed);
             if (_distance <= fastSearchRange)
             {
@@ -47,12 +48,10 @@ public class Map : MonoBehaviour {
             }
             else if (_distance >= secondSearchRange)
             {
-                print("a");
                 anim.speed = 0.5f;
             }
             else
             {
-                print("b");
                 anim.speed = 1f;
             }
 
