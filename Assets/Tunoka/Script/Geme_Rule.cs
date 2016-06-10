@@ -32,10 +32,10 @@ public class Geme_Rule : MonoBehaviour {
         }
         if (boss != null)
         {
-            if (boss.life <= 0)
-            {
-                GameClear();
-            }
+            //if (boss.nowlife <= 0)
+            //{
+            //    GameClear();
+            //}
         }
 
     }
