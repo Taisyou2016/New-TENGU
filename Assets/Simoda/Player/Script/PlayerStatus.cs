@@ -32,7 +32,8 @@ public class PlayerStatus : MonoBehaviour
         currentHp = maxHp;
         currentMp = maxMp;
 
-        originColor = modelMaterial.color;
+        originColor = new Color(modelMaterial.color.r, modelMaterial.color.g, modelMaterial.color.b, 1.0f);
+        modelMaterial.color = originColor;
         //Color alpha = new Color(0, 0, 0, 0.5f);
         //modelMesh.material.color -= alpha;
 

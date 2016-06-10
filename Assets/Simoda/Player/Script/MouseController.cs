@@ -3,9 +3,9 @@ using System.Collections;
 
 public class MouseController : MonoBehaviour
 {
-    public GameObject windAura;
-    public GameObject kamaitachiAura;
-    public GameObject tornadoAura;
+    //public GameObject windAura;
+    //public GameObject kamaitachiAura;
+    //public GameObject tornadoAura;
     public float length = 200.0f;
 
     private Vector3 startPos = new Vector3(Screen.width / 2, Screen.height / 2, 0.0f);
@@ -24,9 +24,9 @@ public class MouseController : MonoBehaviour
     {
         //Cursor.visible = false;
         playerStatus = GameObject.FindObjectOfType<PlayerStatus>();
-        windAura.SetActive(false);
-        kamaitachiAura.SetActive(false);
-        tornadoAura.SetActive(false);
+        //windAura.SetActive(false);
+        //kamaitachiAura.SetActive(false);
+        //tornadoAura.SetActive(false);
     }
 
     void Update()
@@ -34,20 +34,20 @@ public class MouseController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             Cursor.visible = true;
 
-        if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
-            tornadoAura.SetActive(true);
-        else
-            tornadoAura.SetActive(false);
+        //if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
+        //    tornadoAura.SetActive(true);
+        //else
+        //    tornadoAura.SetActive(false);
 
-        if (Input.GetMouseButton(0) && !Input.GetMouseButton(1))
-            windAura.SetActive(true);
-        else
-            windAura.SetActive(false);
+        //if (Input.GetMouseButton(0) && !Input.GetMouseButton(1))
+        //    windAura.SetActive(true);
+        //else
+        //    windAura.SetActive(false);
 
-        if (Input.GetMouseButton(1) && !Input.GetMouseButton(0))
-            kamaitachiAura.SetActive(true);
-        else
-            kamaitachiAura.SetActive(false);
+        //if (Input.GetMouseButton(1) && !Input.GetMouseButton(0))
+        //    kamaitachiAura.SetActive(true);
+        //else
+        //    kamaitachiAura.SetActive(false);
 
         //if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
         //{

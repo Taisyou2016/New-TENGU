@@ -14,7 +14,8 @@ public class WindBlock : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         particle.transform.forward = direction;
-        particle.transform.localScale = transform.localScale;
+        //particle.transform.position = particle.transform.position + new Vector3(0, 0, -2.0f);
+        particle.transform.localPosition = new Vector3(0, particle.transform.localPosition.y, -0.5f);
     }
 
     void Update()

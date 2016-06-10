@@ -91,4 +91,12 @@ namespace PlayerMoveState
             return "State:Stop";
         }
     }
+
+    public class PlayerMoveStateBlow : PlayerMoveState
+    {
+        public override string getStateName()
+        {
+            return "State:Blow";
+        }
+    }
 }
