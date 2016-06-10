@@ -4,7 +4,7 @@ using System.Collections;
 public class BossWSlash : MonoBehaviour {
 
     [SerializeField]
-    private int dmg;
+    private int dmg = 1;
     private Transform boss;
 
 
@@ -20,13 +20,9 @@ public class BossWSlash : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag != "Enemy")
+        if (col.gameObject.tag == "Player")
         {
-            if (col.gameObject.tag == "Player")
-            {
-                col.gameObject.GetComponent<PlayerStatus>().HpDamage(dmg);
-            }
-            Destroy(this.gameObject);
+            col.gameObject.GetComponent<PlayerStatus>().HpDamage(dmg);
         }
     }
 

@@ -28,8 +28,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
     [SerializeField]
     private string state;
-    [SerializeField]
-    private int nowlife;
+    public int nowlife;
 
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
     private float angle = 60.0f;
@@ -67,7 +66,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void Damage(int dmg)
     {
         nowlife -= dmg;
-        if (life <= 0)
+        if (nowlife <= 0)
         {
             ChangeState(BossState.Died);
             return;
@@ -85,7 +84,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void PDistance()
     {
         float Distance = Vector3.Distance(this.transform.position,player.position);
-
+        print(Distance);
         if(Distance <= displeDis)
         {
             ChangeState(BossState.Dispel);

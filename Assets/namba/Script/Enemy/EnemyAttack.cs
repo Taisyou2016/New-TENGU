@@ -10,10 +10,13 @@ public class EnemyAttack : MonoBehaviour {
     private bool run = false;
     private bool flag = false;
     private float a;
+    private Animator anima;
 
     void Start()
     {
-        cooltime_S = 0.5f;
+        //anima = transform.FindChild("Onmyouji_man_Default").GetComponent<Animator>();
+
+        cooltime_S = 1.0f;
         cooltime_M = 3.0f;
         cooltime_L = 3.0f;
     }
@@ -44,9 +47,11 @@ public class EnemyAttack : MonoBehaviour {
         run = true;
         // 処理
 
+        Vector3 pos = transform.up / 2;
         if (!flag)
         {
-            Instantiate(punch1, transform.position + transform.forward, transform.rotation);
+            //anima.SetTrigger("Panch1");
+            Instantiate(punch1, transform.position + pos, transform.rotation);
             Vector3 vec = transform.position + transform.forward * 2;
             iTween.MoveTo(gameObject, iTween.Hash("position", vec));
             flag = true;
@@ -56,9 +61,11 @@ public class EnemyAttack : MonoBehaviour {
         // ランダムでパンチ
         a = Random.Range(0, 2);
         if (a == 0) {
-            Instantiate(punch1, transform.position + transform.forward, transform.rotation);
+            //anima.SetTrigger("Panch1");
+            Instantiate(punch1, transform.position + pos, transform.rotation);
         }else {
-            Instantiate(punch2, transform.position + transform.forward, transform.rotation);
+            //anima.SetTrigger("Panch2");
+            Instantiate(punch2, transform.position + pos, transform.rotation);
         }
 
         yield return new WaitForSeconds(cooltime_S);
@@ -70,6 +77,9 @@ public class EnemyAttack : MonoBehaviour {
         if (run) { yield break; }
         run = true;
         //処理
+
+        //anima.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.5f);
 
         Vector3 vec = transform.up / 2;
         Instantiate(ohuda, transform.position + vec, transform.rotation);
