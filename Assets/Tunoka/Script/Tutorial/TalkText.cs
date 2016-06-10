@@ -15,7 +15,7 @@ public class TalkText : MonoBehaviour {
     void Start ()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
-        player.maxMp = 0;
+        player.currentMp = 0;
         player.GetComponent<PlayerMove>().walkSpeed = 0;
         talkNum = 0;
         text = Textcanvas.transform.FindChild("Text").gameObject.GetComponent<Text>();
@@ -37,7 +37,7 @@ public class TalkText : MonoBehaviour {
 	}
     void talkOff()
     {
-        player.maxMp = 100;
+        player.currentMp = 100;
         player.GetComponent<PlayerMove>().walkSpeed = 5;
         NextPoint.gameObject.SetActive(true);
         Destroy(gameObject);
