@@ -18,7 +18,7 @@ public class TitleController : MonoBehaviour
     {
 
         Cursor.visible = true; //カーソル表示
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Cursor.lockState = CursorLockMode.Locked; //中央にロック
             Cursor.lockState = CursorLockMode.None; //標準モード

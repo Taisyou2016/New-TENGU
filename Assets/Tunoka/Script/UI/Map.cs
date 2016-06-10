@@ -16,6 +16,7 @@ public class Map : MonoBehaviour {
     private float secondSearchRange = 40;
     void Start()
     {
+        anim.Play("Amulet", 0, 0.0f);
         player = GameObject.Find("Player");
         MapPosition = transform.FindChild("Position").transform.gameObject;
         anim = MapPosition.GetComponent<Animator>();

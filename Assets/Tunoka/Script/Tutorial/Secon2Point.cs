@@ -10,11 +10,12 @@ public class Secon2Point : MonoBehaviour {
     public GameObject NextPoint;
     public Text text;
 
+    public string talkText;
 
     private PlayerStatus player;
     // Use this for initialization
     void Start () {
-        text.text = "移動の練習3\n崖があるから気流を使って超えよう";
+        text.text = talkText;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
 
         player.GetComponent<PlayerMove>().walkSpeed = 5;
