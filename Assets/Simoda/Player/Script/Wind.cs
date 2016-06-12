@@ -46,34 +46,45 @@ public class Wind : MonoBehaviour
         DrawLine();
     }
 
-    public void LateUpdate()
-    {
-        //particle.transform.rotation = particleRotation;
-
-    }
-
-    public void Rotate(Quaternion rotation)
-    {
-        //transform.rotation = rotation;
-        //particleRotation = rotation;
-    }
-
     public void Move(int pattern, Vector3 vector, float stopTime)
     {
         generationPattern = pattern;
         windMotion.GetComponent<Rigidbody>().velocity = vector;
 
         particle.transform.forward = direction;
+        //particlePosition = direction + GameObject.Find("Player").transform.position;
 
-        ////particle.transform.Rotate(new Vector3(0, 1, 0), GameObject.Find("Player").transform.eulerAngles.y);
+        Transform playerTransform = GameObject.Find("Player").transform;
+        //particle.transform.Rotate(new Vector3(0, 1, 0), GameObject.Find("Player").transform.eulerAngles.y);
+
+        //position用　if文
+        if (pattern == 1 || pattern == 2)
+        {
+            particlePosition = direction + playerTransform.position;
+        }
+        else if (pattern == 3 || pattern == 4)
+        {
+            particlePosition = direction + playerTransform.position + playerTransform.up * 2.5f;
+        }
+        else if (pattern == 5 || pattern == 6)
+        {
+            particlePosition = direction + playerTransform.position + playerTransform.up * 0.5f;
+        }
+        else if (pattern == 7 || pattern == 8)
+        {
+            particlePosition = direction + playerTransform.position + playerTransform.up;
+        }
+
+        //角度用　if文
         if (pattern == 1 || pattern == 6 || pattern == 7)
             particle.transform.right = vector.normalized;
         else if (pattern == 3 || pattern == 4)
-        { }
+        {
+            particle.transform.right = vector.normalized;
+            particle.transform.localRotation = Quaternion.Euler(particle.transform.localEulerAngles.x, 0, particle.transform.localEulerAngles.z);
+        }
         else
             particle.transform.right = -vector.normalized;
-
-        
 
         Invoke("WindStop", stopTime);
     }
@@ -120,7 +131,7 @@ public class Wind : MonoBehaviour
         this.direction = direction;
 
         transform.forward = direction;
-        particlePosition = direction + GameObject.Find("Player").transform.position;
+        //particlePosition = direction + GameObject.Find("Player").transform.position;
         //particle.transform.forward = direction;
     }
 }

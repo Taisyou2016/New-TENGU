@@ -16,7 +16,7 @@ public class PlayerStatus : MonoBehaviour
     public bool invincible = false; //無敵化どうか
     public float knockBackSmallInvincibleTime = 1.0f; //ノックバック小の時の無敵時間
     public float knockBackLargeInvincibleTime = 3.0f; //ノックバック大の時の無敵時間
-    public Material modelMaterial; //モデルのメッシュ
+    public Material[] modelMaterial; //モデルのメッシュ
 
     private float lastMpAutoRecoveryTime = 0.0f; //前に回復した時の時刻
     private bool mpOver = false; //妖力がOvarしたかどうか
@@ -32,8 +32,14 @@ public class PlayerStatus : MonoBehaviour
         currentHp = maxHp;
         currentMp = maxMp;
 
-        originColor = new Color(modelMaterial.color.r, modelMaterial.color.g, modelMaterial.color.b, 1.0f);
-        modelMaterial.color = originColor;
+        foreach (var material in modelMaterial)
+        {
+            originColor = new Color(material.color.r, material.color.g, material.color.b, 1.0f);
+            material.color = originColor;
+        }
+
+        //originColor = new Color(modelMaterial.color.r, modelMaterial.color.g, modelMaterial.color.b, 1.0f);
+        //modelMaterial.color = originColor;
         //Color alpha = new Color(0, 0, 0, 0.5f);
         //modelMesh.material.color -= alpha;
 
@@ -79,7 +85,12 @@ public class PlayerStatus : MonoBehaviour
         else
         {
             //Color alphaReset = new Color(0, 0, 0, 1.0f - modelMaterial.color.a);
-            modelMaterial.color = originColor;
+            //modelMaterial.color = originColor;
+            foreach (var material in modelMaterial)
+            {
+                originColor = new Color(material.color.r, material.color.g, material.color.b, 1.0f);
+                material.color = originColor;
+            }
         }
 
     }
@@ -156,16 +167,26 @@ public class PlayerStatus : MonoBehaviour
     public void Flashing()
     {
         //アルファが0以下になったらtreu　1以上になったらfalse
-        if (modelMaterial.color.a <= 0.0f)
+        if (modelMaterial[0].color.a <= 0.0f)
             alphaZero = true;
-        else if (modelMaterial.color.a >= 1.0f)
+        else if (modelMaterial[0].color.a >= 1.0f)
             alphaZero = false;
 
         Color alpha = new Color(0, 0, 0, Time.deltaTime * 2.0f); //アルファを0.5秒で1変化させる
 
         if (alphaZero == false)
-            modelMaterial.color -= alpha;
+        {
+            foreach (Material material in modelMaterial)
+            {
+                material.color -= alpha;
+            }
+        }
         else
-            modelMaterial.color += alpha;
+        {
+            foreach (Material material in modelMaterial)
+            {
+                material.color += alpha;
+            }
+        }
     }
 }
