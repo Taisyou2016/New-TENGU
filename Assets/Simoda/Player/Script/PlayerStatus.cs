@@ -37,7 +37,7 @@ public class PlayerStatus : MonoBehaviour
         //Color alpha = new Color(0, 0, 0, 0.5f);
         //modelMesh.material.color -= alpha;
 
-        playerAnimator = transform.FindChild("Tengu_sotai").GetComponent<Animator>();
+        playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
     }
 
     void Update()

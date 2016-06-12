@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         cameraController = GameObject.FindGameObjectWithTag("CameraController");
-        playerAnimator = transform.FindChild("Tengu_sotai").GetComponent<Animator>();
+        playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
 
         stateProcessor.State = stateDefault;
         stateDefault.exeDelegate = Default;

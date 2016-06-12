@@ -5,8 +5,11 @@ public class Wind : MonoBehaviour
 {
     public GameObject windMotion;
     public GameObject linePrefab;
+    public GameObject particle;
 
     private Vector3 startPoint;
+    private Vector3 particlePosition = Vector3.zero;
+    private Quaternion particleRotation;
     public Vector3 point;
     public float lineLength = 1.0f;
     public float scaleY = 0.5f;
@@ -37,19 +40,40 @@ public class Wind : MonoBehaviour
     void Update()
     {
         startPoint = transform.position;
-
+        particle.transform.localScale = new Vector3((startPoint - windMotion.transform.position).magnitude, scaleY, scaleZ);
+        particle.transform.position = Vector3.Lerp(startPoint, particlePosition, 5.0f);
+        particle.transform.Rotate(new Vector3(1, 0, 0), particle.transform.eulerAngles.x * -1.0f);
         DrawLine();
+    }
+
+    public void LateUpdate()
+    {
+        //particle.transform.rotation = particleRotation;
+
     }
 
     public void Rotate(Quaternion rotation)
     {
-        transform.rotation = rotation; ;
+        //transform.rotation = rotation;
+        //particleRotation = rotation;
     }
 
     public void Move(int pattern, Vector3 vector, float stopTime)
     {
         generationPattern = pattern;
         windMotion.GetComponent<Rigidbody>().velocity = vector;
+
+        particle.transform.forward = direction;
+
+        ////particle.transform.Rotate(new Vector3(0, 1, 0), GameObject.Find("Player").transform.eulerAngles.y);
+        if (pattern == 1 || pattern == 6 || pattern == 7)
+            particle.transform.right = vector.normalized;
+        else if (pattern == 3 || pattern == 4)
+        { }
+        else
+            particle.transform.right = -vector.normalized;
+
+        
 
         Invoke("WindStop", stopTime);
     }
@@ -94,5 +118,9 @@ public class Wind : MonoBehaviour
         this.playerPower = playerPower;
         this.objectPower = objectPower;
         this.direction = direction;
+
+        transform.forward = direction;
+        particlePosition = direction + GameObject.Find("Player").transform.position;
+        //particle.transform.forward = direction;
     }
 }

@@ -34,6 +34,7 @@ public class WindGeneration : MonoBehaviour
             + transform.forward * 2.5f
             + transform.right * -5.0f;
 
+        wind.GetComponent<Wind>().Rotate(transform.rotation);
         wind.GetComponent<Wind>().SetForce(playerWidthPower, objectWidthPower, transform.forward);
         wind.GetComponent<Wind>().SetScale(1.0f, 2.0f);
         wind.GetComponent<Wind>().Move(1,transform.right * power, 0.5f);
@@ -57,6 +58,7 @@ public class WindGeneration : MonoBehaviour
             + transform.forward * 2.5f
             + transform.right * 5.0f;
 
+        wind.GetComponent<Wind>().Rotate(transform.rotation);
         wind.GetComponent<Wind>().SetForce(playerWidthPower, objectWidthPower, transform.forward);
         wind.GetComponent<Wind>().SetScale(1.0f, 2.0f);
         wind.GetComponent<Wind>().Move(2,transform.right * power * -1.0f, 0.5f);
@@ -82,8 +84,8 @@ public class WindGeneration : MonoBehaviour
             + transform.forward * 4.0f
             + transform.up * 6.0f;
 
-        wind.GetComponent<Wind>().Rotate(transform.rotation);
         wind.GetComponent<Wind>().SetForce(playerHeightPower, objectHeightPower, transform.forward);
+        wind.GetComponent<Wind>().Rotate(transform.rotation);
         wind.GetComponent<Wind>().SetScale(2.5f, 5.0f);
         wind.GetComponent<Wind>().Move(3,transform.up * -1.0f * power, 0.3f);
 
@@ -152,6 +154,7 @@ public class WindGeneration : MonoBehaviour
             + transform.right * 4.0f
             + transform.up * 3.0f;
 
+        wind.GetComponent<Wind>().Rotate(transform.rotation);
         wind.GetComponent<Wind>().SetForce(playerSlantingPower, objectSlantingPower, transform.forward);
         wind.GetComponent<Wind>().SetScale(1.0f, 2.0f);
         wind.GetComponent<Wind>().Move(5,(transform.right * power * -1.0f) + (transform.up * power * -1.0f / 2), 0.35f);
