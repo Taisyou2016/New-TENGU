@@ -23,6 +23,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     public bool Pflag = false;          // プレイヤーを見つけたか
     private bool Gflag = false;         // 地面に足がついているか
     private bool Hflag = false;         // 攻撃を受けたか
+    private bool flag = false;
     public string state;                // デバッグ用State確認
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
     private float AttackDistance;       // 攻撃移行範囲
@@ -33,9 +34,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private Rigidbody rd;
     private EnemyAttack attack;
     private Collider col;
-
     public Animator anima;
-    public float vel;
 
     // Use this for initialization
     public void Start()
@@ -129,18 +128,21 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     public void Damage(int dmg)
     {
         life -= dmg;
-        if (life <= 0)
+        if (life > 0)
         {
-            ChangeState(EnemyState.Died);
-            return;
+            print("HP :" + life);
+            ChangeState(EnemyState.Hit);
         }
-        print("HP :" + life);
-        ChangeState(EnemyState.Hit);
+        else
+        {
+            if (flag) { return; }
+            flag = true;
+            ChangeState(EnemyState.Died);
+        }
     }
 
     private IEnumerator Lost()
     {
-        anima.SetTrigger("movedown");
         yield return new WaitForSeconds(2);
 
         anima.SetTrigger("Move");
@@ -173,6 +175,11 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             {
                 owner.Switch(0);
                 owner.ChangeState(EnemyState.Pursuit);
+            }
+
+            if (Vector3.SqrMagnitude(owner.transform.position - owner.StartPos) <= 2)
+            {
+                owner.anima.SetTrigger("movedown");
             }
 
         }
@@ -229,7 +236,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         public override void End()
         {
-            owner.anima.SetTrigger("movedown");
         }
     }
 
@@ -262,7 +268,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
                 owner.StartCoroutine(owner.Lost());
                 owner.ChangeState(EnemyState.Wait);
             }
-
         }
 
         public override void End()
@@ -290,7 +295,8 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             // Playerとの距離
             float ToAttackDistance = Vector3.SqrMagnitude(owner.transform.position - owner.player.position);
             // 攻撃範囲外
-            if (ToAttackDistance > owner.AttackDistance * 10.0f)
+            if (ToAttackDistance > owner.AttackDistance * 10.0f && 
+                owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9)
             {
                 //追跡ステートに移行
                 owner.ChangeState(EnemyState.Pursuit);
@@ -298,7 +304,8 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             owner.PSeach();
             owner.GroundingDetection();
 
-            if (!owner.Pflag && owner.Gflag)
+            if (!owner.Pflag && owner.Gflag &&
+                owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9)
             {
                 owner.ChangeState(EnemyState.LostContact);
             }
