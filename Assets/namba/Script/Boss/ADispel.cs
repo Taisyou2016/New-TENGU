@@ -34,4 +34,9 @@ public class ADispel : MonoBehaviour {
             }
         }
     }
+
+    void Update()
+    {
+        iTween.ScaleTo(gameObject, iTween.Hash("Scale", new Vector3(3, 3, 1.3f), "time", 2.0f)); 
+    }
 }

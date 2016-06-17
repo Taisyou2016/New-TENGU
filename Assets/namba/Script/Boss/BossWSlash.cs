@@ -5,24 +5,22 @@ public class BossWSlash : MonoBehaviour {
 
     [SerializeField]
     private int dmg = 1;
-    private Transform boss;
+    private float speed = 10;
 
-
-	// Use this for initialization
-	void Start () {
-        boss = GameObject.FindGameObjectWithTag("Boss").transform;
-	}
-	
 	// Update is called once per frame
 	void Update () {
-        this.transform.position = boss.position + boss.transform.forward * 2;
+        this.transform.position += transform.forward * speed * Time.deltaTime;
 	}
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag != "Enemy")
         {
-            col.gameObject.GetComponent<PlayerStatus>().HpDamage(dmg);
+            if (col.gameObject.tag == "Player")
+            {
+                col.gameObject.GetComponent<PlayerStatus>().HpDamage(dmg);
+            }
+            Destroy(gameObject);
         }
     }
 
