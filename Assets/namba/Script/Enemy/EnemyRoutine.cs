@@ -179,6 +179,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
             if (Vector3.SqrMagnitude(owner.transform.position - owner.StartPos) <= 2)
             {
+                owner.Switch(0);
                 owner.anima.SetTrigger("movedown");
             }
 
