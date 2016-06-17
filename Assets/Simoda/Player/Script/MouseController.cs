@@ -141,7 +141,9 @@ public class MouseController : MonoBehaviour
         if (vector.magnitude > length)
         {
             if (playerStatus.MpCostDecision(playerStatus.windCost))
+            {
                 GameObject.FindObjectOfType<AttackPattern>().WindPatternDecision(angle, vector);
+            }
         }
 
         GenerationFalse();
@@ -158,7 +160,9 @@ public class MouseController : MonoBehaviour
         {
             //MPが一度ゼロになって回復中か、costが足りなかったら発生させない
             if (playerStatus.MpCostDecision(playerStatus.kamaitachiCost))
+            {
                 GameObject.FindObjectOfType<AttackPattern>().KamaitachiPatternDecision(angle, vector);
+            }
         }
 
         GenerationFalse();

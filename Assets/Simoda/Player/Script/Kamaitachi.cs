@@ -13,12 +13,15 @@ public class Kamaitachi : MonoBehaviour
     private GameObject player;
     private PlayerStatus playerStatus;
 
+    //private AudioSource audioSource;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerStatus = player.GetComponent<PlayerStatus>();
         cost = playerStatus.kamaitachiCost;
         playerStatus.MpConsumption(cost);
+        //audioSource = transform.GetComponent<AudioSource>();
         //cost = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().kamaitachiCost;
         //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>().MpConsumption(cost);
 
@@ -27,6 +30,11 @@ public class Kamaitachi : MonoBehaviour
 
     void Update()
     {
+        //if (audioSource.time > 1.0f)
+        //{
+        //    audioSource.time = 0.3f;
+        //}
+
         transform.GetComponent<Rigidbody>().velocity = moveVector;
         //particle.transform.right = moveVector.normalized;
 
