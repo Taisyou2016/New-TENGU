@@ -6,16 +6,17 @@ public class WindBlock : MonoBehaviour
     public float playerPower;
     public float objectPower;
     public Vector3 direction;
-    public GameObject particle;
+    //public GameObject particle;
 
     private GameObject player;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        particle.transform.forward = direction;
+        //particle.transform.forward = direction;
+        //particle.transform.localScale = transform.localScale;
         //particle.transform.position = particle.transform.position + new Vector3(0, 0, -2.0f);
-        particle.transform.localPosition = new Vector3(0, particle.transform.localPosition.y, -0.5f);
+        //particle.transform.localPosition = new Vector3(0, particle.transform.localPosition.y, -0.5f);
     }
 
     void Update()

@@ -17,8 +17,11 @@ public class PlayerMove : MonoBehaviour
     public Vector3 windDirection; //風の方向
     public bool previosGroundHit = false; //ひとつ前の地面に当たっているかどうかの判定
     public bool currentGroundHit = false; //現在の地面に当たっているかどうかの判定
-    public float WaitMotinChangeTime = 10.0f;
+    public float WaitMotinChangeTime = 10.0f; // この秒放置されたら放置アニメーションへ遷移
     public float blowPower = 0.0f;
+    public GameObject lockEnemy;
+    public AudioClip jump;
+    public AudioClip glide;
 
     private CharacterController controller;
     private GameObject cameraController;
@@ -30,11 +33,11 @@ public class PlayerMove : MonoBehaviour
     private bool stop = false;
 
     private List<GameObject> lockEnemyList = new List<GameObject>();
-    private GameObject lockEnemy;
     private bool lockOn = false;
 
     private Animator playerAnimator;
     private float WaitTime;
+    private AudioSource audioSource;
 
     public StateProcessor stateProcessor = new StateProcessor();
     public PlayerMoveStateDefault stateDefault = new PlayerMoveStateDefault();
@@ -49,7 +52,8 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         cameraController = GameObject.FindGameObjectWithTag("CameraController");
-        playerAnimator = transform.FindChild("Tengu_sotai").GetComponent<Animator>();
+        playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
+        audioSource = transform.GetComponent<AudioSource>();
 
         stateProcessor.State = stateDefault;
         stateDefault.exeDelegate = Default;
@@ -72,7 +76,11 @@ public class PlayerMove : MonoBehaviour
 
         if (stop == true) return;
 
-        /******************** ロックオン処理 ********************/
+        /*****************************************************************/
+
+        //ロックオン開始終了　処理
+
+        /*****************************************************************/
         foreach (var e in lockEnemyList)
         {
             if (e == null)
@@ -91,7 +99,7 @@ public class PlayerMove : MonoBehaviour
                 lockOn = true;
                 lockEnemy = lockEnemyList[0];
                 transform.LookAt(lockEnemy.transform.position); //ロックした敵の方を向く
-                cameraController.GetComponent<CameraTest>().LockStart(); //プレイヤーの後ろに回る
+                cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
                 print("ロックオン開始");
             }
             else
@@ -124,8 +132,14 @@ public class PlayerMove : MonoBehaviour
             velocityY = 10;
             jampState = true;
             playerAnimator.SetTrigger("Jump");
+            audioSource.PlayOneShot(jump);
         }
 
+        /*****************************************************************/
+
+        //アニメーション
+
+        /*****************************************************************/
         playerAnimator.SetFloat("VelocityY", velocity.y);
         Vector3 velocityYzero = velocity;
         velocityYzero.y = 0;
@@ -249,7 +263,19 @@ public class PlayerMove : MonoBehaviour
         blowPower = power;
     }
 
-    /******************** プレイヤーの移動状態関係 ********************/
+    public void LookForward()
+    {
+        Vector3 lookPos = transform.position + transform.forward;
+        lookPos.y = transform.position.y;
+
+        transform.LookAt(lookPos);
+    }
+
+    /*****************************************************************/
+
+    //プレイヤーの移動状態関係
+
+    /*****************************************************************/
     public void Default() //通常移動
     {
         ////カメラの正面向きのベクトルを取得
@@ -289,14 +315,21 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(newDir);
         }
 
-        if (lockOn == true) stateProcessor.State = stateLockOn;
+        if (lockOn == true)
+        {
+            cameraController.GetComponent<CameraTest>().CameraInitialize();
+            stateProcessor.State = stateLockOn;
+        }
         if (windPower >= 1)
         {
             playerAnimator.SetTrigger("WindMoveOn");
+            cameraController.GetComponent<CameraTest>().CameraInitialize();
+            audioSource.PlayOneShot(glide);
             stateProcessor.State = stateWind;
         }
         if (blowPower >= 1)
         {
+            cameraController.GetComponent<CameraTest>().CameraInitialize();
             stateProcessor.State = stateBlow;
         }
     }
@@ -305,20 +338,25 @@ public class PlayerMove : MonoBehaviour
     {
         if (lockOn == false)
         {
+            LookForward();
+            cameraController.GetComponent<CameraTest>().CameraInitialize();
             lockPosition.transform.position = transform.position;
             stateProcessor.State = stateDefault;
             return;
         }
         if (windPower >= 1)
         {
+            cameraController.GetComponent<CameraTest>().CameraInitialize();
             lockOn = false;
             lockPosition.transform.position = transform.position;
             playerAnimator.SetTrigger("WindMoveOn");
+            audioSource.PlayOneShot(glide);
             stateProcessor.State = stateWind;
             return;
         }
         if (blowPower >= 1)
         {
+            cameraController.GetComponent<CameraTest>().CameraInitialize();
             lockOn = false;
             lockPosition.transform.position = transform.position;
             stateProcessor.State = stateBlow;
@@ -343,7 +381,7 @@ public class PlayerMove : MonoBehaviour
                 lockEnemy = lockEnemyList[index - 1];
 
             transform.LookAt(lockEnemy.transform.position); //ロックした敵の方を向く
-            cameraController.GetComponent<CameraTest>().LockStart(); //プレイヤーの後ろに回る
+            cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
         }
         //ロックを1つ遠い敵に変更
         if (Input.GetKeyDown(KeyCode.R))
@@ -355,7 +393,7 @@ public class PlayerMove : MonoBehaviour
                 lockEnemy = lockEnemyList[index + 1];
 
             transform.LookAt(lockEnemy.transform.position); //ロックした敵の方を向く
-            cameraController.GetComponent<CameraTest>().LockStart(); //プレイヤーの後ろに回る
+            cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
         }
         //プレイヤーとロックしている敵とY軸が離れすぎたらロックを終了させる
         if (lockEnemyList != null && lockEnemy != null)
@@ -370,11 +408,13 @@ public class PlayerMove : MonoBehaviour
         if (lockEnemyList != null && lockEnemy == null)
         {
             lockEnemy = lockEnemyList[0];
-            cameraController.GetComponent<CameraTest>().LockStart(); //プレイヤーの後ろに回る
+            cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
         }
 
         if (lockEnemy == null)
         {
+            LookForward();
+            cameraController.GetComponent<CameraTest>().CameraInitialize();
             lockOn = false;
             lockPosition.transform.position = transform.position;
             stateProcessor.State = stateDefault;
@@ -438,6 +478,8 @@ public class PlayerMove : MonoBehaviour
             windPower = 0;
             windMove = false;
             playerAnimator.SetTrigger("WindMoveOff");
+            LookForward();
+            cameraController.GetComponent<CameraTest>().CameraInitialize();
             stateProcessor.State = stateDefault;
         }
         //if (windPower <= 0.5 && lockOn == true) stateProcessor.State = stateLockOn;

@@ -9,7 +9,7 @@ public class AttackPattern : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerAnimator = player.transform.FindChild("Tengu_sotai").GetComponent<Animator>();
+        playerAnimator = player.transform.FindChild("Tengu_Default").GetComponent<Animator>();
     }
 
     void Update()

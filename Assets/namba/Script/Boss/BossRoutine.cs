@@ -33,14 +33,17 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
     private float angle = 60.0f;
     private float dt;
-
+    private bool Madness = false;
+    private bool flag = false;
 
     private Transform player;
     private CharacterController charcon;
     private BossAttack attack;
+    public Animator anima;
+    
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         attack = GetComponent<BossAttack>();
         charcon = GetComponent<CharacterController>();
@@ -66,17 +69,22 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void Damage(int dmg)
     {
         nowlife -= dmg;
-        if (nowlife <= 0)
+        if(nowlife / life <= 0.5f)
         {
-            ChangeState(BossState.Died);
-            return;
-        }
-        else if(Madness())
-        {
+            Madness = false;
             speed = madnessspeed;
         }
-        print("HP :" + life);
-        ChangeState(BossState.Hit);
+        else if (nowlife >= 0)
+        {
+            ChangeState(BossState.Hit);
+        }
+        else
+        {
+            if (flag) { return; }
+            flag = true;
+            ChangeState(BossState.Died);
+        }
+
 
     }
 
@@ -84,7 +92,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void PDistance()
     {
         float Distance = Vector3.Distance(this.transform.position,player.position);
-        print(Distance);
         if(Distance <= displeDis)
         {
             ChangeState(BossState.Dispel);
@@ -124,16 +131,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         dt += Time.deltaTime;
     }
 
-    // 覚醒状態
-    public bool Madness()
-    {
-        bool flag = nowlife / life <= 0.5f;
-
-        return flag;
-    }
-
-
-
     /*----------------------------------------------------/
                     ここからState処理
     /----------------------------------------------------*/
@@ -163,7 +160,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             if (run) { yield break; }
             run = true;
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(4);
             owner.ChangeState(BossState.Move);
 
             run = false;
@@ -183,10 +180,12 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         {
             owner.state = "Move";
             targetdis = Random.Range(owner.targetdis.x, owner.targetdis.y);
+            owner.anima.SetTrigger("Move");
 
-
-            if (owner.Madness())
+            if (owner.Madness)
             {
+                owner.anima.SetTrigger("Jump");
+
                 float subx = Vector3.Distance(owner.player.position, owner.transform.position);
                 float suby = subx / (Mathf.Sin(2 * owner.angle * Mathf.Deg2Rad) / 9.8f);
                 Vx = Mathf.Sqrt(suby) * Mathf.Cos(owner.angle * Mathf.Deg2Rad);
@@ -205,7 +204,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             if (Distance > targetdis)
             {
                 destination.y = 0;
-                if (owner.Madness())
+                if (owner.Madness)
                 {
                     owner.JumpMove(Vx, Vy);
                     return;
@@ -222,6 +221,8 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         public override void End()
         {
+            owner.anima.SetTrigger("MoveDown");
+
             owner.dt = 0;
         }
 
@@ -242,9 +243,11 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             if (enemys.Length > 0)
             {
                 owner.ChangeState(BossState.Move);
-                return;
             }
-            owner.StartCoroutine(Attack());
+            else {
+                owner.anima.SetTrigger("Hexa");
+                owner.StartCoroutine(Attack());
+            }
         }
 
         public override void Execute()
@@ -259,11 +262,17 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
-            // 六芒星生成
-            owner.attack.Attack(1);
+            yield return new WaitForSeconds(1);
+
 
             // 攻撃モーションが終わり次第
-            yield return new WaitForSeconds(1);
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+            {
+                yield return null;
+            }
+
+            // 六芒星生成
+            owner.attack.Attack(1);
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Move);
@@ -279,6 +288,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         public override void Initialize()
         {
             owner.state = "Dispel";
+            owner.anima.SetTrigger("Dispel");
             owner.StartCoroutine(Attack());
         }
 
@@ -293,10 +303,14 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
-            owner.attack.Attack(2);
 
             // 攻撃モーションが終わり次第
-            yield return new WaitForSeconds(1);
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+            {
+                yield return null;
+            }
+
+            owner.attack.Attack(2);
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Hexagram);
@@ -314,14 +328,13 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         public override void Initialize()
         {
             owner.state = "WindSlash";
+            owner.anima.SetTrigger("Cutter");
             vec = owner.transform.position + owner.transform.forward * 4;
             owner.StartCoroutine(Attack());
         }
 
         public override void Execute()
         {
-            // 攻撃終了後移行
-            //owner.ChangeState(BossState.Hexagram);
         }
 
         public override void End()
@@ -330,10 +343,16 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
+
+            // 攻撃モーションが終わり次第
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.8f)
+            {
+                yield return null;
+            }
+
             iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec));
             owner.attack.Attack(3);
 
-            // 攻撃モーションが終わり次第
             yield return new WaitForSeconds(1);
 
             // 攻撃終了後移行
@@ -350,6 +369,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         public override void Initialize()
         {
             owner.state = "Tornado";
+            owner.anima.SetTrigger("Tornado");
             owner.StartCoroutine(Attack());
         }
 
@@ -363,10 +383,14 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
-            owner.attack.Attack(4);
 
             // 攻撃モーションが終わり次第
-            yield return new WaitForSeconds(1);
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+            {
+                yield return null;
+            }
+
+            owner.attack.Attack(4);
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Hexagram);
@@ -382,6 +406,8 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         public override void Initialize()
         {
             owner.state = "Died";
+            owner.anima.SetTrigger("Death");
+
             Destroy(owner.gameObject, 1.0f);
         }
 
@@ -402,6 +428,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         public override void Initialize()
         {
             owner.state = "Hit";
+            owner.anima.SetTrigger("Damage");
             owner.StartCoroutine(hit());
         }
 
