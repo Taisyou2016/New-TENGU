@@ -40,9 +40,12 @@ public class Wind : MonoBehaviour
     void Update()
     {
         startPoint = transform.position;
-        particle.transform.localScale = new Vector3((startPoint - windMotion.transform.position).magnitude, scaleY, scaleZ);
+        particle.transform.localScale = new Vector3((startPoint - windMotion.transform.position).magnitude, scaleY, scaleZ / 2);
         particle.transform.position = Vector3.Lerp(startPoint, particlePosition, 5.0f);
-        particle.transform.Rotate(new Vector3(1, 0, 0), particle.transform.eulerAngles.x * -1.0f);
+        if (generationPattern == 3 || generationPattern == 4)
+        { }
+        else
+            particle.transform.Rotate(new Vector3(1, 0, 0), particle.transform.eulerAngles.x * -1.0f);
         DrawLine();
     }
 
@@ -103,6 +106,7 @@ public class Wind : MonoBehaviour
             obj.transform.position = windMotion.transform.position;
 
             obj.transform.right = (windMotion.transform.position - point).normalized;
+            obj.transform.forward = player.transform.forward;
             if (generationPattern == 3 || generationPattern == 4) obj.transform.forward = player.transform.forward;
 
             obj.transform.Rotate(new Vector3(1, 0, 0), obj.transform.eulerAngles.x * -1.0f);

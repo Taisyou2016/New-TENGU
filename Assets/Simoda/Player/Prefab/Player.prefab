@@ -946,6 +946,7 @@ GameObject:
   - 114: {fileID: 11424510}
   - 114: {fileID: 11430062}
   - 114: {fileID: 11466856}
+  - 114: {fileID: 11486288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2241,6 +2242,7 @@ MonoBehaviour:
   currentGroundHit: 0
   WaitMotinChangeTime: 10
   blowPower: 0
+  lockEnemy: {fileID: 0}
 --- !u!114 &11452316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2279,6 +2281,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 50
+--- !u!114 &11486288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218fd238139e3a64fbc351b64235cf68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockCursorPrefab: {fileID: 127106, guid: ce84a603f2f66e44c83aa12ff9ccf55a, type: 2}
 --- !u!114 &11486516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2316,7 +2330,13 @@ MonoBehaviour:
   invincible: 0
   knockBackSmallInvincibleTime: 1
   knockBackLargeInvincibleTime: 3
-  modelMaterial: {fileID: 2100000, guid: 34c9960e2af568d48a37417f609137c1, type: 2}
+  modelMaterial:
+  - {fileID: 2100000, guid: 34c9960e2af568d48a37417f609137c1, type: 2}
+  - {fileID: 2100000, guid: 93816364bcbfece4c852c966981e1dce, type: 2}
+  - {fileID: 2100000, guid: 5887bd1227ed604438767a9f62dd63f7, type: 2}
+  - {fileID: 2100000, guid: dc0095a07962e324693b4dd98b9a5df3, type: 2}
+  - {fileID: 2100000, guid: e8d8348f61554a64a807c9ca6d347b60, type: 2}
+  - {fileID: 2100000, guid: 94d6ffe8790a6124f935bd95700f19f3, type: 2}
 --- !u!135 &13570766
 SphereCollider:
   m_ObjectHideFlags: 1
