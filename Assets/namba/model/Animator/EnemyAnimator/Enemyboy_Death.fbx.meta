@@ -117,7 +117,119 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 110
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: imagePlane3
+        weight: 1
+      - path: L_arm
+        weight: 1
+      - path: pSphere2
+        weight: 1
+      - path: pSphere2/pPlane1
+        weight: 1
+      - path: pSphere2/pSphere3
+        weight: 1
+      - path: R_arm
+        weight: 1
+      - path: root
+        weight: 1
+      - path: root/hip
+        weight: 1
+      - path: root/hip/L_pelvis
+        weight: 1
+      - path: root/hip/L_pelvis/L_kinee
+        weight: 1
+      - path: root/hip/L_pelvis/L_kinee/L_ankle
+        weight: 1
+      - path: root/hip/L_pelvis/L_kinee/L_ankle/L_ball
+        weight: 1
+      - path: root/hip/L_pelvis/L_kinee/L_ankle/L_ball/L_toe
+        weight: 1
+      - path: root/hip/R_pelvis
+        weight: 1
+      - path: root/hip/R_pelvis/R_kinee
+        weight: 1
+      - path: root/hip/R_pelvis/R_kinee/R_ankle
+        weight: 1
+      - path: root/hip/R_pelvis/R_kinee/R_ankle/R_ball
+        weight: 1
+      - path: root/hip/R_pelvis/R_kinee/R_ankle/R_ball/R_toe
+        weight: 1
+      - path: root/waist
+        weight: 1
+      - path: root/waist/chest
+        weight: 1
+      - path: root/waist/chest/L_clavicle
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow/L_wrist
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow/L_wrist/L_finger3
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow/L_wrist/L_finger3/L_finger2
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow/L_wrist/L_finger3/L_finger2/L_finger1
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow/L_wrist/L_o_finger2
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow/L_wrist/L_o_finger2/L_o_finger1
+        weight: 1
+      - path: root/waist/chest/L_clavicle1
+        weight: 1
+      - path: root/waist/chest/L_clavicle1/L_shoulder1
+        weight: 1
+      - path: root/waist/chest/L_clavicle1/L_shoulder1/L_elbow1
+        weight: 1
+      - path: root/waist/chest/L_clavicle1/L_shoulder1/L_elbow1/L_wrist1
+        weight: 1
+      - path: root/waist/chest/L_clavicle1/L_shoulder1/L_elbow1/L_wrist1/L_finger4
+        weight: 1
+      - path: root/waist/chest/L_clavicle1/L_shoulder1/L_elbow1/L_wrist1/L_finger4/L_finger5
+        weight: 1
+      - path: root/waist/chest/L_clavicle1/L_shoulder1/L_elbow1/L_wrist1/L_finger4/L_finger5/L_finger6
+        weight: 1
+      - path: root/waist/chest/L_clavicle1/L_shoulder1/L_elbow1/L_wrist1/L_o_finger3
+        weight: 1
+      - path: root/waist/chest/L_clavicle1/L_shoulder1/L_elbow1/L_wrist1/L_o_finger3/L_o_finger4
+        weight: 1
+      - path: root/waist/chest/neck
+        weight: 1
+      - path: root/waist/chest/neck/head
+        weight: 1
+      - path: root/waist/chest/neck/head/nose
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []

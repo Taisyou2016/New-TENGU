@@ -2503,7 +2503,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19899664, guid: 6e1eef63073bf5341965825387944a6a, type: 2}
       propertyPath: ColorModule.gradient.maxGradient.key1.rgba
-      value: 3261227000
+      value: 4284637176
       objectReference: {fileID: 0}
     - target: {fileID: 19899664, guid: 6e1eef63073bf5341965825387944a6a, type: 2}
       propertyPath: ColorModule.gradient.maxGradient.ctime1
@@ -2512,6 +2512,14 @@ Prefab:
     - target: {fileID: 134420, guid: 6e1eef63073bf5341965825387944a6a, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19899664, guid: 6e1eef63073bf5341965825387944a6a, type: 2}
+      propertyPath: ColorModule.gradient.maxGradient.key0.rgba
+      value: 846330102
+      objectReference: {fileID: 0}
+    - target: {fileID: 19899664, guid: 6e1eef63073bf5341965825387944a6a, type: 2}
+      propertyPath: InitialModule.startColor.maxColor.rgba
+      value: 1217697023
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e1eef63073bf5341965825387944a6a, type: 2}
@@ -4967,7 +4975,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 134420, guid: 6e1eef63073bf5341965825387944a6a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19899664, guid: 6e1eef63073bf5341965825387944a6a, type: 2}
+      propertyPath: InitialModule.startColor.maxColor.rgba
+      value: 1245395963
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e1eef63073bf5341965825387944a6a, type: 2}

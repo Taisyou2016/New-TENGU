@@ -9,6 +9,8 @@ public class CameraTest : MonoBehaviour
     public float cameraMoveSpeedDefault = 3.0f;
     public float cameraMoveSpeedWind = 10.0f;
     public float cameraRotateSpeed = 2.0f;
+    public float rotateMinX = -10.0f;
+    public float rotateMaxX = 30.0f;
 
     private float cameraMoveSpeed;
     private Transform cameraTransform;
@@ -28,13 +30,24 @@ public class CameraTest : MonoBehaviour
 
         if (target.GetComponent<PlayerMove>().GetLockOnInfo() == true) //ロックしてるとき
         {
-            if (Input.GetAxis("Horizontal") != 0) flag = true;
-            if (transform.rotation == target.transform.rotation) flag = false;
+            Quaternion targetRotation = targetTransform.rotation;
+            float targetRotationX;
+            if (targetRotation.eulerAngles.x > 180.0f)
+                targetRotationX = targetRotation.eulerAngles.x - 360.0f;
+            else
+                targetRotationX = targetRotation.eulerAngles.x;
 
-            Vector3 targetRotation = targetTransform.rotation.eulerAngles;
+            targetRotation = Quaternion.Euler(Mathf.Clamp(targetRotationX, rotateMinX, rotateMaxX), targetTransform.rotation.eulerAngles.y, targetTransform.rotation.eulerAngles.z);
+
+
+
+            if (Input.GetAxis("Horizontal") != 0) flag = true;
+            if (transform.rotation == targetRotation) flag = false;
+
+            //Vector3 targetRotation = targetTransform.rotation.eulerAngles;
             if (flag == true) //フラグがtrueだったらプレイヤーの後ろに回る
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetTransform.rotation, cameraRotateSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, cameraRotateSpeed * Time.deltaTime);
             }
         }
         else if (target.GetComponent<PlayerMove>().GetWindMove() == true)
@@ -86,7 +99,61 @@ public class CameraTest : MonoBehaviour
         }
     }
 
-    public void LockStart()
+    //public void LateUpdate()
+    //{
+    //    transform.position = Vector3.Lerp(transform.position, targetTransform.position, cameraMoveSpeed * Time.deltaTime);
+
+    //    if (target.GetComponent<PlayerMove>().GetLockOnInfo() == true) //ロックしてるとき
+    //    {
+    //        Quaternion targetRotation = targetTransform.rotation;
+    //        float targetRotationX;
+    //        if (targetRotation.eulerAngles.x > 180.0f)
+    //            targetRotationX = targetRotation.eulerAngles.x - 360.0f;
+    //        else
+    //            targetRotationX = targetRotation.eulerAngles.x;
+
+    //        targetRotation = Quaternion.Euler(Mathf.Clamp(targetRotationX, rotateMinX, rotateMaxX), targetTransform.rotation.eulerAngles.y, targetTransform.rotation.eulerAngles.z);
+
+
+
+    //        if (Input.GetAxis("Horizontal") != 0) flag = true;
+    //        if (transform.rotation == targetRotation) flag = false;
+
+    //        //Vector3 targetRotation = targetTransform.rotation.eulerAngles;
+    //        if (flag == true) //フラグがtrueだったらプレイヤーの後ろに回る
+    //        {
+    //            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, cameraRotateSpeed * Time.deltaTime);
+    //        }
+    //    }
+    //    else if (target.GetComponent<PlayerMove>().GetWindMove() == true)
+    //    {
+    //        Quaternion targetRotationZzoro = target.transform.rotation;
+    //        targetRotationZzoro.z = 0;
+    //        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotationZzoro, cameraRotateSpeed * Time.deltaTime);
+    //    }
+    //    else
+    //    {
+    //        if (Input.GetAxis("Horizontal") != 0) flag = true;
+    //        if (transform.rotation == target.transform.rotation || (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") == 0))
+    //        {
+    //            flag = false;
+    //        }
+
+    //        if (flag == true)
+    //        {
+    //            transform.rotation = Quaternion.Slerp(transform.rotation, targetTransform.rotation, cameraRotateSpeed * Time.deltaTime);
+    //        }
+    //        //else
+    //        //{
+    //        //    transform.rotation = Quaternion.Slerp(
+    //        //        transform.rotation,
+    //        //        Quaternion.Euler(targetTransform.rotation.eulerAngles.x, targetTransform.rotation.eulerAngles.y - 180.0f, targetTransform.rotation.eulerAngles.z),
+    //        //        cameraRotateSpeed * Time.deltaTime);
+    //        //}
+    //    }
+    //}
+
+    public void CameraInitialize()
     {
         flag = true;
     }

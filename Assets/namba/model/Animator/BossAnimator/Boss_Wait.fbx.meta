@@ -111,7 +111,111 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: boss_uchiwa:tengu_sotai4:body
+        weight: 1
+      - path: boss_uchiwa:tengu_sotai4:body/boss_uchiwa:tengu_sotai4:hand
+        weight: 1
+      - path: boss_uchiwa:tengu_sotai4:pPlane6
+        weight: 1
+      - path: boss_uchiwa:tengu_sotai4:pPlane6/boss_uchiwa:tengu_sotai4:transform2
+        weight: 1
+      - path: boss_uchiwa:tengu_sotai4:pPlane7
+        weight: 1
+      - path: boss_uchiwa:tengu_sotai4:pPlane7/boss_uchiwa:tengu_sotai4:transform1
+        weight: 1
+      - path: boss_uchiwa:tengu_UV:body
+        weight: 1
+      - path: boss_uchiwa:tengu_UV:body/boss_uchiwa:tengu_UV:hand
+        weight: 1
+      - path: boss_uchiwa:tengu_UV:pPlane6
+        weight: 1
+      - path: boss_uchiwa:tengu_UV:pPlane6/boss_uchiwa:tengu_UV:transform2
+        weight: 1
+      - path: boss_uchiwa:tengu_UV:pPlane7
+        weight: 1
+      - path: boss_uchiwa:tengu_UV:pPlane7/boss_uchiwa:tengu_UV:transform1
+        weight: 1
+      - path: imagePlane3
+        weight: 1
+      - path: pSphere3
+        weight: 1
+      - path: root
+        weight: 1
+      - path: root/hip
+        weight: 1
+      - path: root/hip/L_pelvis
+        weight: 1
+      - path: root/hip/L_pelvis/L_knee
+        weight: 1
+      - path: root/hip/L_pelvis/L_knee/L_ankle
+        weight: 1
+      - path: root/hip/R_pelvis
+        weight: 1
+      - path: root/hip/R_pelvis/R_knee
+        weight: 1
+      - path: root/hip/R_pelvis/R_knee/R_ankle
+        weight: 1
+      - path: root/waist
+        weight: 1
+      - path: root/waist/chest
+        weight: 1
+      - path: root/waist/chest/L_clavicle
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow/L_wrist
+        weight: 1
+      - path: root/waist/chest/L_clavicle/L_shoulder/L_elbow/L_wrist/boss_uchiwa:pCylinder5
+        weight: 1
+      - path: root/waist/chest/neck
+        weight: 1
+      - path: root/waist/chest/neck/head
+        weight: 1
+      - path: root/waist/chest/neck/head/nose
+        weight: 1
+      - path: root/waist/chest/R_clavicle
+        weight: 1
+      - path: root/waist/chest/R_clavicle/R_shoulder
+        weight: 1
+      - path: root/waist/chest/R_clavicle/R_shoulder/R_elbow
+        weight: 1
+      - path: root/waist/chest/R_clavicle/R_shoulder/R_elbow/R_wrist
+        weight: 1
+      - path: root/waist/chest/R_clavicle/R_shoulder/R_elbow/R_wrist/pCylinder5
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []
