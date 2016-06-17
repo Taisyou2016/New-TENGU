@@ -7,6 +7,8 @@ public class MouseController : MonoBehaviour
     //public GameObject kamaitachiAura;
     //public GameObject tornadoAura;
     public float length = 200.0f;
+    public AudioClip wind;
+    public AudioClip kamaitachi;
 
     private Vector3 startPos = new Vector3(Screen.width / 2, Screen.height / 2, 0.0f);
     private Vector3 endPos;
@@ -20,6 +22,8 @@ public class MouseController : MonoBehaviour
     private bool kamaitachiGeneration = false;
     private bool tornadoGeneration = false;
 
+    private AudioSource audioSource;
+
     void Start()
     {
         //Cursor.visible = false;
@@ -27,6 +31,7 @@ public class MouseController : MonoBehaviour
         //windAura.SetActive(false);
         //kamaitachiAura.SetActive(false);
         //tornadoAura.SetActive(false);
+        audioSource = transform.parent.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -141,7 +146,10 @@ public class MouseController : MonoBehaviour
         if (vector.magnitude > length)
         {
             if (playerStatus.MpCostDecision(playerStatus.windCost))
+            {
                 GameObject.FindObjectOfType<AttackPattern>().WindPatternDecision(angle, vector);
+                audioSource.PlayOneShot(wind); // 対応SE再生
+            }
         }
 
         GenerationFalse();
@@ -158,7 +166,10 @@ public class MouseController : MonoBehaviour
         {
             //MPが一度ゼロになって回復中か、costが足りなかったら発生させない
             if (playerStatus.MpCostDecision(playerStatus.kamaitachiCost))
+            {
                 GameObject.FindObjectOfType<AttackPattern>().KamaitachiPatternDecision(angle, vector);
+                audioSource.PlayOneShot(kamaitachi); // 対応SE再生
+            }
         }
 
         GenerationFalse();

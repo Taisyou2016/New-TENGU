@@ -941,6 +941,7 @@ GameObject:
   - 4: {fileID: 472394}
   - 143: {fileID: 14338050}
   - 135: {fileID: 13570766}
+  - 82: {fileID: 8290818}
   - 114: {fileID: 11435836}
   - 114: {fileID: 11492454}
   - 114: {fileID: 11424510}
@@ -2170,6 +2171,80 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143502}
   m_Mesh: {fileID: 4300006, guid: 43de8809069a3d84a8f48593bd983f19, type: 3}
+--- !u!82 &8290818
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199778}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &9525424
 Animator:
   serializedVersion: 3
@@ -2243,6 +2318,8 @@ MonoBehaviour:
   WaitMotinChangeTime: 10
   blowPower: 0
   lockEnemy: {fileID: 0}
+  jump: {fileID: 8300000, guid: da5169f9c5f156c4ca05955d5e036e87, type: 3}
+  glide: {fileID: 8300000, guid: ae4b2540c4364614c9ee85ae060b7813, type: 3}
 --- !u!114 &11452316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2281,6 +2358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 50
+  wind: {fileID: 8300000, guid: 58e0a59b16f0df143b1b57bfe0185f5f, type: 3}
+  kamaitachi: {fileID: 8300000, guid: a1dc03c76b678e045b458524cdb2c592, type: 3}
 --- !u!114 &11486288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2326,7 +2405,8 @@ MonoBehaviour:
   kamaitachiCost: 10
   tornadoCost: 60
   mpAutoRecoveryCost: 1
-  mpAutoRecoveryTime: 0.7
+  defaultMpAutoRecoveryTime: 0.7
+  overMpAutoRecoveryTime: 0.1
   invincible: 0
   knockBackSmallInvincibleTime: 1
   knockBackLargeInvincibleTime: 3
@@ -2337,6 +2417,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: dc0095a07962e324693b4dd98b9a5df3, type: 2}
   - {fileID: 2100000, guid: e8d8348f61554a64a807c9ca6d347b60, type: 2}
   - {fileID: 2100000, guid: 94d6ffe8790a6124f935bd95700f19f3, type: 2}
+  smallDamage: {fileID: 8300000, guid: 2bdd8d65feeaa164aa893202b6c42643, type: 3}
+  largeDamage: {fileID: 8300000, guid: 2bdd8d65feeaa164aa893202b6c42643, type: 3}
+  dead: {fileID: 8300000, guid: eba613f8723f77a4a8c9ffad0036057e, type: 3}
 --- !u!135 &13570766
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -19,6 +19,9 @@ public class PlayerMove : MonoBehaviour
     public bool currentGroundHit = false; //現在の地面に当たっているかどうかの判定
     public float WaitMotinChangeTime = 10.0f; // この秒放置されたら放置アニメーションへ遷移
     public float blowPower = 0.0f;
+    public GameObject lockEnemy;
+    public AudioClip jump;
+    public AudioClip glide;
 
     private CharacterController controller;
     private GameObject cameraController;
@@ -29,12 +32,12 @@ public class PlayerMove : MonoBehaviour
     private bool knockBackState = false;
     private bool stop = false;
 
-    public GameObject lockEnemy;
     private List<GameObject> lockEnemyList = new List<GameObject>();
     private bool lockOn = false;
 
     private Animator playerAnimator;
     private float WaitTime;
+    private AudioSource audioSource;
 
     public StateProcessor stateProcessor = new StateProcessor();
     public PlayerMoveStateDefault stateDefault = new PlayerMoveStateDefault();
@@ -50,6 +53,7 @@ public class PlayerMove : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cameraController = GameObject.FindGameObjectWithTag("CameraController");
         playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
+        audioSource = transform.GetComponent<AudioSource>();
 
         stateProcessor.State = stateDefault;
         stateDefault.exeDelegate = Default;
@@ -128,6 +132,7 @@ public class PlayerMove : MonoBehaviour
             velocityY = 10;
             jampState = true;
             playerAnimator.SetTrigger("Jump");
+            audioSource.PlayOneShot(jump);
         }
 
         /*****************************************************************/
@@ -319,6 +324,7 @@ public class PlayerMove : MonoBehaviour
         {
             playerAnimator.SetTrigger("WindMoveOn");
             cameraController.GetComponent<CameraTest>().CameraInitialize();
+            audioSource.PlayOneShot(glide);
             stateProcessor.State = stateWind;
         }
         if (blowPower >= 1)
@@ -344,6 +350,7 @@ public class PlayerMove : MonoBehaviour
             lockOn = false;
             lockPosition.transform.position = transform.position;
             playerAnimator.SetTrigger("WindMoveOn");
+            audioSource.PlayOneShot(glide);
             stateProcessor.State = stateWind;
             return;
         }

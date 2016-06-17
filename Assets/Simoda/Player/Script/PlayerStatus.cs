@@ -12,12 +12,18 @@ public class PlayerStatus : MonoBehaviour
     public int tornadoCost = 60; //竜巻発生に必要なcost;
 
     public int mpAutoRecoveryCost = 1; //自動回復するときの妖力の量
-    public float mpAutoRecoveryTime = 1.0f; //自動回復の間隔
+    public float defaultMpAutoRecoveryTime = 1.0f; //自動回復の間隔
+    public float overMpAutoRecoveryTime = 0.1f; //自動回復の間隔
     public bool invincible = false; //無敵化どうか
     public float knockBackSmallInvincibleTime = 1.0f; //ノックバック小の時の無敵時間
     public float knockBackLargeInvincibleTime = 3.0f; //ノックバック大の時の無敵時間
-    public Material[] modelMaterial; //モデルのメッシュ
+    public Material[] modelMaterial; //モデルのマテリアル
 
+    public AudioClip smallDamage;
+    public AudioClip largeDamage;
+    public AudioClip dead;
+
+    private float mpAutoRecoveryTime = 1.0f; //自動回復の間隔
     private float lastMpAutoRecoveryTime = 0.0f; //前に回復した時の時刻
     private bool mpOver = false; //妖力がOvarしたかどうか
     private float currentInvincibleTime = 0.0f; //現在の無敵時間
@@ -26,11 +32,13 @@ public class PlayerStatus : MonoBehaviour
     private float flashingSecond = 0.0f;
 
     private Animator playerAnimator;
+    private AudioSource audioSource;
 
     void Start()
     {
         currentHp = maxHp;
         currentMp = maxMp;
+        mpAutoRecoveryTime = defaultMpAutoRecoveryTime;
 
         foreach (var material in modelMaterial)
         {
@@ -44,6 +52,7 @@ public class PlayerStatus : MonoBehaviour
         //modelMesh.material.color -= alpha;
 
         playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
+        audioSource = transform.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -58,9 +67,15 @@ public class PlayerStatus : MonoBehaviour
         if (currentMp > maxMp) currentMp = 100;
 
         if (currentMp < 1) //妖力が0になったらmpOverをtrueに
+        {
             mpOver = true;
+            mpAutoRecoveryTime = overMpAutoRecoveryTime;
+        }
         if (currentMp >= maxMp && mpOver == true) //妖力が100まで回復したらmpOverをfalseに
+        {
             mpOver = false;
+            mpAutoRecoveryTime = defaultMpAutoRecoveryTime;
+        }
 
         if (invincible == true)
             currentInvincibleTime -= Time.deltaTime;
@@ -113,6 +128,7 @@ public class PlayerStatus : MonoBehaviour
             currentHp = 0;
             playerAnimator.SetTrigger("Dead");
             gameObject.GetComponent<PlayerMove>().ChangeStop();
+            audioSource.PlayOneShot(dead); // 対応SE再生
             print("体力がなくなり死亡しました");
             return;
         }
@@ -126,6 +142,7 @@ public class PlayerStatus : MonoBehaviour
             currentInvincibleTime = knockBackSmallInvincibleTime;
             playerAnimator.SetTrigger("KnockBackSmall");
             gameObject.GetComponent<PlayerMove>().ChangeKnockBackSmall();
+            audioSource.PlayOneShot(smallDamage); // 対応SE再生
             SetFlashingSecond(1.0f);
         }
         else if (damage >= 2) //damageが2以上だったらknockBackLargeInvincibleTimeを代入
@@ -133,6 +150,7 @@ public class PlayerStatus : MonoBehaviour
             currentInvincibleTime = knockBackLargeInvincibleTime;
             playerAnimator.SetTrigger("KnockBackLarge");
             gameObject.GetComponent<PlayerMove>().ChangeKnockBackLarge(10.0f);
+            audioSource.PlayOneShot(largeDamage); // 対応SE再生
             SetFlashingSecond(3.0f);
         }
 
