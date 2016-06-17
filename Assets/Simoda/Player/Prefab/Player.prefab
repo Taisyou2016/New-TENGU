@@ -942,6 +942,7 @@ GameObject:
   - 143: {fileID: 14338050}
   - 135: {fileID: 13570766}
   - 82: {fileID: 8290818}
+  - 81: {fileID: 8172664}
   - 114: {fileID: 11435836}
   - 114: {fileID: 11492454}
   - 114: {fileID: 11424510}
@@ -2171,6 +2172,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143502}
   m_Mesh: {fileID: 4300006, guid: 43de8809069a3d84a8f48593bd983f19, type: 3}
+--- !u!81 &8172664
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199778}
+  m_Enabled: 1
 --- !u!82 &8290818
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2216,7 +2224,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2233,7 +2241,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2358,8 +2366,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 50
-  wind: {fileID: 8300000, guid: 58e0a59b16f0df143b1b57bfe0185f5f, type: 3}
-  kamaitachi: {fileID: 8300000, guid: a1dc03c76b678e045b458524cdb2c592, type: 3}
 --- !u!114 &11486288
 MonoBehaviour:
   m_ObjectHideFlags: 1

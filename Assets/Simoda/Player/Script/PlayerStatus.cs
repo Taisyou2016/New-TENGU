@@ -157,6 +157,47 @@ public class PlayerStatus : MonoBehaviour
         invincible = true; //無敵に
     }
 
+    public void HpDamage(int damage, GameObject gameobject) //HPをダメージ分減らす
+    {
+        if (invincible == true) return; //無敵だったら処理を行わない
+        if (currentHp <= 0) return; //現在のHPが0以下だったら処理を行わない
+
+        if (currentHp - damage <= 0) //現在のHPが0より小さかったら0に
+        {
+            currentHp = 0;
+            transform.LookAt(gameObject.transform.position); // gameObjectの方を向く
+            playerAnimator.SetTrigger("Dead");
+            gameObject.GetComponent<PlayerMove>().ChangeStop();
+            audioSource.PlayOneShot(dead); // 対応SE再生
+            print("体力がなくなり死亡しました");
+            return;
+        }
+        else
+        {
+            currentHp -= damage;
+        }
+
+        if (damage == 1) //damageが1だったらknockBackSmallInvincibleTimeを代入
+        {
+            currentInvincibleTime = knockBackSmallInvincibleTime;
+            transform.LookAt(gameObject.transform.position); // gameObjectの方を向く
+            playerAnimator.SetTrigger("KnockBackSmall");
+            gameObject.GetComponent<PlayerMove>().ChangeKnockBackSmall();
+            audioSource.PlayOneShot(smallDamage); // 対応SE再生
+            SetFlashingSecond(1.0f);
+        }
+        else if (damage >= 2) //damageが2以上だったらknockBackLargeInvincibleTimeを代入
+        {
+            currentInvincibleTime = knockBackLargeInvincibleTime;
+            transform.LookAt(gameObject.transform.position); // gameObjectの方を向く
+            playerAnimator.SetTrigger("KnockBackLarge");
+            gameObject.GetComponent<PlayerMove>().ChangeKnockBackLarge(10.0f);
+            audioSource.PlayOneShot(largeDamage); // 対応SE再生
+            SetFlashingSecond(3.0f);
+        }
+
+        invincible = true; //無敵に
+    }
     public void MpConsumption(int cost) //cost分現在のMPを消費する
     {
         currentMp -= cost;
