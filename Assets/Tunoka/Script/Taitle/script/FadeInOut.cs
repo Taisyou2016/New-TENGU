@@ -9,7 +9,11 @@ public class FadeInOut : MonoBehaviour {
     public string m_scenechange;
     [SerializeField]
     private GameObject m_Fade;
+
+    [SerializeField]
+    private int m_fadeTime = 2;
     bool m_tr =true;
+    
 
     void Awake()
     {
@@ -25,13 +29,13 @@ public class FadeInOut : MonoBehaviour {
         print("FadeIn");
         m_tr = true;
         // SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
-        iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 2f, "onupdate", "SetValue"));
+        iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", m_fadeTime, "onupdate", "SetValue"));
     }
     public void FadeOut()
     {
         print("FadeOut");
         // SetValue()を毎フレーム呼び出して、１秒間に１から０までの値の中間値を渡す
-        iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 2f, "onupdate", "SetValue"));
+        iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", m_fadeTime, "onupdate", "SetValue"));
         m_tr = false;
     }
     void SetValue(float alpha)
