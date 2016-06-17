@@ -76,7 +76,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         }
         else if (nowlife >= 0)
         {
-            print("HP :" + life);
             ChangeState(BossState.Hit);
         }
         else
@@ -93,7 +92,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void PDistance()
     {
         float Distance = Vector3.Distance(this.transform.position,player.position);
-        print(Distance);
         if(Distance <= displeDis)
         {
             ChangeState(BossState.Dispel);
@@ -162,7 +160,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             if (run) { yield break; }
             run = true;
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(4);
             owner.ChangeState(BossState.Move);
 
             run = false;
@@ -245,10 +243,11 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             if (enemys.Length > 0)
             {
                 owner.ChangeState(BossState.Move);
-                return;
             }
-            owner.anima.SetTrigger("Hexa");
-            owner.StartCoroutine(Attack());
+            else {
+                owner.anima.SetTrigger("Hexa");
+                owner.StartCoroutine(Attack());
+            }
         }
 
         public override void Execute()
@@ -263,15 +262,17 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
-            // 六芒星生成
-            owner.attack.Attack(1);
+            yield return new WaitForSeconds(1);
+
 
             // 攻撃モーションが終わり次第
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
             {
                 yield return null;
             }
 
+            // 六芒星生成
+            owner.attack.Attack(1);
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Move);
@@ -302,14 +303,14 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
-            owner.attack.Attack(2);
 
             // 攻撃モーションが終わり次第
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
             {
                 yield return null;
             }
 
+            owner.attack.Attack(2);
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Hexagram);
@@ -334,8 +335,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         public override void Execute()
         {
-            // 攻撃終了後移行
-            //owner.ChangeState(BossState.Hexagram);
         }
 
         public override void End()
@@ -344,15 +343,17 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
-            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec));
-            owner.attack.Attack(3);
 
             // 攻撃モーションが終わり次第
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.8f)
             {
                 yield return null;
             }
 
+            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec));
+            owner.attack.Attack(3);
+
+            yield return new WaitForSeconds(1);
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Hexagram);
@@ -368,7 +369,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         public override void Initialize()
         {
             owner.state = "Tornado";
-            owner.anima.SetTrigger("Toranado");
+            owner.anima.SetTrigger("Tornado");
             owner.StartCoroutine(Attack());
         }
 
@@ -382,13 +383,14 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
-            owner.attack.Attack(4);
 
             // 攻撃モーションが終わり次第
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
             {
                 yield return null;
             }
+
+            owner.attack.Attack(4);
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Hexagram);
