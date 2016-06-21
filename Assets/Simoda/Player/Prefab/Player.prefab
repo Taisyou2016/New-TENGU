@@ -2319,6 +2319,7 @@ MonoBehaviour:
   gravity: 10
   jampPower: 10
   knockBackPower: 0
+  knockBackState: 0
   windPower: 0
   windDirection: {x: 0, y: 0, z: 0}
   previosGroundHit: 0
@@ -2328,6 +2329,28 @@ MonoBehaviour:
   lockEnemy: {fileID: 0}
   jump: {fileID: 8300000, guid: da5169f9c5f156c4ca05955d5e036e87, type: 3}
   glide: {fileID: 8300000, guid: ae4b2540c4364614c9ee85ae060b7813, type: 3}
+  blowCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.64856225
+      value: 0.028745737
+      inSlope: 0.24195768
+      outSlope: 0.24195768
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 8.115635
+      outSlope: 8.115635
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  blowStartTime: 0
 --- !u!114 &11452316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2378,6 +2401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockCursorPrefab: {fileID: 127106, guid: ce84a603f2f66e44c83aa12ff9ccf55a, type: 2}
+  cursorEnemyPosY: 2.5
+  cursorBossPosY: 5.5
 --- !u!114 &11486516
 MonoBehaviour:
   m_ObjectHideFlags: 1

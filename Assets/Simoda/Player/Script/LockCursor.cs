@@ -4,10 +4,12 @@ using System.Collections;
 public class LockCursor : MonoBehaviour
 {
     public GameObject lockCursorPrefab;
+    public float cursorEnemyPosY = 2.5f;
+    public float cursorBossPosY = 5.5f;
 
     private GameObject lockCursor;
     private PlayerMove playerMove;
-    private bool playerLockState;
+    private float cursorPosY;
 
     void Start()
     {
@@ -18,12 +20,18 @@ public class LockCursor : MonoBehaviour
 
     void Update()
     {
-        if (playerLockState = playerMove.GetLockOnInfo() && playerMove.lockEnemy != null)
+        if (playerMove.GetLockOnInfo() && playerMove.lockEnemy != null)
         {
             lockCursor.SetActive(true);
+
+            if (playerMove.lockEnemy.tag == "Enemy")
+                cursorPosY = cursorEnemyPosY;
+            else if (playerMove.lockEnemy.tag == "Boss")
+                cursorPosY = cursorBossPosY;
+
             lockCursor.transform.position =
                 playerMove.lockEnemy.transform.position
-                + Vector3.up * 2.0f;
+                + Vector3.up * cursorPosY;
         }
         else
         {

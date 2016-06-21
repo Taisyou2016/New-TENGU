@@ -33,6 +33,7 @@ public class PlayerStatus : MonoBehaviour
 
     private Animator playerAnimator;
     private AudioSource audioSource;
+    private GameObject mouseController;
 
     void Start()
     {
@@ -53,6 +54,7 @@ public class PlayerStatus : MonoBehaviour
 
         playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
         audioSource = transform.GetComponent<AudioSource>();
+        mouseController = transform.FindChild("MouseController").gameObject;
     }
 
     void Update()
@@ -127,6 +129,7 @@ public class PlayerStatus : MonoBehaviour
         {
             currentHp = 0;
             playerAnimator.SetTrigger("Dead");
+            mouseController.SetActive(false);
             gameObject.GetComponent<PlayerMove>().ChangeStop();
             audioSource.PlayOneShot(dead); // 対応SE再生
             print("体力がなくなり死亡しました");
