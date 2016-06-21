@@ -1278,7 +1278,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1327,6 +1327,10 @@ MonoBehaviour:
   punch1: {fileID: 171060, guid: 1952b5f609b539442b1b4ff4bfda7d8c, type: 2}
   punch2: {fileID: 171060, guid: 1952b5f609b539442b1b4ff4bfda7d8c, type: 2}
   anima: {fileID: 9567022}
+  sounds:
+  - {fileID: 8300000, guid: 6228117d2ed11aa4d9cf542d5162d74d, type: 3}
+  - {fileID: 8300000, guid: e9d3d0da0b489494a9a366cd29704bad, type: 3}
+  - {fileID: 8300000, guid: 41a731443c418514ba7880a3e581aa7e, type: 3}
 --- !u!114 &11498408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1346,7 +1350,6 @@ MonoBehaviour:
   Pflag: 0
   state: 
   anima: {fileID: 9567022}
-  flag: 0
 --- !u!137 &13703496
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

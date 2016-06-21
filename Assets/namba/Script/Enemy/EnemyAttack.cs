@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyAttack : MonoBehaviour {
 
@@ -10,13 +11,18 @@ public class EnemyAttack : MonoBehaviour {
     private bool run = false;
     private bool flag = false;
     private float a;
+
+    private AudioSource se;
     public Animator anima;
+    public List<AudioClip> sounds = new List<AudioClip>();
 
     void Start()
     {
         cooltime_S = 1.0f;
         cooltime_M = 3.0f;
         cooltime_L = 3.0f;
+
+        se = gameObject.AddComponent<AudioSource>();
     }
 
     /// <summary>
@@ -65,6 +71,7 @@ public class EnemyAttack : MonoBehaviour {
             anima.SetTrigger("Panch2");
             Instantiate(punch2, transform.position + pos, transform.rotation);
         }
+        se.PlayOneShot(sounds[0]);
 
         yield return new WaitForSeconds(cooltime_S);
         run = false;
@@ -81,6 +88,7 @@ public class EnemyAttack : MonoBehaviour {
 
         Vector3 vec = transform.up / 2;
         Instantiate(ohuda, transform.position + vec, transform.rotation);
+        se.PlayOneShot(sounds[1]);
 
         run = false;
     }
@@ -95,6 +103,7 @@ public class EnemyAttack : MonoBehaviour {
         yield return new WaitForSeconds(cooltime_L);
 
         Instantiate(bow, transform.position, this.transform.rotation);
+        se.PlayOneShot(sounds[2]);
 
 
         run = false;

@@ -9,6 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 432750}
   - 114: {fileID: 11465600}
+  - 135: {fileID: 13536760}
+  - 114: {fileID: 11470438}
   m_Layer: 0
   m_Name: Boss_Dispel
   m_TagString: Untagged
@@ -43,7 +45,6 @@ GameObject:
   - 4: {fileID: 418458}
   - 198: {fileID: 19803310}
   - 199: {fileID: 19917564}
-  - 114: {fileID: 11461596}
   m_Layer: 0
   m_Name: Wind
   m_TagString: Untagged
@@ -60,6 +61,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: -0.349, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 432750}
   m_RootOrder: 1
@@ -72,6 +74,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 432750}
   m_RootOrder: 0
@@ -84,25 +87,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 418458}
   - {fileID: 412368}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11461596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d6d442ecd322c46a9a6de6a0577b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 1
-  power: 5
-  dmg: 1
 --- !u!114 &11465600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,6 +105,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 2
+--- !u!114 &11470438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d6d442ecd322c46a9a6de6a0577b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 5
+  dmg: 1
+--- !u!135 &13536760
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112976}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19803310
 ParticleSystem:
   m_ObjectHideFlags: 1

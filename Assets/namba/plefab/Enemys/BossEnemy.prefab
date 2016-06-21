@@ -1262,11 +1262,12 @@ MonoBehaviour:
   speed: 4
   madnessspeed: 8
   targetdis: {x: 2, y: 5}
-  tornadoDis: {x: 2, y: 4}
-  windSlashDis: {x: 1, y: 4}
-  displeDis: 1
+  tornadoDis: {x: 2, y: 8}
+  windSlashDis: {x: 1, y: 6}
+  displeDis: 3
   state: 
   nowlife: 0
+  anima: {fileID: 9577302}
 --- !u!114 &11487210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1279,10 +1280,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacks:
-  - {fileID: 104870, guid: 3150a7a0b7e44a949b5ccc41f61e76c1, type: 2}
-  - {fileID: 184232, guid: 9df78977f6f4261478d1a1cb95cae7b3, type: 2}
+  - {fileID: 109112, guid: 3150a7a0b7e44a949b5ccc41f61e76c1, type: 2}
+  - {fileID: 112976, guid: 0286acaee14cf9446a9c7fc463ea1b42, type: 2}
   - {fileID: 113930, guid: e7efd648fdf74684dab344da6ed21360, type: 2}
   - {fileID: 172064, guid: 4032b83087f1c6545afa777260e939e5, type: 2}
+  sounds:
+  - {fileID: 8300000, guid: 0e168bfed249187489882a90ee82f428, type: 3}
+  - {fileID: 8300000, guid: a5fc4172390259740957a2d72d178498, type: 3}
+  - {fileID: 8300000, guid: 43a750dcb60dc3941b5b1a9c719cc6a6, type: 3}
+  - {fileID: 8300000, guid: 68bca4c30573e1b4f942a836fb3db270, type: 3}
 --- !u!136 &13697852
 CapsuleCollider:
   m_ObjectHideFlags: 1
