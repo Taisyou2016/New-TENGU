@@ -264,7 +264,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
             owner.Switch(1);
             owner.agent.SetDestination(owner.lostPos);
-            if (Vector3.SqrMagnitude(owner.transform.position - owner.lostPos) <= 2)
+            if (Vector3.SqrMagnitude(owner.transform.position - owner.lostPos) <= 1)
             {
                 owner.StartCoroutine(owner.Lost());
                 owner.ChangeState(EnemyState.Wait);

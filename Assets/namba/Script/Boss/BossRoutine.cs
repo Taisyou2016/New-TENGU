@@ -20,11 +20,11 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public float speed = 4;                             // 通常時スピード
     public float madnessspeed = 8;                      // 発狂時スピード
 
-    public Vector2 targetdis = new Vector2(2,5);
+    public Vector2 targetdis = new Vector2(2,6);
             
-    public Vector2 tornadoDis = new Vector2(2,4);
-    public Vector2 windSlashDis = new Vector2(1, 4); 
-    public float displeDis = 1;
+    public Vector2 tornadoDis = new Vector2(2,8);
+    public Vector2 windSlashDis = new Vector2(1, 6); 
+    public float displeDis = 2;
 
     [SerializeField]
     private string state;
@@ -69,13 +69,13 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void Damage(int dmg)
     {
         nowlife -= dmg;
-        if(nowlife / life <= 0.5f)
+        if (nowlife >= 0)
         {
-            Madness = false;
-            speed = madnessspeed;
-        }
-        else if (nowlife >= 0)
-        {
+            if (nowlife <= life / 2)
+            {
+                Madness = true;
+                speed = madnessspeed;
+            }
             ChangeState(BossState.Hit);
         }
         else
@@ -92,14 +92,15 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void PDistance()
     {
         float Distance = Vector3.Distance(this.transform.position,player.position);
+        print(Distance);
         if(Distance <= displeDis)
         {
             ChangeState(BossState.Dispel);
         }
-        else if(Distance <= windSlashDis.y && nowlife / life >= 0.3){
+        else if(Distance <= windSlashDis.y && !Madness){
             ChangeState(BossState.WindSlash);
         }
-        else
+        else if (Distance <= tornadoDis.y && Madness)
         {
             ChangeState(BossState.Tornado);
         }
@@ -266,13 +267,14 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
 
             // 攻撃モーションが終わり次第
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.99f)
             {
                 yield return null;
             }
 
             // 六芒星生成
             owner.attack.Attack(1);
+            yield return new WaitForSeconds(1.5f);
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Move);
@@ -303,14 +305,18 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator Attack()
         {
-
             // 攻撃モーションが終わり次第
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.8f)
             {
                 yield return null;
             }
 
             owner.attack.Attack(2);
+
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.99f)
+            {
+                yield return null;
+            }
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Hexagram);
@@ -345,15 +351,23 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         {
 
             // 攻撃モーションが終わり次第
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.8f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.55f)
             {
                 yield return null;
             }
 
+            owner.anima.speed = 0;
             iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec));
+            yield return new WaitForSeconds(0.5f);
+            owner.anima.speed = 1;
+
             owner.attack.Attack(3);
 
-            yield return new WaitForSeconds(1);
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.99f)
+            {
+                yield return null;
+            }
+
 
             // 攻撃終了後移行
             owner.ChangeState(BossState.Hexagram);
@@ -385,7 +399,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         {
 
             // 攻撃モーションが終わり次第
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.99f)
             {
                 yield return null;
             }
