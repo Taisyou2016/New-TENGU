@@ -13,12 +13,16 @@ public class MouseController : MonoBehaviour
     private Vector3 vector;
     private float radian;
     private float angle;
-    private bool doubleButtonDown = false;
     private PlayerStatus playerStatus;
 
-    private bool windGeneration = false;
-    private bool kamaitachiGeneration = false;
-    private bool tornadoGeneration = false;
+    //private bool doubleButtonDown = false;
+    //private bool windGeneration = false;
+    //private bool kamaitachiGeneration = false;
+    //private bool tornadoGeneration = false;
+    private bool generation = false;
+
+
+    float time;
 
     void Start()
     {
@@ -85,7 +89,27 @@ public class MouseController : MonoBehaviour
         //    return;
         //}
 
-        if (Input.GetMouseButton(0) && !Input.GetMouseButton(1) && windGeneration == false)
+        //竜巻を出した後、マウスを押してないのに気流またはかまいたちが出てしまうのをブロック
+        time += Time.deltaTime;
+        if (time >= 5.0f)
+        {
+            GenerationTrue();
+            GenerationFalse();
+            time = 0.0f;
+        }
+
+        if (Input.GetMouseButton(0) && Input.GetMouseButton(1) && generation == false)
+        {
+            GenerationTrue();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
+
+            Invoke("TornadoDecision", 0.5f);
+            return;
+        }
+
+        if (Input.GetMouseButton(0) && !Input.GetMouseButton(1) && generation == false)
         {
             GenerationTrue();
 
@@ -96,7 +120,7 @@ public class MouseController : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(1) && !Input.GetMouseButton(0) && kamaitachiGeneration == false)
+        if (Input.GetMouseButton(1) && !Input.GetMouseButton(0) && generation == false)
         {
             GenerationTrue();
 
@@ -104,17 +128,6 @@ public class MouseController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
 
             Invoke("KamaitachiDecision", 0.3f);
-            return;
-        }
-
-        if (Input.GetMouseButton(0) && Input.GetMouseButton(1) && tornadoGeneration == false)
-        {
-            GenerationTrue();
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.lockState = CursorLockMode.None;
-
-            Invoke("TornadoDecision", 0.5f);
             return;
         }
 
@@ -140,13 +153,13 @@ public class MouseController : MonoBehaviour
 
         if (vector.magnitude > length)
         {
-            if (playerStatus.MpCostDecision(playerStatus.windCost))
+            if (playerStatus.MpCostDecision(playerStatus.windCost) && transform.parent.transform.GetComponent<PlayerMove>().knockBackState == false)
             {
                 GameObject.FindObjectOfType<AttackPattern>().WindPatternDecision(angle, vector);
             }
         }
 
-        GenerationFalse();
+        Invoke("GenerationFalse", 0.3f);
     }
 
     public void KamaitachiDecision()
@@ -159,13 +172,13 @@ public class MouseController : MonoBehaviour
         if (vector.magnitude > length)
         {
             //MPが一度ゼロになって回復中か、costが足りなかったら発生させない
-            if (playerStatus.MpCostDecision(playerStatus.kamaitachiCost))
+            if (playerStatus.MpCostDecision(playerStatus.kamaitachiCost) && transform.parent.transform.GetComponent<PlayerMove>().knockBackState == false)
             {
                 GameObject.FindObjectOfType<AttackPattern>().KamaitachiPatternDecision(angle, vector);
             }
         }
 
-        GenerationFalse();
+        Invoke("GenerationFalse", 0.3f);
     }
 
     public void TornadoDecision()
@@ -177,7 +190,7 @@ public class MouseController : MonoBehaviour
 
         if (vector.magnitude > length)
         {
-            if (playerStatus.MpCostDecision(playerStatus.tornadoCost))
+            if (playerStatus.MpCostDecision(playerStatus.tornadoCost) && transform.parent.transform.GetComponent<PlayerMove>().knockBackState == false)
                 GameObject.FindObjectOfType<AttackPattern>().TornadoPatternDecision(angle, vector);
         }
 
@@ -186,15 +199,17 @@ public class MouseController : MonoBehaviour
 
     public void GenerationTrue()
     {
-        windGeneration = true;
-        kamaitachiGeneration = true;
-        tornadoGeneration = true;
+        //windGeneration = true;
+        //kamaitachiGeneration = true;
+        //tornadoGeneration = true;
+        generation = true;
     }
 
     public void GenerationFalse()
     {
-        tornadoGeneration = false;
-        windGeneration = false;
-        kamaitachiGeneration = false;
+        //tornadoGeneration = false;
+        //windGeneration = false;
+        //kamaitachiGeneration = false;
+        generation = false;
     }
 }
