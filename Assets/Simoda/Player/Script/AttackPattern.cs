@@ -20,7 +20,7 @@ public class AttackPattern : MonoBehaviour
     public void WindPatternDecision(float angle, Vector3 vector) //気流用
     {
         //横方向 → ←
-        if (angle >= -20.0f && angle <= 20)
+        if (angle >= -30.0f && angle <= 30)
         {
             if (vector.x > 0)
             {
@@ -37,7 +37,7 @@ public class AttackPattern : MonoBehaviour
         }
 
         //縦方向 ↓ ↑
-        if ((angle <= -70 && angle >= -90) || (angle >= 70 && angle <= 90))
+        if ((angle <= -60 && angle >= -120) || (angle >= 60 && angle <= 120))
         {
             if (vector.y < 0)
             {
@@ -54,7 +54,7 @@ public class AttackPattern : MonoBehaviour
         }
 
         //右斜め方向 ↙ ↗
-        if (angle > 20 && angle < 70)
+        if (angle > 30 && angle < 60)
         {
             if (vector.x < 0)
             {
@@ -71,7 +71,7 @@ public class AttackPattern : MonoBehaviour
         }
 
         //左斜め方向 ↘ ↖
-        if (angle < -20 && angle > -70)
+        if (angle < -30 && angle > -60)
         {
             if (vector.x > 0)
             {
@@ -119,7 +119,7 @@ public class AttackPattern : MonoBehaviour
         //}
 
         //横方向 → ←
-        if (angle >= -20.0f && angle <= 20)
+        if (angle >= -30.0f && angle <= 30)
         {
             if (vector.x > 0)
             {
@@ -136,7 +136,7 @@ public class AttackPattern : MonoBehaviour
         }
 
         //縦方向 ↓ ↑
-        if ((angle <= -70 && angle >= -90) || (angle >= 70 && angle <= 90))
+        if ((angle <= -60 && angle >= -120) || (angle >= 60 && angle <= 120))
         {
             if (vector.y < 0)
             {
@@ -153,7 +153,7 @@ public class AttackPattern : MonoBehaviour
         }
 
         //右斜め方向 ↙ ↗
-        if (angle > 20 && angle < 70)
+        if (angle > 30 && angle < 60)
         {
             if (vector.x < 0)
             {
@@ -170,7 +170,7 @@ public class AttackPattern : MonoBehaviour
         }
 
         //左斜め方向 ↘ ↖
-        if (angle < -20 && angle > -70)
+        if (angle < -30 && angle > -60)
         {
             if (vector.x > 0)
             {
