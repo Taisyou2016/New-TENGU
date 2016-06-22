@@ -9,11 +9,13 @@ public class LockCursor : MonoBehaviour
 
     private GameObject lockCursor;
     private PlayerMove playerMove;
+    private GameObject player;
     private float cursorPosY;
 
     void Start()
     {
         playerMove = transform.GetComponent<PlayerMove>();
+        player = GameObject.FindGameObjectWithTag("Player");
         lockCursor = Instantiate(lockCursorPrefab);
         lockCursor.SetActive(false);
     }
@@ -23,6 +25,8 @@ public class LockCursor : MonoBehaviour
         if (playerMove.GetLockOnInfo() && playerMove.lockEnemy != null)
         {
             lockCursor.SetActive(true);
+
+            lockCursor.transform.LookAt(player.transform);
 
             if (playerMove.lockEnemy.tag == "Enemy")
                 cursorPosY = cursorEnemyPosY;
