@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum EnemyState
 {
@@ -33,18 +34,16 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private NavMeshAgent agent;
     private Rigidbody rd;
     private EnemyAttack attack;
-    private Collider col;
     public Animator anima;
 
     // Use this for initialization
     public void Start()
     {
         // Playerの座標を取得
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        agent = GetComponent<NavMeshAgent>();
-        rd = GetComponent<Rigidbody>();
-        attack = GetComponent<EnemyAttack>();
-        col = GetComponent<Collider>();
+        player      = GameObject.FindGameObjectWithTag("Player").transform;
+        agent       = GetComponent<NavMeshAgent>();
+        rd          = GetComponent<Rigidbody>();
+        attack      = GetComponent<EnemyAttack>();
         if (LengeType == 1) { AttackDistance = 1; }
         else if (LengeType == 2) { AttackDistance = 8; }
         else if (LengeType == 3) { AttackDistance = 10; }
@@ -143,6 +142,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
     private IEnumerator Lost()
     {
+        anima.SetTrigger("movedown");
         yield return new WaitForSeconds(2);
 
         anima.SetTrigger("Move");

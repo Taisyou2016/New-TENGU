@@ -5,13 +5,22 @@ public class CrScroll : MonoBehaviour {
 
     [SerializeField]
     private int scollTime = 8;
-    // Use this for initialization
+    public GameObject fade;
     void Start () {
-        iTween.MoveTo(gameObject, iTween.Hash("y", 884, "time", scollTime));
+        iTween.MoveTo(gameObject, iTween.Hash("y", 1301, 
+            "delay", 4 ,"islocal" , true ,
+            "time", scollTime, 
+            "easeType", iTween.EaseType.linear,
+            "oncomplete", "EndAction",
+            "oncompletetarget", gameObject
+            ));
     }
-
-    // Update is called once per frame
-    void Update () {
-	
-	}
+    void EndAction()
+    {
+        Invoke("FadeIn", 2);
+    }
+    void FadeIn()
+    {
+        GameObject.Find("FadeInOut").GetComponent<FadeInOut>().FadeIn();
+    }
 }

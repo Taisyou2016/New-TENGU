@@ -13,7 +13,10 @@ public class FadeInOut : MonoBehaviour {
     [SerializeField]
     private int m_fadeTime = 2;
     bool m_tr =true;
-    
+
+    [SerializeField]
+    private GameObject[] SaundObj;
+
 
     void Awake()
     {
@@ -23,9 +26,17 @@ public class FadeInOut : MonoBehaviour {
     {
         FadeOut();
     }
-   
+
     public void FadeIn()
     {
+        print("FadeIn");
+        m_tr = true;
+        // SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
+        iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", m_fadeTime, "onupdate", "SetValue"));
+    }
+    public void FadeIn(string name)
+    {
+        m_scenechange = name;
         print("FadeIn");
         m_tr = true;
         // SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
@@ -40,7 +51,15 @@ public class FadeInOut : MonoBehaviour {
     }
     void SetValue(float alpha)
     {
-        // iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
+        if (SaundObj != null)
+        {
+            float volume = 1 - alpha;
+            print("サウンドダウン");
+            foreach (GameObject value in SaundObj)
+            {
+                value.GetComponent<AudioSource>().volume = volume;
+            }
+        }
         m_Fade.gameObject.GetComponent<UnityEngine.UI.Image>().color = new Color(0, 0, 0, alpha);
         if (alpha >= 1 && m_tr) SceneChange(m_scenechange);
     }

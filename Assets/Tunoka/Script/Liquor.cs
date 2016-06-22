@@ -5,24 +5,51 @@ public class Liquor : MonoBehaviour {
 
     public int recovery;
     private PlayerStatus playerStatus;
+    public bool Hp = false;
+    public bool Mp = false;
     void Start()
     {
         playerStatus = GameObject.Find("Player").GetComponent<PlayerStatus>();
     }
-
+    void Update()
+    {
+        transform.eulerAngles += new Vector3(0, 2, 0);
+    }
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (recovery <= playerStatus.maxHp - playerStatus.currentHp)
+            if (Hp == true)
             {
-                playerStatus.currentHp += recovery;
+                Hp_recovery();
             }
-            else
+            if (Mp == true)
             {
-                playerStatus.currentHp = playerStatus.maxHp;
+                Mp_recovery();
             }
             Destroy(gameObject);
+        }
+    }
+    void Hp_recovery()
+    {
+        if (recovery <= playerStatus.maxHp - playerStatus.currentHp)
+        {
+            playerStatus.currentHp += recovery;
+        }
+        else
+        {
+            playerStatus.currentHp = playerStatus.maxHp;
+        }
+    }
+    void Mp_recovery()
+    {
+        if (recovery <= playerStatus.maxMp - playerStatus.currentMp)
+        {
+            playerStatus.currentMp += recovery;
+        }
+        else
+        {
+            playerStatus.currentMp = playerStatus.maxMp;
         }
     }
 }

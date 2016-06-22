@@ -3,9 +3,12 @@ using System.Collections;
 
 public class GameOverScene : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        Invoke("FadeIn", 5);
+
+    [SerializeField]
+    private int FadeTime = 5;
+
+    void Start () {
+        Invoke("FadeIn", FadeTime);
     }
 
     void FadeIn()
