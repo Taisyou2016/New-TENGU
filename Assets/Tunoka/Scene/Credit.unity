@@ -455,6 +455,7 @@ GameObject:
   - 222: {fileID: 668200183}
   - 114: {fileID: 668200182}
   - 114: {fileID: 668200181}
+  - 114: {fileID: 668200184}
   m_Layer: 5
   m_Name: ProducerText
   m_TagString: Untagged
@@ -492,24 +493,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Producer:
   - "\u30D7\u30E9\u30F3\u30CA\u30FC"
-  - "\u3000\u3000\u3000\u3000\u30FB\u85E4\u5DDD\u4F38\u4E00\u90CE"
-  - "\u3000\u3000\u3000\u3000\u30FB\u4F50\u85E4\u6210\u60A0\u591A"
+  - "\u3000\u3000\u3000\u30FB\u85E4\u5DDD\u4F38\u4E00\u90CE"
+  - "\u3000\u3000\u3000\u30FB\u4F50\u85E4\u6210\u60A0\u591A"
   - "\u30D7\u30ED\u30B0\u30E9\u30DE\u30FC"
-  - "\u3000\u3000\u3000\u3000\u30FB\u96E3\u6CE2\u5927\u548C"
-  - "\u3000\u3000\u3000\u3000\u30FB\u89D2\u9E7F\u745E\u6A39"
-  - "\u3000\u3000\u3000\u3000\u30FB\u4E0B\u7530\u6566\u4E5F"
+  - "\u3000\u3000\u3000\u30FB\u96E3\u6CE2\u5927\u548C"
+  - "\u3000\u3000\u3000\u30FB\u89D2\u9E7F\u745E\u6A39"
+  - "\u3000\u3000\u3000\u30FB\u4E0B\u7530\u6566\u4E5F"
   - CG
-  - "      \u3000\u3000\u30FB\u5C71\u672C\u548C\u99AC"
-  - "\u3000\u3000\u3000\u3000\u30FB\u7530\u4E2D\u7FD4\u99AC"
-  - "\u3000\u3000\u3000\u3000\u30FB\u5C71\u672C\u7FD4\u5E0C"
+  - "\u3000\u3000\u3000\u30FB\u5C71\u672C\u548C\u99AC"
+  - "\u3000\u3000\u3000\u30FB\u7530\u4E2D\u7FD4\u99AC"
+  - "\u3000\u3000\u3000\u30FB\u5C71\u672C\u7FD4\u5E0C"
   - "\u30A4\u30E9\u30B9\u30C8"
-  - "\u3000\u3000\u3000\u3000\u30FB\u6731\u7A0B\u7A0B"
-  - "\u3000\u3000\u3000\u3000\u30FB\u4E2D\u5DDD\u5F69\u82B1"
-  - "\u3000\u3000\u3000\u3000\u30FB\u6E21\u8FBA\u5F69"
-  - "\u3000\u3000\u3000\u3000\u30FB\u4E26\u6CB3\u3072\u3068\u307F"
+  - "\u3000\u3000\u3000\u30FB\u6731\u7A0B\u7A0B"
+  - "\u3000\u3000\u3000\u30FB\u4E2D\u5DDD\u5F69\u82B1"
+  - "\u3000\u3000\u3000\u30FB\u6E21\u8FBA\u5F69"
+  - "\u3000\u3000\u3000\u30FB\u4E26\u6CB3\u3072\u3068\u307F"
   - "\u30B9\u30DA\u30B7\u30E3\u30EB\u30B5\u30F3\u30AF\u30B9"
-  - "\u3000\u3000\u3000\u3000\u30FBBGM1"
-  - "\u3000\u3000\u3000\u3000\u30FBSE"
+  - "\u3000\u3000\u3000\u30FB\u52B9\u679C\u97F3\u30E9\u30DC"
+  - "\u3000\u3000\u3000\u30FBhttp://taira-komori.jpn.org/"
+  - "\u3000\u3000\u3000\u30FBOn-Jin \uFF5E\u97F3\u4EBA\uFF5E"
+  - "\u3000\u3000\u3000\u30FB\u30D5\u30EA\u30FC\u97F3\u697D\u7D20\u6750 H/MIX GALLERY"
+  - "\u3000\u3000\u3000\u30FBSHW"
+  - "\u3000\u3000\u3000\u30FB\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F"
+  - "\u3000\u3000\u3000\u30FB\u30DD\u30B1\u30C3\u30C8\u30B5\u30A6\u30F3\u30C9"
   text: {fileID: 668200182}
 --- !u!114 &668200182
 MonoBehaviour:
@@ -523,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -532,10 +538,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 67
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -550,6 +556,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 668200179}
+--- !u!114 &668200184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 668200179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &967760554
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +633,7 @@ GameObject:
   - 224: {fileID: 1714381628}
   - 222: {fileID: 1714381630}
   - 114: {fileID: 1714381629}
+  - 114: {fileID: 1714381631}
   m_Layer: 5
   m_Name: Producer
   m_TagString: Untagged
@@ -649,7 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -676,6 +697,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1714381627}
+--- !u!114 &1714381631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1714381627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1768096981 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 174206, guid: 59897877c7080ff4898054e16e55cd5b, type: 2}
