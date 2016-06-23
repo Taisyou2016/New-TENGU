@@ -9,6 +9,7 @@ public class ParticleTornado : MonoBehaviour
     public Vector3 direction;
     public float power;
     public int damage = 20;
+    public bool Free = false;
 
     void Start()
     {
@@ -54,6 +55,11 @@ public class ParticleTornado : MonoBehaviour
     void SetValue(float alpha)
     {
         // iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
+        if (Free == true)
+        {
+            particles[0].startColor = new Color(0, 255, 0, alpha);
+            return;
+        }
         particles[0].startColor = new Color(158, 158, 158, alpha);
 
     }

@@ -64,6 +64,7 @@ GameObject:
   - 23: {fileID: 2300400}
   - 114: {fileID: 11404310}
   - 114: {fileID: 11435470}
+  - 114: {fileID: 11430494}
   m_Layer: 0
   m_Name: s_AmuletController
   m_TagString: Untagged
@@ -138,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 118896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6727, y: 0.0949, z: -0.642}
-  m_LocalScale: {x: 0.007, y: 0.015, z: 0.003}
+  m_LocalScale: {x: 0.007, y: 0.015, z: 0.0004090939}
   m_Children:
   - {fileID: 436434}
   - {fileID: 497442}
@@ -218,7 +219,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3aeb857ab980af74090eae6119f09035, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -337,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd02d78bbc230d840a29927ce6cafb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  catchEnem: {fileID: 0}
 --- !u!114 &11404310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,6 +351,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ScrollSpeed: {x: 0, y: 0.15}
+--- !u!114 &11430494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e16b682ff87db6468970a5399a902a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talkText: {fileID: 0}
+  text: {fileID: 0}
+  ObjDelete: 0
+  loopTalk: 0
+  talk: "\u3075\u3080\u3001\u3053\u308C\u306F\u4F55\u51E6\u304B\u306B \u3042\u308B\u8B77\u7B26\u3092\u58CA\u3055\u306A\u3044\u3068
+    \u901A\u308C\u305D\u3046\u306B\u306A\u3044\u306A"
 --- !u!114 &11435470
 MonoBehaviour:
   m_ObjectHideFlags: 1

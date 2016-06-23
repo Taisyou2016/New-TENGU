@@ -2300,7 +2300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kamaitachiPrefab: {fileID: 162010, guid: 7a7e6f54dc6851248a35b753f8b45dab, type: 2}
-  speed: 10
+  speed: 20
 --- !u!114 &11435836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2313,7 +2313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockPosition: {fileID: 131400}
-  walkSpeed: 4
+  walkSpeed: 5
   lockOnRotateSpeed: 45
   lockDistanceY: 10
   gravity: 10
@@ -2400,9 +2400,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218fd238139e3a64fbc351b64235cf68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockCursorPrefab: {fileID: 127106, guid: ce84a603f2f66e44c83aa12ff9ccf55a, type: 2}
-  cursorEnemyPosY: 2.5
-  cursorBossPosY: 5.5
+  lockCursorPrefab: {fileID: 154480, guid: b7720a81e21e52d40b19b6ff60e72c4b, type: 2}
+  cursorEnemyPosY: 2
+  cursorBossPosY: 6.5
+  cursorBossShortPosY: 2.5
 --- !u!114 &11486516
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,6 +8,7 @@ public class Tornado : MonoBehaviour {
     private int Time = 20;
     public Vector3 TornadoSize = new Vector3(2,4,2);
 
+    public bool Free = false;
     // Use this for initialization
     void Start()
     {
@@ -19,6 +20,8 @@ public class Tornado : MonoBehaviour {
     void Update () {
         if (transform.localScale.x == TornadoSize.x)
         {
+            if (Free == true)
+            { return; }
             iTween.ScaleTo(gameObject, iTween.Hash("x", 0, "z", 0, "time", 10));
             transform.FindChild("Particle").gameObject.GetComponent<ParticleTornado>().FadeOut(5f);
         }

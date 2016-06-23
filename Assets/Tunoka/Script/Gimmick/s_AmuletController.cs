@@ -38,13 +38,12 @@ public class s_AmuletController : MonoBehaviour {
             One = false;
         }
     }
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
         {
-            Center.gameObject.transform.LookAt(other.transform.position);
-            iTween.MoveTo(other.gameObject, iTween.Hash("x", WindPoint.transform.position.x, "y", WindPoint.transform.position.y, "z", WindPoint.transform.position.z));
-            
+            other.transform.LookAt(Center.transform.position);
+            other.GetComponent<PlayerMove>().ChangeKnockBackLarge(10);
         }
     }
 }
