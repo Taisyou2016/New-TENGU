@@ -16,6 +16,7 @@ public class TalkText : MonoBehaviour {
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
         player.currentMp = 0;
+        player.maxMp = 0;
         player.GetComponent<PlayerMove>().walkSpeed = 0;
         talkNum = 0;
         text = Textcanvas.transform.FindChild("Text").gameObject.GetComponent<Text>();

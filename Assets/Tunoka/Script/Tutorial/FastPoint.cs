@@ -23,10 +23,6 @@ public class FastPoint : MonoBehaviour {
     void Update()
     {
         int count = transform.childCount;
-        if (count <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 
     public void OnTriggerEnter(Collider other)
