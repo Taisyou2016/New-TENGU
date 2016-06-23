@@ -744,10 +744,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 11486288, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
-      propertyPath: lockCursorPrefab
-      value: 
-      objectReference: {fileID: 154480, guid: b7720a81e21e52d40b19b6ff60e72c4b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
   m_IsPrefabParent: 0
@@ -792,18 +788,26 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 402892, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 402892, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 402892, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 149724, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439612, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487210, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

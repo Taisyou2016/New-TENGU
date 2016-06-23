@@ -11,16 +11,6 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: New-TENGU
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-  productName: New-TENGU
-=======
-  productName: test24
->>>>>>> fa3ecdbdc65eacf3767bd4e35b93a4c497ee105b
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
->>>>>>> e9563860abcc3c2b55808f0cb389d2da2cf97fe1
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -106,19 +96,7 @@ PlayerSettings:
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
-<<<<<<< HEAD
-  productGUID: dc6d5a5aa7e70c14b98f4b6dd22711dd
-=======
-<<<<<<< HEAD
-  productGUID: 43379d65cff9a3747b976cd84f6f3a79
-=======
-<<<<<<< HEAD
-  productGUID: 4cf4d6afb4a535340b8a8990042802d9
-=======
-  productGUID: b55c5c75d1e63d347af4cd34db809c93
->>>>>>> fa3ecdbdc65eacf3767bd4e35b93a4c497ee105b
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
->>>>>>> e9563860abcc3c2b55808f0cb389d2da2cf97fe1
+  productGUID: 6685024bddb110e45a21a5f8da3cc866
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
@@ -139,11 +117,6 @@ PlayerSettings:
     m_Bits: 238
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 22
-<<<<<<< HEAD
-  tvOSSdkVersion: 0
-  tvOSTargetOSVersion: 900
-=======
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -217,10 +190,6 @@ PlayerSettings:
   wiiUSystemHeapSize: 128
   wiiUTVStartupScreen: {fileID: 0}
   wiiUGamePadStartupScreen: {fileID: 0}
-<<<<<<< HEAD
-  wiiUDrcBufferDisabled: 0
-=======
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
   wiiUProfilerLibPath: 
   actionOnDotNetUnhandledException: 1
   enableInternalProfiler: 0
@@ -288,10 +257,6 @@ PlayerSettings:
   ps4DownloadDataSize: 0
   ps4GarlicHeapSize: 2048
   ps4Passcode: frAQBc8Wsa1xVPfvJcrgRYwTiizs2trQ
-<<<<<<< HEAD
-  ps4UseDebugIl2cppLibs: 0
-=======
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -357,10 +322,6 @@ PlayerSettings:
   psp2UseLibLocation: 0
   psp2InfoBarOnStartup: 0
   psp2InfoBarColor: 0
-<<<<<<< HEAD
-  psp2UseDebugIl2cppLibs: 0
-=======
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
   scriptingDefineSymbols:
@@ -374,16 +335,6 @@ PlayerSettings:
     17: MOBILE_INPUT
     20: MOBILE_INPUT
   metroPackageName: New-TENGU
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-  metroPackageName: New-TENGU
-=======
-  metroPackageName: test24
->>>>>>> fa3ecdbdc65eacf3767bd4e35b93a4c497ee105b
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
->>>>>>> e9563860abcc3c2b55808f0cb389d2da2cf97fe1
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
@@ -391,16 +342,6 @@ PlayerSettings:
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: New-TENGU
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-  metroApplicationDescription: New-TENGU
-=======
-  metroApplicationDescription: test24
->>>>>>> fa3ecdbdc65eacf3767bd4e35b93a4c497ee105b
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
->>>>>>> e9563860abcc3c2b55808f0cb389d2da2cf97fe1
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
@@ -478,13 +419,6 @@ PlayerSettings:
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
   intPropertyNames:
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
->>>>>>> e9563860abcc3c2b55808f0cb389d2da2cf97fe1
   - Standalone::ScriptingBackend
   - WebPlayer::ScriptingBackend
   Standalone::ScriptingBackend: 0
@@ -493,52 +427,6 @@ PlayerSettings:
   - XboxOne::enus
   XboxOne::enus: 1
   stringPropertyNames: []
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-  - Android::ScriptingBackend
-  - Metro::ScriptingBackend
-  - Standalone::ScriptingBackend
-  - WebGL::ScriptingBackend
-  - WebGL::audioCompressionFormat
-  - WebGL::exceptionSupport
-  - WebGL::memorySize
-  - WebPlayer::ScriptingBackend
-  - iOS::Architecture
-  - iOS::EnableIncrementalBuildSupportForIl2cpp
-  - iOS::ScriptingBackend
-  Android::ScriptingBackend: 0
-  Metro::ScriptingBackend: 2
-  Standalone::ScriptingBackend: 0
-  WebGL::ScriptingBackend: 1
-  WebGL::audioCompressionFormat: 4
-  WebGL::exceptionSupport: 1
-  WebGL::memorySize: 256
-  WebPlayer::ScriptingBackend: 0
-  iOS::Architecture: 2
-  iOS::EnableIncrementalBuildSupportForIl2cpp: 1
-  iOS::ScriptingBackend: 1
-  boolPropertyNames:
-  - WebGL::analyzeBuildSize
-  - WebGL::dataCaching
-  - WebGL::useEmbeddedResources
-  - XboxOne::enus
-  WebGL::analyzeBuildSize: 0
-  WebGL::dataCaching: 0
-  WebGL::useEmbeddedResources: 0
-  XboxOne::enus: 1
-  stringPropertyNames:
-  - WebGL::emscriptenArgs
-  - WebGL::template
-  - additionalIl2CppArgs::additionalIl2CppArgs
-  WebGL::emscriptenArgs: 
-  WebGL::template: APPLICATION:Default
-  additionalIl2CppArgs::additionalIl2CppArgs: 
->>>>>>> fa3ecdbdc65eacf3767bd4e35b93a4c497ee105b
->>>>>>> 96bb8ebaf6764eba6f51c0127e9267c85f773b16
->>>>>>> e9563860abcc3c2b55808f0cb389d2da2cf97fe1
   cloudProjectId: 
   projectName: 
   organizationId: 
