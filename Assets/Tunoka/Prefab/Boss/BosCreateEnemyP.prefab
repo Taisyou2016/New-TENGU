@@ -552,6 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tornadoPrefab: {fileID: 176054, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
+  tornadoPrefabG: {fileID: 103544, guid: af7db5410e0307a4388c98aea5a285ea, type: 2}
 --- !u!114 &11419846
 MonoBehaviour:
   m_ObjectHideFlags: 1
