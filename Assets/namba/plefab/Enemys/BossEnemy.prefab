@@ -1259,12 +1259,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 1000
-  speed: 4
+  speed: 8
   madnessspeed: 8
-  targetdis: {x: 2, y: 5}
-  tornadoDis: {x: 2, y: 8}
-  windSlashDis: {x: 1, y: 6}
-  displeDis: 3
+  targetdis: {x: 3, y: 10}
+  tornadoDis: {x: 2, y: 10}
+  windSlashDis: {x: 1, y: 8}
+  displeDis: 4
   state: 
   nowlife: 0
   anima: {fileID: 9577302}

@@ -17,7 +17,7 @@ public class ADispel : MonoBehaviour {
 
     void Update()
     {
-        iTween.ScaleTo(child, iTween.Hash("Scale", new Vector3(3, 3, 1.3f), "time", 2.0f)); 
+        iTween.ScaleTo(child, iTween.Hash("Scale", new Vector3(3, 3, 2), "time", 2.0f)); 
     }
 
     void OnTriggerEnter(Collider hit)

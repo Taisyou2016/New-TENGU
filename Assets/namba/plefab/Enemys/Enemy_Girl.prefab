@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93661e3de97ed554e8e747276c2ca056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SearchDistance: 15
+  SearchDistance: 30
   maxlife: 80
   speed: 2
   LengeType: 3
