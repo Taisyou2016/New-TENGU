@@ -10,11 +10,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-<<<<<<< HEAD
-  productName: NewTENGU
-=======
   productName: New-TENGU
->>>>>>> 4dd6b1a998e180d624e35cad22c6e50f692eb700
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -100,11 +96,7 @@ PlayerSettings:
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
-<<<<<<< HEAD
-  productGUID: 708375ff40360df4aadd4cfc5b801b9e
-=======
-  productGUID: 6685024bddb110e45a21a5f8da3cc866
->>>>>>> 4dd6b1a998e180d624e35cad22c6e50f692eb700
+  productGUID: e07e02edd54f84449af467ad7c9d1884
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
@@ -342,22 +334,14 @@ PlayerSettings:
     16: CROSS_PLATFORM_INPUT;MOBILE_INPUT
     17: MOBILE_INPUT
     20: MOBILE_INPUT
-<<<<<<< HEAD
-  metroPackageName: NewTENGU
-=======
   metroPackageName: New-TENGU
->>>>>>> 4dd6b1a998e180d624e35cad22c6e50f692eb700
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-<<<<<<< HEAD
-  metroApplicationDescription: NewTENGU
-=======
   metroApplicationDescription: New-TENGU
->>>>>>> 4dd6b1a998e180d624e35cad22c6e50f692eb700
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
@@ -435,46 +419,6 @@ PlayerSettings:
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
   intPropertyNames:
-<<<<<<< HEAD
-  - Android::ScriptingBackend
-  - Metro::ScriptingBackend
-  - Standalone::ScriptingBackend
-  - WebGL::ScriptingBackend
-  - WebGL::audioCompressionFormat
-  - WebGL::exceptionSupport
-  - WebGL::memorySize
-  - WebPlayer::ScriptingBackend
-  - iOS::Architecture
-  - iOS::EnableIncrementalBuildSupportForIl2cpp
-  - iOS::ScriptingBackend
-  Android::ScriptingBackend: 0
-  Metro::ScriptingBackend: 2
-  Standalone::ScriptingBackend: 0
-  WebGL::ScriptingBackend: 1
-  WebGL::audioCompressionFormat: 4
-  WebGL::exceptionSupport: 1
-  WebGL::memorySize: 256
-  WebPlayer::ScriptingBackend: 0
-  iOS::Architecture: 2
-  iOS::EnableIncrementalBuildSupportForIl2cpp: 1
-  iOS::ScriptingBackend: 1
-  boolPropertyNames:
-  - WebGL::analyzeBuildSize
-  - WebGL::dataCaching
-  - WebGL::useEmbeddedResources
-  - XboxOne::enus
-  WebGL::analyzeBuildSize: 0
-  WebGL::dataCaching: 0
-  WebGL::useEmbeddedResources: 0
-  XboxOne::enus: 1
-  stringPropertyNames:
-  - WebGL::emscriptenArgs
-  - WebGL::template
-  - additionalIl2CppArgs::additionalIl2CppArgs
-  WebGL::emscriptenArgs: 
-  WebGL::template: APPLICATION:Default
-  additionalIl2CppArgs::additionalIl2CppArgs: 
-=======
   - Standalone::ScriptingBackend
   - WebPlayer::ScriptingBackend
   Standalone::ScriptingBackend: 0
@@ -483,7 +427,6 @@ PlayerSettings:
   - XboxOne::enus
   XboxOne::enus: 1
   stringPropertyNames: []
->>>>>>> 4dd6b1a998e180d624e35cad22c6e50f692eb700
   cloudProjectId: 
   projectName: 
   organizationId: 

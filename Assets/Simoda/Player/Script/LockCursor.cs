@@ -32,7 +32,7 @@ public class LockCursor : MonoBehaviour
 
             if (playerMove.lockEnemy.tag == "Enemy")
             {
-                cursorPosY = playerMove.lockEnemy.transform.position.y + cursorEnemyPosY;
+                cursorPosY = cursorEnemyPosY;
                 lookAtPosition.y = cursorPosY;
 
                 lockCursor.transform.position =
@@ -43,7 +43,7 @@ public class LockCursor : MonoBehaviour
             {
                 if ((player.transform.position - playerMove.lockEnemy.transform.position).magnitude > 5.0f)
                 {
-                    cursorPosY = playerMove.lockEnemy.transform.position.y + cursorBossPosY;
+                    cursorPosY = cursorBossPosY;
                     lookAtPosition.y = playerMove.lockEnemy.transform.position.y + cursorBossPosY;
 
                     lockCursor.transform.position =
@@ -52,7 +52,7 @@ public class LockCursor : MonoBehaviour
                 }
                 else
                 {
-                    cursorPosY = playerMove.lockEnemy.transform.position.y + cursorBossShortPosY;
+                    cursorPosY = cursorBossShortPosY;
                     lookAtPosition.y = playerMove.lockEnemy.transform.position.y + cursorBossShortPosY;
 
                     lockCursor.transform.position =
