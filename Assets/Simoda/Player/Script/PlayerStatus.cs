@@ -68,7 +68,7 @@ public class PlayerStatus : MonoBehaviour
         //現在のMPが最大値を超えていたら最大値にする
         if (currentMp > maxMp) currentMp = 100;
 
-        if (currentMp < 1) //妖力が0になったらmpOverをtrueに
+        if (currentMp < 10) //妖力が0になったらmpOverをtrueに
         {
             mpOver = true;
             mpAutoRecoveryTime = overMpAutoRecoveryTime;
@@ -84,15 +84,15 @@ public class PlayerStatus : MonoBehaviour
         if (currentInvincibleTime <= 0) //currentInvincibleTimeが0より小さくなったら無敵を解除
             invincible = false;
 
-        if (Input.GetKeyDown(KeyCode.K))
-            HpDamage(1);
-        if (Input.GetKeyDown(KeyCode.L))
-            HpDamage(3);
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            playerAnimator.SetTrigger("Joy");
-            gameObject.GetComponent<PlayerMove>().ChangeStop();
-        }
+        //if (Input.GetKeyDown(KeyCode.K))
+        //    HpDamage(1);
+        //if (Input.GetKeyDown(KeyCode.L))
+        //    HpDamage(3);
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    playerAnimator.SetTrigger("Joy");
+        //    gameObject.GetComponent<PlayerMove>().ChangeStop();
+        //}
 
         flashingSecond -= Time.deltaTime;
         if (flashingSecond >= 0.0f)

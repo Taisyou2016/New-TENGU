@@ -131,10 +131,10 @@ public class MouseController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TornadoDecision();
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    TornadoDecision();
+        //}
     }
 
     public void WindAttackDecision()
