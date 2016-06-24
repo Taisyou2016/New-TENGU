@@ -43,6 +43,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private CharacterController charcon;
     private BossAttack attack;
     private AnimatorStateInfo info;
+    private HpGauge hpgauge;
     public Animator anima;
 
 
@@ -52,6 +53,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         attack = GetComponent<BossAttack>();
         charcon = GetComponent<CharacterController>();
         info = anima.GetCurrentAnimatorStateInfo(0);
+        hpgauge = GameObject.Find("BossHPgauge").GetComponent<HpGauge>();
 
         nowlife = life;
         anima.speed = animaSpeed;
@@ -75,6 +77,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void Damage(int dmg)
     {
         nowlife -= dmg;
+        hpgauge.Damage(dmg);
         if (nowlife > 0)
         {
             if (nowlife <= life / 2)
