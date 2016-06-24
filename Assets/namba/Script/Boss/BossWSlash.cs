@@ -18,7 +18,7 @@ public class BossWSlash : MonoBehaviour {
         {
             if (col.gameObject.tag == "Player")
             {
-                col.gameObject.GetComponent<PlayerStatus>().HpDamage(dmg);
+                col.gameObject.GetComponent<PlayerStatus>().HpDamage(dmg, gameObject);
             }
             Destroy(gameObject);
         }

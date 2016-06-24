@@ -17,7 +17,7 @@ public class ADispel : MonoBehaviour {
 
     void Update()
     {
-        iTween.ScaleTo(child, iTween.Hash("Scale", new Vector3(3, 3, 1.3f), "time", 2.0f)); 
+        iTween.ScaleTo(child, iTween.Hash("Scale", new Vector3(3, 3, 2), "time", 2.0f)); 
     }
 
     void OnTriggerEnter(Collider hit)
@@ -30,9 +30,9 @@ public class ADispel : MonoBehaviour {
 
         if (hit.gameObject.tag == "Player")
         {
-            hit.GetComponent<PlayerMove>().SetVelocityY((int)power);
+            hit.GetComponent<PlayerMove>().SetVelocityY((int)power / 2);
             hit.GetComponent<PlayerMove>().SetBlowPower(power);
-            hit.GetComponent<PlayerStatus>().HpDamage(dmg);
+            hit.GetComponent<PlayerStatus>().HpDamage(dmg, gameObject);
         }
 
         if (hit.gameObject.tag == "Enemy")

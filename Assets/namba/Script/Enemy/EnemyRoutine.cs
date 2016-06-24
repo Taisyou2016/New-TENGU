@@ -34,6 +34,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private NavMeshAgent agent;
     private Rigidbody rd;
     private EnemyAttack attack;
+    private AnimatorStateInfo info;
     public Animator anima;
 
     // Use this for initialization
@@ -44,6 +45,8 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         agent       = GetComponent<NavMeshAgent>();
         rd          = GetComponent<Rigidbody>();
         attack      = GetComponent<EnemyAttack>();
+        info = anima.GetCurrentAnimatorStateInfo(0);
+
         if (LengeType == 1) { AttackDistance = 1; }
         else if (LengeType == 2) { AttackDistance = 8; }
         else if (LengeType == 3) { AttackDistance = 10; }
@@ -129,7 +132,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         life -= dmg;
         if (life > 0)
         {
-            print("HP :" + life);
             ChangeState(EnemyState.Hit);
         }
         else
@@ -264,7 +266,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
             owner.Switch(1);
             owner.agent.SetDestination(owner.lostPos);
-            if (Vector3.SqrMagnitude(owner.transform.position - owner.lostPos) <= 1)
+            if (Vector2.SqrMagnitude(owner.transform.position - owner.lostPos) <= 3)
             {
                 owner.StartCoroutine(owner.Lost());
                 owner.ChangeState(EnemyState.Wait);
@@ -340,7 +342,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             owner.Switch(0);
             owner.state = "died";
             owner.anima.SetTrigger("Death");
-            Destroy(owner.gameObject, 5.0f);
+            owner.StartCoroutine(died());
         }
 
         public override void Execute()
@@ -349,6 +351,16 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         public override void End()
         {
+        }
+
+        IEnumerator died()
+        {
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+            {
+                yield return null;
+            }
+
+            Destroy(owner.gameObject);
         }
 
     }
@@ -370,21 +382,27 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             int mask = LayerMask.GetMask(new string[] { "Field" });
             if (Physics.CheckSphere(owner.transform.position, 0.8f, mask))
             {
+
                 owner.StartCoroutine(move());
             }
         }
 
         public override void End()
         {
+            iTween.RotateTo(owner.gameObject, iTween.Hash("x", 0, "z", 0, "easeType", iTween.EaseType.easeOutBack));
+            owner.StartCoroutine(owner.Lost());
         }
 
         IEnumerator move()
         {
-            iTween.RotateTo(owner.gameObject, iTween.Hash("x", 0, "z", 0));
 
-            yield return new WaitForSeconds(1);
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+            {
+                yield return null;
+            }
+            yield return null;
             owner.Switch(1);
-            owner.StartCoroutine(owner.Lost());
+
             owner.ChangeState(EnemyState.Wait);
         }
     }

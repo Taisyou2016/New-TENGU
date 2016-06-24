@@ -13,6 +13,7 @@ public class EnemyAttack : MonoBehaviour {
     private float a;
 
     private AudioSource se;
+    private AnimatorStateInfo info;
     public Animator anima;
     public List<AudioClip> sounds = new List<AudioClip>();
 
@@ -23,6 +24,7 @@ public class EnemyAttack : MonoBehaviour {
         cooltime_L = 3.0f;
 
         se = gameObject.AddComponent<AudioSource>();
+        info = anima.GetCurrentAnimatorStateInfo(0);
     }
 
     /// <summary>
@@ -84,11 +86,17 @@ public class EnemyAttack : MonoBehaviour {
         //処理
 
         anima.SetTrigger("Attack");
-        yield return new WaitForSeconds(cooltime_M);
+        yield return new WaitForSeconds(1);
+        while (anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.6f)
+        {
+            yield return null;
+        }
 
         Vector3 vec = transform.up / 2;
         Instantiate(ohuda, transform.position + vec, transform.rotation);
         se.PlayOneShot(sounds[1]);
+
+        yield return new WaitForSeconds(cooltime_M - 1);
 
         run = false;
     }
@@ -100,11 +108,16 @@ public class EnemyAttack : MonoBehaviour {
         //処理
 
         anima.SetTrigger("Bow");
-        yield return new WaitForSeconds(cooltime_L);
+        yield return new WaitForSeconds(1);
+        while (anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.6f)
+        {
+            yield return null;
+        }
 
         Instantiate(bow, transform.position, this.transform.rotation);
         se.PlayOneShot(sounds[2]);
 
+        yield return new WaitForSeconds(cooltime_L - 1);
 
         run = false;
     }

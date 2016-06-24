@@ -35,7 +35,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private float rotateSmooth = 4.0f;  // 振り向きにかかる時間
     private float angle = 60.0f;
     private float dt;
-    private float animaSpeed = 1;
+    private float animaSpeed = 1.2f;
     private bool Madness = false;
     private bool flag = false;
 
@@ -43,6 +43,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private CharacterController charcon;
     private BossAttack attack;
     private AnimatorStateInfo info;
+    private HpGauge hpgauge;
     public Animator anima;
 
 
@@ -52,9 +53,10 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         attack = GetComponent<BossAttack>();
         charcon = GetComponent<CharacterController>();
         info = anima.GetCurrentAnimatorStateInfo(0);
+        hpgauge = GameObject.Find("BossHPgauge").GetComponent<HpGauge>();
 
         nowlife = life;
-
+        anima.speed = animaSpeed;
 
         // Stateの初期設定
         statelist.Add(new IdleState(this));
@@ -75,6 +77,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public void Damage(int dmg)
     {
         nowlife -= dmg;
+        hpgauge.Damage(dmg);
         if (nowlife > 0)
         {
             if (nowlife <= life / 2)
@@ -122,6 +125,13 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         Quaternion targetRotate = Quaternion.LookRotation(vec);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotate, Time.deltaTime * rotateSmooth);
 
+    }
+
+    // 自由落下
+    public void fall(Vector3 vel)
+    {
+        vel.y += Physics.gravity.y;
+        charcon.Move(vel * Time.deltaTime);
     }
 
     // 移動処理
@@ -243,6 +253,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         public HexagramAttack(BossRoutine owner) : base(owner) { }
 
         private GameObject[] enemys;
+        Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
@@ -262,6 +273,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         public override void Execute()
         {
+            owner.fall(vel);
 
         }
 
@@ -300,6 +312,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private class DispelAttack : IState<BossRoutine>
     {
         public DispelAttack(BossRoutine owner) : base(owner) { }
+        Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
@@ -310,6 +323,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         public override void Execute()
         {
+            owner.fall(vel);
 
         }
 
@@ -354,19 +368,22 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         private Vector3 vec;
         private float dis;
+        Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
             owner.state = "WindSlash";
             owner.anima.SetBool("Cutter", true);
 
-            dis = Vector3.Distance(owner.player.position, owner.transform.position) / 2;
+            dis = Vector3.Distance(owner.player.position, owner.transform.position) / 1.5f;
             vec = owner.transform.position + owner.transform.forward * dis;
             owner.StartCoroutine(Attack());
         }
 
         public override void Execute()
         {
+            owner.fall(vel);
+
         }
 
         public override void End()
@@ -386,7 +403,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             }
 
             owner.anima.speed = 0;
-            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec));
+            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec, "easeType", iTween.EaseType.easeInOutExpo));
             yield return new WaitForSeconds(0.5f);
             owner.anima.speed = owner.animaSpeed;
 
@@ -408,6 +425,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private class TornadoAttack : IState<BossRoutine>
     {
         public TornadoAttack(BossRoutine owner) : base(owner) { }
+        Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
@@ -419,6 +437,8 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         public override void Execute()
         {
+            owner.fall(vel);
+
         }
 
         public override void End()
@@ -449,17 +469,19 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private class DiedState : IState<BossRoutine>
     {
         public DiedState(BossRoutine owner) : base(owner) { }
+        Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
             owner.state = "Died";
             owner.anima.SetTrigger("Death");
 
-            Destroy(owner.gameObject, 1.0f);
+            Destroy(owner.gameObject, 5.0f);
         }
 
         public override void Execute()
         {
+            owner.fall(vel);
         }
 
         public override void End()
@@ -471,6 +493,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private class HitState : IState<BossRoutine>
     {
         public HitState(BossRoutine owner) : base(owner) { }
+        Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
@@ -481,6 +504,8 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         public override void Execute()
         {
+            owner.fall(vel);
+
         }
 
         public override void End()
@@ -489,7 +514,10 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
 
         IEnumerator hit()
         {
-            yield return new WaitForSeconds(1);
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+            {
+                yield return null;
+            }
             owner.ChangeState(BossState.Move);
         }
     }
@@ -499,6 +527,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private class AwakeningState : IState<BossRoutine>
     {
         public AwakeningState(BossRoutine owner) : base(owner) { }
+        Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
@@ -506,12 +535,14 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             owner.anima.SetTrigger("Awakening");
             owner.Madness = true;
             owner.speed = owner.madnessspeed;
-            owner.animaSpeed = 1.2f;
+            owner.animaSpeed = 1.5f;
             owner.StartCoroutine(hit());
         }
 
         public override void Execute()
         {
+            owner.fall(vel);
+
         }
 
         public override void End()

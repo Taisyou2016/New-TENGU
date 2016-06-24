@@ -61,7 +61,6 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: -0.349, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 432750}
   m_RootOrder: 1
@@ -74,7 +73,6 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 432750}
   m_RootOrder: 0
@@ -87,7 +85,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 418458}
   - {fileID: 412368}
@@ -104,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1931ea215c182994895f7ca75c167682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 2
+  time: 1.5
 --- !u!114 &11470438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d6d442ecd322c46a9a6de6a0577b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 5
+  power: 10
   dmg: 1
 --- !u!135 &13536760
 SphereCollider:
