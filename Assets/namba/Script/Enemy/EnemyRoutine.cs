@@ -342,7 +342,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             owner.Switch(0);
             owner.state = "died";
             owner.anima.SetTrigger("Death");
-            Destroy(owner.gameObject, 5.0f);
+            owner.StartCoroutine(died());
         }
 
         public override void Execute()
@@ -351,6 +351,16 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         public override void End()
         {
+        }
+
+        IEnumerator died()
+        {
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+            {
+                yield return null;
+            }
+
+            Destroy(owner.gameObject);
         }
 
     }

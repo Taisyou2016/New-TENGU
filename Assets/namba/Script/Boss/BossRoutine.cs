@@ -372,7 +372,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             owner.state = "WindSlash";
             owner.anima.SetBool("Cutter", true);
 
-            dis = Vector3.Distance(owner.player.position, owner.transform.position) / 1.2f;
+            dis = Vector3.Distance(owner.player.position, owner.transform.position) / 1.5f;
             vec = owner.transform.position + owner.transform.forward * dis;
             owner.StartCoroutine(Attack());
         }
