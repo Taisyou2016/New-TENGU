@@ -14,6 +14,8 @@ public class Geme_Rule : MonoBehaviour {
     public GameObject FadeInOut;
     // Use this for initialization
     void Start () {
+        Cursor.visible = false;
+        if (GameObject.Find("Player") == null) return;
         player = GameObject.Find("Player");
         if(GameObject.FindGameObjectWithTag("Boss") != null)
         {
@@ -24,7 +26,8 @@ public class Geme_Rule : MonoBehaviour {
     // Update is called once per frame
 	void Update () {
 
-  
+        if (GameObject.Find("Player") == null) return;
+
         m_p_Hp = playerStatus.currentHp;
         if (m_p_Hp <= 0)
         {
