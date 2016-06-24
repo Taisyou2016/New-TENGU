@@ -162,8 +162,8 @@ public class PlayerMove : MonoBehaviour
         else WaitTime = 0.0f;
 
 
-        if (Input.GetKeyDown(KeyCode.B))
-            SetBlowPower(20.0f);
+        //if (Input.GetKeyDown(KeyCode.B))
+        //    SetBlowPower(20.0f);
     }
 
 
