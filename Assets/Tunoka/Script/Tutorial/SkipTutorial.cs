@@ -41,7 +41,7 @@ public class SkipTutorial : MonoBehaviour {
         if (Input.GetMouseButton(0))
         {
             //Skip
-            if (selectNom == 1)
+            if (selectNom == 0)
             {
                 print("スキップ");
                 Destroy(gameObject);

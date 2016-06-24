@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Talkpos : MonoBehaviour {
 
     public GameObject talkText;
-    public Text text;
+    private Text text;
 
     public bool ObjDelete = false;
     public bool loopTalk;
@@ -27,7 +27,7 @@ public class Talkpos : MonoBehaviour {
             textOn();
         }
     }
-    void textOn()
+    public void textOn()
     {
         talkText.gameObject.SetActive(true);
         text.text = talk;
@@ -46,5 +46,11 @@ public class Talkpos : MonoBehaviour {
             Destroy(gameObject);
         }
         Destroy(gameObject.GetComponent<Talkpos>());
+    }
+    void textOn(string _text)
+    {
+        talkText.gameObject.SetActive(true);
+        text.text = _text;
+        Invoke("textOff", 4f);
     }
 }

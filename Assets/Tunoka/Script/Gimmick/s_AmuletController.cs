@@ -7,6 +7,7 @@ public class s_AmuletController : MonoBehaviour {
     private int AmuletCount;
     bool One = true;
 
+    public GameObject BreakAmu;
     public GameObject Center;
     public GameObject WindPoint;
     // Use this for initialization
@@ -32,6 +33,7 @@ public class s_AmuletController : MonoBehaviour {
     {
         if (One)
         {
+            BreakAmu.GetComponent<Talkpos>().textOn();
             GetComponent<SphereCollider>().enabled = false;
             iTween.ScaleTo(gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "time", 10));
             print("護符用ギミック作動");

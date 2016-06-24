@@ -130,7 +130,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11479574, guid: 59897877c7080ff4898054e16e55cd5b, type: 2}
       propertyPath: m_scenechange
-      value: title
+      value: Logo
       objectReference: {fileID: 0}
     - target: {fileID: 11479574, guid: 59897877c7080ff4898054e16e55cd5b, type: 2}
       propertyPath: m_fadeTime
@@ -383,7 +383,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   Priority: 128

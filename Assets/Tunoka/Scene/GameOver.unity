@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161a50bcc0d6ebe4f90bc2769c4a6888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_scenechange: title
+  m_scenechange: Logo
   m_Fade: {fileID: 1536772081}
   m_fadeTime: 2
   SaundObj:
@@ -516,7 +516,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   Priority: 128

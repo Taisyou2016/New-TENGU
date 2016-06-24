@@ -14,6 +14,7 @@ public class Map : MonoBehaviour {
     private float fastSearchRange = 10;
     [SerializeField]
     private float secondSearchRange = 40;
+    public float Size;
     void Start()
     {
         player = GameObject.Find("Player");
@@ -43,7 +44,7 @@ public class Map : MonoBehaviour {
             if (_distance <= fastSearchRange)
             {
                 Anime();
-                MapPosition.transform.localPosition = new Vector3(0, _distance / fastSearchRange * 30, 0);
+                MapPosition.transform.localPosition = new Vector3(0, _distance / fastSearchRange * Size, 0);
             }
             if (anim == null) return;
             if (_distance >= secondSearchRange)
