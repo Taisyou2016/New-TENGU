@@ -5,7 +5,7 @@ public class BossWSlash : MonoBehaviour {
 
     [SerializeField]
     private int dmg = 1;
-    private float speed = 10;
+    private float speed = 15;
 
 	// Update is called once per frame
 	void Update () {
@@ -14,12 +14,9 @@ public class BossWSlash : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag != "Enemy")
+        if (col.gameObject.tag == "Player")
         {
-            if (col.gameObject.tag == "Player")
-            {
-                col.gameObject.GetComponent<PlayerStatus>().HpDamage(dmg, gameObject);
-            }
+            col.gameObject.GetComponent<PlayerStatus>().HpDamage(dmg, gameObject);
             Destroy(gameObject);
         }
     }

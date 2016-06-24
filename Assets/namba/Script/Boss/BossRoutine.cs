@@ -42,7 +42,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private Transform player;
     private CharacterController charcon;
     private BossAttack attack;
-    private AnimatorStateInfo info;
     private HpGauge hpgauge;
     public Animator anima;
 
@@ -52,7 +51,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         attack = GetComponent<BossAttack>();
         charcon = GetComponent<CharacterController>();
-        info = anima.GetCurrentAnimatorStateInfo(0);
         hpgauge = GameObject.Find("BossHPgauge").GetComponent<HpGauge>();
 
         nowlife = life;

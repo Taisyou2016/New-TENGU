@@ -34,7 +34,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private NavMeshAgent agent;
     private Rigidbody rd;
     private EnemyAttack attack;
-    private AnimatorStateInfo info;
     public Animator anima;
 
     // Use this for initialization
@@ -45,7 +44,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         agent       = GetComponent<NavMeshAgent>();
         rd          = GetComponent<Rigidbody>();
         attack      = GetComponent<EnemyAttack>();
-        info = anima.GetCurrentAnimatorStateInfo(0);
 
         if (LengeType == 1) { AttackDistance = 1; }
         else if (LengeType == 2) { AttackDistance = 8; }
@@ -342,6 +340,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             owner.Switch(0);
             owner.state = "died";
             owner.anima.SetTrigger("Death");
+            owner.attack.Stop();
             owner.StartCoroutine(died());
         }
 
@@ -355,7 +354,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         IEnumerator died()
         {
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
             {
                 yield return null;
             }
