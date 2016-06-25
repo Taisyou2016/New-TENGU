@@ -1346,7 +1346,9 @@ MonoBehaviour:
   maxlife: 100
   speed: 3
   LengeType: 2
-  AttackLenge: 8
+  FT_Leng: 2
+  MG_Leng: 8
+  AT_Leng: 10
   life: 0
   Pflag: 0
   state: 
