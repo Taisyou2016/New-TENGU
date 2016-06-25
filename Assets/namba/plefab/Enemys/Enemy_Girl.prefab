@@ -1390,6 +1390,9 @@ MonoBehaviour:
   maxlife: 80
   speed: 2
   LengeType: 3
+  FT_Leng: 2
+  MG_Leng: 8
+  AT_Leng: 10
   life: 0
   Pflag: 0
   state: 

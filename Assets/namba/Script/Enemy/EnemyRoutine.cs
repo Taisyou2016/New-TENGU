@@ -18,7 +18,8 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     public int maxlife = 40;            // 最大ＨＰ
     public float speed;                 // スピード
     public int LengeType = 2;           // 攻撃タイプ(1=格闘 2=お札 3=弓)
-    public float AttackLenge = 10;       // 攻撃移行範囲
+    [SerializeField]
+    private float FT_Leng, MG_Leng, AT_Leng;
 
     [SerializeField]
     private int life;
@@ -28,6 +29,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private bool flag = false;
     public string state;                // デバッグ用State確認
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
+    private float AttackLenge;       // 攻撃移行範囲
     private Vector3 StartPos;
     private Vector3 lostPos;
     private Transform player;
@@ -49,6 +51,10 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         StartPos = this.transform.position;
         lostPos = StartPos;
         Switch(0);
+
+        if (LengeType == 1) AttackLenge = FT_Leng;
+        else if (LengeType == 2) AttackLenge = MG_Leng;
+        else if (LengeType == 3) AttackLenge = AT_Leng;
 
         // Stateの初期設定
         statelist.Add(new StateWait(this));
