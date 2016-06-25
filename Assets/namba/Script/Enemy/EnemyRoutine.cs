@@ -146,7 +146,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private IEnumerator Lost()
     {
         anima.SetTrigger("movedown");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         anima.SetTrigger("Move");
         agent.SetDestination(StartPos);
@@ -269,13 +269,13 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             owner.agent.SetDestination(owner.lostPos);
             if (Vector2.SqrMagnitude(owner.transform.position - owner.lostPos) <= 3)
             {
-                owner.StartCoroutine(owner.Lost());
                 owner.ChangeState(EnemyState.Wait);
             }
         }
 
         public override void End()
         {
+            owner.StartCoroutine(owner.Lost());
         }
 
     }
@@ -357,7 +357,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         IEnumerator died()
         {
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
             {
                 yield return null;
             }
@@ -376,6 +376,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         {
             owner.state = "Hit";
             owner.Switch(0);
+            owner.attack.Stop();
             owner.anima.SetTrigger("Damage2");
         }
 

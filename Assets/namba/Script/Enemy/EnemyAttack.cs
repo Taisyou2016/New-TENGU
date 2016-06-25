@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class EnemyAttack : MonoBehaviour {
 
-    public GameObject ohuda;
-    public GameObject bow;
-    public GameObject punch1, punch2;
+    public GameObject ohuda, bow, punch1, punch2;
+    private GameObject Punch; 
     private float cooltime_S ,cooltime_M, cooltime_L;
     private bool run = false;
     private bool flag = false;
     private float a;
+    private bool stop = false;
 
     private AudioSource se;
     public Animator anima;
@@ -50,7 +50,7 @@ public class EnemyAttack : MonoBehaviour {
         StopCoroutine(InFighting());
         StopCoroutine(OhudaAttack());
         StopCoroutine(yumiAttack());
-
+        stop = true;
     }
     private IEnumerator InFighting()
     {
@@ -73,11 +73,12 @@ public class EnemyAttack : MonoBehaviour {
         a = Random.Range(0, 2);
         if (a == 0) {
             anima.SetTrigger("Panch1");
-            Instantiate(punch1, transform.position + pos, transform.rotation);
+            Punch = punch1;
         }else {
             anima.SetTrigger("Panch2");
-            Instantiate(punch2, transform.position + pos, transform.rotation);
+            Punch = punch2;
         }
+        Instantiate(Punch, transform.position + pos, transform.rotation);
         se.PlayOneShot(sounds[0]);
 
         yield return new WaitForSeconds(cooltime_S);
@@ -92,9 +93,10 @@ public class EnemyAttack : MonoBehaviour {
 
         anima.SetTrigger("Attack");
         yield return new WaitForSeconds(1);
-        while (anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.6f)
+        while (anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.5f)
         {
             yield return null;
+            if (stop) yield break;
         }
 
         Vector3 vec = transform.up / 2;
@@ -117,6 +119,7 @@ public class EnemyAttack : MonoBehaviour {
         while (anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.6f)
         {
             yield return null;
+            if (stop) yield break;
         }
 
         Instantiate(bow, transform.position, this.transform.rotation);
