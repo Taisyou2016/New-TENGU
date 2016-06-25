@@ -18,6 +18,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     public int maxlife = 40;            // 最大ＨＰ
     public float speed;                 // スピード
     public int LengeType = 2;           // 攻撃タイプ(1=格闘 2=お札 3=弓)
+    public float AttackLenge = 10;       // 攻撃移行範囲
 
     [SerializeField]
     private int life;
@@ -27,14 +28,12 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private bool flag = false;
     public string state;                // デバッグ用State確認
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
-    private float AttackDistance;       // 攻撃移行範囲
     private Vector3 StartPos;
     private Vector3 lostPos;
     private Transform player;
     private NavMeshAgent agent;
     private Rigidbody rd;
     private EnemyAttack attack;
-    private AnimatorStateInfo info;
     public Animator anima;
 
     // Use this for initialization
@@ -45,11 +44,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         agent       = GetComponent<NavMeshAgent>();
         rd          = GetComponent<Rigidbody>();
         attack      = GetComponent<EnemyAttack>();
-        info = anima.GetCurrentAnimatorStateInfo(0);
 
-        if (LengeType == 1) { AttackDistance = 1; }
-        else if (LengeType == 2) { AttackDistance = 8; }
-        else if (LengeType == 3) { AttackDistance = 10; }
         life = maxlife;
         StartPos = this.transform.position;
         lostPos = StartPos;
@@ -217,9 +212,9 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             }
 
             // Playerとの距離
-            float ToAttackDistance = Vector3.SqrMagnitude(this.owner.transform.position - owner.player.position);
+            float ToAttackLenge = Vector3.SqrMagnitude(this.owner.transform.position - owner.player.position);
             // 攻撃範囲内
-            if (ToAttackDistance < owner.AttackDistance * 10.0f)
+            if (ToAttackLenge < owner.AttackLenge * 10.0f)
             {
                 //攻撃ステートに移行
                 owner.ChangeState(EnemyState.Attack);
@@ -296,9 +291,9 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         public override void Execute()
         {
             // Playerとの距離
-            float ToAttackDistance = Vector3.SqrMagnitude(owner.transform.position - owner.player.position);
+            float ToAttackLenge = Vector3.SqrMagnitude(owner.transform.position - owner.player.position);
             // 攻撃範囲外
-            if (ToAttackDistance > owner.AttackDistance * 10.0f && 
+            if (ToAttackLenge > owner.AttackLenge * 10.0f && 
                 owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9)
             {
                 //追跡ステートに移行
@@ -342,6 +337,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             owner.Switch(0);
             owner.state = "died";
             owner.anima.SetTrigger("Death");
+            owner.attack.Stop();
             owner.StartCoroutine(died());
         }
 
@@ -355,7 +351,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         IEnumerator died()
         {
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
             {
                 yield return null;
             }

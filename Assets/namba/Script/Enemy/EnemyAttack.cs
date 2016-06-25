@@ -13,7 +13,6 @@ public class EnemyAttack : MonoBehaviour {
     private float a;
 
     private AudioSource se;
-    private AnimatorStateInfo info;
     public Animator anima;
     public List<AudioClip> sounds = new List<AudioClip>();
 
@@ -24,7 +23,6 @@ public class EnemyAttack : MonoBehaviour {
         cooltime_L = 3.0f;
 
         se = gameObject.AddComponent<AudioSource>();
-        info = anima.GetCurrentAnimatorStateInfo(0);
     }
 
     /// <summary>
@@ -47,6 +45,13 @@ public class EnemyAttack : MonoBehaviour {
         }
     }
 
+    public void Stop()
+    {
+        StopCoroutine(InFighting());
+        StopCoroutine(OhudaAttack());
+        StopCoroutine(yumiAttack());
+
+    }
     private IEnumerator InFighting()
     {
         if (run) { yield break; }
