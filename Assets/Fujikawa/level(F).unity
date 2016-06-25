@@ -4037,6 +4037,10 @@ Prefab:
       propertyPath: SearchDistance
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 11498408, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
+      propertyPath: AttackLenge
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
   m_IsPrefabParent: 0
