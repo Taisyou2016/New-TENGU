@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BossCreateEnemyP : MonoBehaviour {
 
+    public GameObject a;
     // Use this for initialization
     public GameObject tornadoPrefab;
     public GameObject tornadoPrefabG;
@@ -24,14 +25,18 @@ public class BossCreateEnemyP : MonoBehaviour {
             if (i == 3)
             {
                 print("G");
-                Instantiate(tornadoPrefabG, child.transform.position, transform.rotation);
+                GameObject clone = (GameObject)Instantiate(tornadoPrefabG, child.position, child.rotation);
+
+                clone.GetComponent<EnemyRoutine>().LengeType = i;
+                clone.GetComponent<EnemyRoutine>().maxlife = 10;
             }
             else
             {
-                Instantiate(tornadoPrefab, child.transform.position, transform.rotation);
+                GameObject clone = (GameObject)Instantiate(tornadoPrefab, child.position, child.rotation);
+
+                clone.GetComponent<EnemyRoutine>().LengeType = i;
+                clone.GetComponent<EnemyRoutine>().maxlife = 10;
             }
-            tornadoPrefab.GetComponent<EnemyRoutine>().LengeType = i;
-            tornadoPrefab.GetComponent<EnemyRoutine>().maxlife = 20;
             count++;
         }
         Invoke("DeleteObj", 3.5f);

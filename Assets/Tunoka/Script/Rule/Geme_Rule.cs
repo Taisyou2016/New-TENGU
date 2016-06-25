@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Geme_Rule : MonoBehaviour {
 
@@ -44,15 +45,12 @@ public class Geme_Rule : MonoBehaviour {
     }
     void Gameovera()
     {
-        print("Gameovera");
         _GameOvera.transform.localPosition = Vector3.zero;
-        FadeInOut.GetComponent<FadeInOut>().m_scenechange = "GameOver";
-        FadeInOut.GetComponent<FadeInOut>().FadeIn();
+        FadeInOut.GetComponent<FadeInOut>().FadeIn("GameOver");
 
     }
     public void GameClear()
     {
-        print("GameClear");
         _GameClear.transform.localPosition = Vector3.zero;
         FadeInOut.GetComponent<FadeInOut>().FadeIn();
     }

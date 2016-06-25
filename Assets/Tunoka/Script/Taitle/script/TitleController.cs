@@ -31,7 +31,7 @@ public class TitleController : MonoBehaviour
     void CursorWind()
     {
         _mousePosition = Input.mousePosition;
-        if (_mousePosition.x < _center.x - 10 && _mousePosition.y > _center.y + 10)
+        if (_mousePosition.x != _center.x  && _mousePosition.y != _center.y )
         {
             print(_mousePosition);
             print("OK");

@@ -15,6 +15,7 @@ public class SkipTutorial : MonoBehaviour {
     {
         PlayerStatus player = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
         player.currentMp = 0;
+        player.maxMp = 0;
         player.GetComponent<PlayerMove>().walkSpeed = 0;
         selectNom = 0;
         cursor = skipsel.transform.FindChild("cursor").gameObject;
@@ -37,7 +38,7 @@ public class SkipTutorial : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.A)) selectNom += 1;
         if (Input.GetKeyDown(KeyCode.D)) selectNom += 1;
         if (selectNom > 1) selectNom = 0;
-        cursor.transform.eulerAngles = new Vector3(0, 0, 90+ (180 * selectNom));
+        cursor.transform.eulerAngles = new Vector3(0, 0,  (180 * selectNom));
         if (Input.GetMouseButton(0))
         {
             //Skip

@@ -501,11 +501,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 480330, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 20.9
+      value: 23.2
       objectReference: {fileID: 0}
     - target: {fileID: 480330, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 18.3
       objectReference: {fileID: 0}
     - target: {fileID: 480330, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: m_LocalRotation.x
@@ -549,7 +549,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: InitialModule.startSize.scalar
-      value: 1.6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: InitialModule.startSize.maxCurve.m_Curve.Array.data[0].value
@@ -557,7 +557,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: InitialModule.startSize.minCurve.m_Curve.Array.data[0].value
-      value: 0.625
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: EmissionModule.rate.scalar
@@ -577,7 +577,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: VelocityModule.y.maxCurve.m_Curve.Array.data[0].value
-      value: -1
+      value: 0.5714294
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: VelocityModule.y.scalar
@@ -609,11 +609,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: VelocityModule.x.maxCurve.m_Curve.Array.data[1].time
-      value: 0.14235452
+      value: 0.08853016
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: VelocityModule.x.maxCurve.m_Curve.Array.data[1].value
-      value: 0.99963814
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: VelocityModule.x.maxCurve.m_Curve.Array.data[0].time
@@ -689,7 +689,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: ForceModule.enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: ForceModule.x.scalar
@@ -721,15 +721,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: VelocityModule.y.maxCurve.m_Curve.Array.data[0].time
-      value: 0.05291005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: VelocityModule.z.maxCurve.m_Curve.Array.data[0].value
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
       propertyPath: VelocityModule.z.maxCurve.m_Curve.Array.data[0].time
-      value: 0.01940035
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19835252, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
+      propertyPath: VelocityModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 141994, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7c716499d79e5541ad96353f57a25e1, type: 2}

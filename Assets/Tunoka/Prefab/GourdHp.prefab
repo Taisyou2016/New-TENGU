@@ -53,8 +53,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106440}
   m_LocalRotation: {x: 0, y: 0, z: -0.14638743, w: 0.9892274}
-  m_LocalPosition: {x: 8.69, y: 9.88, z: 17.88}
-  m_LocalScale: {x: 1.5000001, y: 1.5000001, z: 1.5}
+  m_LocalPosition: {x: -48.90087, y: 4.2049656, z: -88.77}
+  m_LocalScale: {x: 1.5000002, y: 1.5000007, z: 1.5}
   m_Children:
   - {fileID: 472836}
   m_Father: {fileID: 0}
@@ -107,6 +107,8 @@ MonoBehaviour:
   recovery: 2
   Hp: 1
   Mp: 0
+  particle: {fileID: 158790, guid: 4e79d884291cad24099aae64dd6fae61, type: 2}
+  catchEnem: {fileID: 0}
 --- !u!136 &13684202
 CapsuleCollider:
   m_ObjectHideFlags: 1

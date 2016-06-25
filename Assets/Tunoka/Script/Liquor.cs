@@ -8,6 +8,8 @@ public class Liquor : MonoBehaviour {
     public bool Hp = false;
     public bool Mp = false;
 
+    public GameObject particle;
+
     public GameObject catchEnem;
     private bool setEnem;
 
@@ -50,6 +52,9 @@ public class Liquor : MonoBehaviour {
             {
                 Mp_recovery();
             }
+            GameObject mParticle = (GameObject)Instantiate(particle, other.transform.position, other.transform.rotation);
+
+            
             Destroy(gameObject);
         }
     }
