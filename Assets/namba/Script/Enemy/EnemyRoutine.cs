@@ -150,6 +150,14 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         anima.SetTrigger("Move");
         agent.SetDestination(StartPos);
+
+        while (Vector3.SqrMagnitude(transform.position - StartPos) >= 2)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        Switch(0);
+        anima.SetTrigger("movedown");
     }
 
     /*----------------------------------------------------/
@@ -180,11 +188,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
                 owner.ChangeState(EnemyState.Pursuit);
             }
 
-            if (Vector3.SqrMagnitude(owner.transform.position - owner.StartPos) <= 2)
-            {
-                owner.Switch(0);
-                owner.anima.SetTrigger("movedown");
-            }
 
         }
 
@@ -357,9 +360,11 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         IEnumerator died()
         {
+            yield return null;
+
             while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
             {
-                yield return null;
+                yield return new WaitForSeconds(0.1f);
             }
 
             Destroy(owner.gameObject);
@@ -376,7 +381,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         {
             owner.state = "Hit";
             owner.Switch(0);
-            owner.attack.Stop();
             owner.anima.SetTrigger("Damage2");
         }
 
