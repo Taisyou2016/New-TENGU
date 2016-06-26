@@ -249,14 +249,13 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     {
         public HexagramAttack(BossRoutine owner) : base(owner) { }
 
-        private GameObject[] enemys;
         Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
             owner.state = "Hexagram";
 
-            enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
             if (enemys.Length > 0)
             {
                 owner.ChangeState(BossState.Move);
@@ -372,7 +371,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             owner.state = "WindSlash";
             owner.anima.SetBool("Cutter", true);
 
-            dis = Vector3.Distance(owner.player.position, owner.transform.position) / 1.5f;
+            dis = Vector3.Distance(owner.player.position, owner.transform.position) / 2;
             vec = owner.transform.position + owner.transform.forward * dis;
             owner.StartCoroutine(Attack());
         }
@@ -400,7 +399,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             }
 
             owner.anima.speed = 0;
-            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec, "easeType", iTween.EaseType.easeInOutExpo));
+            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec, "easeType", iTween.EaseType.linear));
             yield return new WaitForSeconds(0.5f);
             owner.anima.speed = owner.animaSpeed;
 
