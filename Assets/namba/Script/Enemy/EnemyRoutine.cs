@@ -146,10 +146,18 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private IEnumerator Lost()
     {
         anima.SetTrigger("movedown");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         anima.SetTrigger("Move");
         agent.SetDestination(StartPos);
+
+        while (Vector3.SqrMagnitude(transform.position - StartPos) >= 2)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        Switch(0);
+        anima.SetTrigger("movedown");
     }
 
     /*----------------------------------------------------/
@@ -180,11 +188,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
                 owner.ChangeState(EnemyState.Pursuit);
             }
 
-            if (Vector3.SqrMagnitude(owner.transform.position - owner.StartPos) <= 2)
-            {
-                owner.Switch(0);
-                owner.anima.SetTrigger("movedown");
-            }
 
         }
 
@@ -269,13 +272,13 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             owner.agent.SetDestination(owner.lostPos);
             if (Vector2.SqrMagnitude(owner.transform.position - owner.lostPos) <= 3)
             {
-                owner.StartCoroutine(owner.Lost());
                 owner.ChangeState(EnemyState.Wait);
             }
         }
 
         public override void End()
         {
+            owner.StartCoroutine(owner.Lost());
         }
 
     }
@@ -357,9 +360,11 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         IEnumerator died()
         {
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
+            yield return null;
+
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
             {
-                yield return null;
+                yield return new WaitForSeconds(0.1f);
             }
 
             Destroy(owner.gameObject);

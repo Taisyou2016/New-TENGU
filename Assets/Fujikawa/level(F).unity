@@ -273,6 +273,10 @@ Prefab:
       propertyPath: FT_Leng
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 11498408, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
+      propertyPath: maxlife
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
   m_IsPrefabParent: 0
@@ -1112,6 +1116,10 @@ Prefab:
       propertyPath: FT_Leng
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 11498408, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
+      propertyPath: maxlife
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
   m_IsPrefabParent: 0
@@ -1168,7 +1176,7 @@ Light:
   serializedVersion: 6
   m_Type: 1
   m_Color: {r: 0.85294116, g: 0.9634888, b: 1, a: 1}
-  m_Intensity: 1.6
+  m_Intensity: 0.9
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1187,7 +1195,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 4
-  m_BounceIntensity: 0.94
+  m_BounceIntensity: 0.5
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
@@ -1474,6 +1482,8 @@ MonoBehaviour:
   talkText: {fileID: 1181011999}
   ObjDelete: 1
   loopTalk: 0
+  PlayerHp: -1
+  PlayerMp: -1
   talk: "\u308F\u3057\u3092\u5C01\u5370\u3057\u305F\u3084\u3064\u306F\u7D50\u754C\u306E\u4E2D\u306E\u5BFA\u306B\u3044\u308B\u306A
     \u307E\u3042\u5468\u308A\u306E\u672D\u3092\u58CA\u3057\u7D50\u754C\u3092\u7834\u3089\u306D\u3070\u5165\u308C\u306A\u3044\u304C\u306E\u3046..."
 --- !u!1001 &476317455
@@ -4255,6 +4265,10 @@ Prefab:
       propertyPath: FT_Leng
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 11498408, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
+      propertyPath: maxlife
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
   m_IsPrefabParent: 0
@@ -4340,6 +4354,10 @@ Prefab:
     - target: {fileID: 11459170, guid: 78948a721918b9749b49e7e46c477000, type: 2}
       propertyPath: maxlife
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459170, guid: 78948a721918b9749b49e7e46c477000, type: 2}
+      propertyPath: SearchDistance
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78948a721918b9749b49e7e46c477000, type: 2}
@@ -4796,6 +4814,8 @@ MonoBehaviour:
   talkText: {fileID: 1181011999}
   ObjDelete: 0
   loopTalk: 0
+  PlayerHp: -1
+  PlayerMp: -1
   talk: "\u7D50\u754C\u304B\u30FB\u30FB\u30FB \u5148\u306B\u8B77\u7B26\u3092\u3059\u3079\u3066\u96C6\u3081\u306A\u3044\u3068\u3044\u3051\u306A\u3044\u306A"
 --- !u!1001 &1239722376
 Prefab:
@@ -6121,6 +6141,8 @@ MonoBehaviour:
   talkText: {fileID: 1181011999}
   ObjDelete: 1
   loopTalk: 0
+  PlayerHp: -1
+  PlayerMp: -1
   talk: "\u3088\u3057\u7D50\u754C\u3092\u7834\u3063\u305F\u305E\uFF01 \u3053\u308C\u3067\u308F\u3057\u3092\u5C01\u5370\u3057\u305F\u3084\u3064\u3092\u5012\u3057\u306B\u884C\u3051\u308B"
 --- !u!4 &1892089082
 Transform:

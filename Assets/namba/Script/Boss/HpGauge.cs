@@ -25,9 +25,11 @@ public class HpGauge : MonoBehaviour {
     public void Damage(int dmg)
     {
         hp.value -= dmg;
-        if(hp.value == 0)
-        {
-            Destroy(gameObject);
-        }
+    }
+
+    public void Destruction()
+    {
+        Destroy(gameObject);
+
     }
 }

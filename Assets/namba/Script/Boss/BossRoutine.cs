@@ -76,7 +76,14 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     {
         nowlife -= dmg;
         hpgauge.Damage(dmg);
-        if (nowlife > 0)
+        if (nowlife <= 0)
+        {
+            if (!flag) { return; }
+            flag = false;
+            hpgauge.Destruction();
+            ChangeState(BossState.Died);
+        }
+        else
         {
             if (nowlife <= life / 2)
             {
@@ -87,12 +94,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
                 return;
             }
             ChangeState(BossState.Hit);
-        }
-        else
-        {
-            if (!flag) { return; }
-            flag = false;
-            ChangeState(BossState.Died);
         }
 
 
@@ -156,7 +157,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
                     ここからState処理
     /----------------------------------------------------*/
 
-    // 待機状態
+        // 待機状態
     private class IdleState : IState<BossRoutine>
     {
         public IdleState(BossRoutine owner) : base(owner) { }
@@ -238,8 +239,6 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         {
             owner.anima.SetBool("Move", false);
             owner.anima.SetBool("Jump", false);
-            //owner.anima.SetTrigger("MoveDown");
-
             owner.dt = 0;
         }
 
@@ -250,14 +249,13 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     {
         public HexagramAttack(BossRoutine owner) : base(owner) { }
 
-        private GameObject[] enemys;
         Vector3 vel = new Vector3(0, 0, 0);
 
         public override void Initialize()
         {
             owner.state = "Hexagram";
 
-            enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
             if (enemys.Length > 0)
             {
                 owner.ChangeState(BossState.Move);
@@ -373,7 +371,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             owner.state = "WindSlash";
             owner.anima.SetBool("Cutter", true);
 
-            dis = Vector3.Distance(owner.player.position, owner.transform.position) / 1.5f;
+            dis = Vector3.Distance(owner.player.position, owner.transform.position) / 2;
             vec = owner.transform.position + owner.transform.forward * dis;
             owner.StartCoroutine(Attack());
         }
@@ -401,7 +399,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             }
 
             owner.anima.speed = 0;
-            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec, "easeType", iTween.EaseType.easeInOutExpo));
+            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec, "easeType", iTween.EaseType.linear));
             yield return new WaitForSeconds(0.5f);
             owner.anima.speed = owner.animaSpeed;
 
@@ -473,13 +471,15 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         {
             owner.state = "Died";
             owner.anima.SetTrigger("Death");
-
-            Destroy(owner.gameObject, 5.0f);
         }
 
         public override void Execute()
         {
             owner.fall(vel);
+            if (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            {
+                Destroy(owner.gameObject);
+            }
         }
 
         public override void End()

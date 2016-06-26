@@ -1343,10 +1343,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SearchDistance: 20
-  maxlife: 100
+  maxlife: 60
   speed: 3
   LengeType: 2
-  FT_Leng: 2
+  FT_Leng: 1
   MG_Leng: 8
   AT_Leng: 10
   life: 0
