@@ -169,6 +169,7 @@ public class PlayerStatus : MonoBehaviour
         {
             currentHp = 0;
             transform.LookAt(damageObject.transform.position); // gameObjectの方を向く
+            gameObject.GetComponent<PlayerMove>().knockBackState = true;
             playerAnimator.SetTrigger("Dead");
             gameObject.GetComponent<PlayerMove>().ChangeStop();
             audioSource.PlayOneShot(dead); // 対応SE再生
