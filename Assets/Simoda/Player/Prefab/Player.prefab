@@ -2401,7 +2401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockCursorPrefab: {fileID: 154480, guid: b7720a81e21e52d40b19b6ff60e72c4b, type: 2}
-  cursorEnemyPosY: 2
+  cursorEnemyPosY: 2.5
   cursorBossPosY: 6.5
   cursorBossShortPosY: 2.5
 --- !u!114 &11486516
