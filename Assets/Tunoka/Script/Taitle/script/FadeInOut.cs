@@ -29,7 +29,6 @@ public class FadeInOut : MonoBehaviour {
 
     public void FadeIn()
     {
-        print("FadeIn");
         m_tr = true;
         // SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
         iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", m_fadeTime, "onupdate", "SetValue"));
@@ -37,7 +36,6 @@ public class FadeInOut : MonoBehaviour {
     public void FadeIn(string name)
     {
         m_scenechange = name;
-        print("FadeIn");
         m_tr = true;
         // SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
         iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", m_fadeTime, "onupdate", "SetValue"));
@@ -54,7 +52,6 @@ public class FadeInOut : MonoBehaviour {
         if (SaundObj != null)
         {
             float volume = 1 - alpha;
-            print("サウンドダウン");
             foreach (GameObject value in SaundObj)
             {
                 value.GetComponent<AudioSource>().volume = volume;

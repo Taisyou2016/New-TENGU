@@ -2101,7 +2101,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11435836, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
       propertyPath: walkSpeed
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11492454, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
       propertyPath: maxMp
@@ -2266,7 +2266,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11439612, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
       propertyPath: speed
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
