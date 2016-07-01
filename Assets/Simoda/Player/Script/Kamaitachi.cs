@@ -12,7 +12,6 @@ public class Kamaitachi : MonoBehaviour
 
     private GameObject player;
     private PlayerStatus playerStatus;
-
     //private AudioSource audioSource;
 
     void Start()

@@ -27,7 +27,6 @@ public class LockCursor : MonoBehaviour
         if (playerMove.GetLockOnInfo() && playerMove.lockEnemy != null)
         {
             lockCursor.SetActive(true);
-
             lookAtPosition = player.transform.position;
 
             if (playerMove.lockEnemy.tag == "Enemy")
