@@ -23,7 +23,6 @@ public class Magic_Meter : MonoBehaviour
         // HPゲージに値を設定
         cooldown.fillAmount = _Mp;
 
-        print(_Mp);
         if (player.currentMp < 10)
         {
             print("0");

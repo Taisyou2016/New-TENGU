@@ -9,15 +9,20 @@ public class Geme_Rule : MonoBehaviour {
     private GameObject player;
     private PlayerStatus playerStatus;
     private BossRoutine boss;
+    private bool des = false;
+
 
     public GameObject _GameOvera;
     public GameObject _GameClear;
     public GameObject FadeInOut;
     // Use this for initialization
     void Start () {
+        des = false;
         Cursor.visible = false;
         if (GameObject.Find("Player") == null) return;
+
         player = GameObject.Find("Player");
+
         if(GameObject.FindGameObjectWithTag("Boss") != null)
         {
             boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossRoutine>();
@@ -28,11 +33,14 @@ public class Geme_Rule : MonoBehaviour {
 	void Update () {
 
         if (GameObject.Find("Player") == null) return;
+        if (des == true) return;
 
-        m_p_Hp = playerStatus.currentHp;
-        if (m_p_Hp <= 0)
+
+        if (m_p_Hp <= 0 )
         {
-            Gameovera();
+            _GameOvera.transform.localPosition = Vector3.zero;
+            des = true;
+            Invoke("Gameovera", 3f);
         }
         if (boss != null)
         {
@@ -41,11 +49,13 @@ public class Geme_Rule : MonoBehaviour {
                 GameClear();
             }
         }
+        
+        m_p_Hp = playerStatus.currentHp;
 
     }
     void Gameovera()
     {
-        _GameOvera.transform.localPosition = Vector3.zero;
+
         FadeInOut.GetComponent<FadeInOut>().FadeIn("GameOver");
 
     }
