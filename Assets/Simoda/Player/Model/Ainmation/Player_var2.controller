@@ -176,7 +176,7 @@ AnimatorStateTransition:
     m_ConditionEvent: VelocityY
     m_EventTreshold: -0.7
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 110264820}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -2064,7 +2064,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Flight
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110194290}
