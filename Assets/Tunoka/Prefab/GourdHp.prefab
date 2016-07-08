@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recovery: 2
-  Hp: 1
+  Hp: 0
   Mp: 0
   particle: {fileID: 158790, guid: 4e79d884291cad24099aae64dd6fae61, type: 2}
   catchEnem: {fileID: 0}
