@@ -21,20 +21,22 @@ public class PlayerMove : MonoBehaviour
     public float WaitMotinChangeTime = 10.0f; // この秒放置されたら放置アニメーションへ遷移
     public float blowPower = 0.0f;
     public GameObject lockEnemy;
-    public AudioClip jump;
-    public AudioClip glide;
     public AnimationCurve blowCurve;
     public float blowStartTime;
+    public AudioClip jump;
+    public AudioClip glide;
 
     private CharacterController controller;
     private GameObject cameraController;
     private Vector3 velocity;
     private float velocityY = 0;
     private bool jampState = false;
+    private bool flightState = false;
     private bool windMove = false;
     private bool stop = false;
     private List<GameObject> lockEnemyList = new List<GameObject>();
     private bool lockOn = false;
+    private PlayerStatus playerStatus;
     private Animator playerAnimator;
     private float WaitTime;
     private AudioSource audioSource;
@@ -52,6 +54,7 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         cameraController = GameObject.FindGameObjectWithTag("CameraController");
+        playerStatus = gameObject.GetComponent<PlayerStatus>();
         playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
         audioSource = transform.GetComponent<AudioSource>();
 
@@ -69,8 +72,19 @@ public class PlayerMove : MonoBehaviour
     {
         stateProcessor.Execute(); //設定されている移動状態を実行
 
-        if (currentGroundHit == false) velocityY -= gravity * Time.deltaTime;
+        if (currentGroundHit == false && flightState == false) velocityY -= gravity * Time.deltaTime;
         velocity.y = velocityY;
+
+        if (knockBackState == false && windMove == false && jampState == true && velocityY <= -1.0f && playerStatus.MpCostDecision(playerStatus.flightCost) && Input.GetKey(KeyCode.Space)) //滞空処理
+        {
+            playerStatus.MpConsumption(playerStatus.flightCost);
+            flightState = true;
+            velocity.y = 0;
+        }
+        if ((flightState == true && Input.GetKeyUp(KeyCode.Space)) || !playerStatus.MpCostDecision(playerStatus.flightCost))
+            flightState = false;
+
+        playerAnimator.SetBool("FlightState", flightState);
 
         controller.Move(velocity * Time.deltaTime);
 
@@ -127,7 +141,7 @@ public class PlayerMove : MonoBehaviour
         else
             jampState = true;
 
-        if (jampState == false && Input.GetKeyDown(KeyCode.Space))
+        if (knockBackState == false && jampState == false && Input.GetKeyDown(KeyCode.Space))
         {
             velocityY = 10;
             jampState = true;
@@ -148,6 +162,7 @@ public class PlayerMove : MonoBehaviour
         playerAnimator.SetFloat("LockonAxis", Input.GetAxis("Horizontal"));
         playerAnimator.SetBool("KnockBackState", knockBackState);
         playerAnimator.SetBool("WindMove", windMove);
+        playerAnimator.SetBool("GroundHit", currentGroundHit);
 
         AnimatorStateInfo aniStateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
         if (aniStateInfo.nameHash == Animator.StringToHash("Base Layer.Wait"))
@@ -223,7 +238,7 @@ public class PlayerMove : MonoBehaviour
     public bool CheckGrounded() //地面に接地しているかどうかを調べる
     {
         //controller.isGroundedがtrueならRaycastを使わずに判定終了
-        if (controller.isGrounded) return true;
+        //if (controller.isGrounded) return true;
         //放つ光線の初期位置と姿勢
         //若干体にめり込ませた位置から発射しないと正しく判定できないときがある
         Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
@@ -231,6 +246,7 @@ public class PlayerMove : MonoBehaviour
         float tolerance = 1.3f;
         Debug.DrawRay(ray.origin, ray.direction * tolerance);
         //Raycastがhitするかどうかで判定
+        //RaycastHit hit;
         //地面にのみ衝突するようにレイヤを指定する
         return Physics.Raycast(ray, tolerance, 1 << 8);
         //return Physics.BoxCast(ray.origin, new Vector3(0.1f, 0.05f, 0.1f), ray.direction, transform.rotation, tolerance, 1 << 8);
@@ -259,6 +275,8 @@ public class PlayerMove : MonoBehaviour
 
     public void SetVelocityY(int velocity)
     {
+        if (knockBackState == true) return;
+
         velocityY = velocity;
     }
 
@@ -515,10 +533,13 @@ public class PlayerMove : MonoBehaviour
         stop = true;
         knockBackState = true;
         velocity = Vector3.zero;
+        if (currentGroundHit == false && flightState == false) velocityY -= gravity * Time.deltaTime;
+        velocity.y = velocityY;
     }
 
     public void Blow()
     {
+        knockBackState = true;
         velocity = -transform.forward * blowPower;
         //blowPower -= Time.deltaTime;
         //Mathf.Lerp(blowPower, 0.0f, blowCurve);
@@ -528,7 +549,11 @@ public class PlayerMove : MonoBehaviour
         blowPower = Mathf.Lerp(blowPower, 0.0f, curvePos);
         print(blowPower);
 
-        if (blowPower <= 0.5f) stateProcessor.State = stateDefault;
+        if (blowPower <= 0.5f)
+        {
+            knockBackState = false;
+            stateProcessor.State = stateDefault;
+        }
     }
 
     public void ChangeKnockBackSmall()

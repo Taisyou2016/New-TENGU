@@ -20,8 +20,7 @@ public class Wind : MonoBehaviour
     public Vector3 direction;
     public int generationPattern;
 
-
-    private int cost;
+    private float cost;
 
     private GameObject player;
     private PlayerStatus playerStatus;
