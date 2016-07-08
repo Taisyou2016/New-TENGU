@@ -36,6 +36,7 @@ public class PlayerMove : MonoBehaviour
     private bool stop = false;
     private List<GameObject> lockEnemyList = new List<GameObject>();
     private bool lockOn = false;
+    private PlayerStatus playerStatus;
     private Animator playerAnimator;
     private float WaitTime;
     private AudioSource audioSource;
@@ -53,6 +54,7 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         cameraController = GameObject.FindGameObjectWithTag("CameraController");
+        playerStatus = gameObject.GetComponent<PlayerStatus>();
         playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
         audioSource = transform.GetComponent<AudioSource>();
 
@@ -73,13 +75,16 @@ public class PlayerMove : MonoBehaviour
         if (currentGroundHit == false && flightState == false) velocityY -= gravity * Time.deltaTime;
         velocity.y = velocityY;
 
-        if (knockBackState == false && jampState == true && Input.GetKey(KeyCode.Space)) //滞空処理
+        if (knockBackState == false && windMove == false && jampState == true && velocityY <= -1.0f && playerStatus.MpCostDecision(playerStatus.flightCost) && Input.GetKey(KeyCode.Space)) //滞空処理
         {
+            playerStatus.MpConsumption(playerStatus.flightCost);
             flightState = true;
             velocity.y = 0;
         }
-        if (flightState == true && Input.GetKeyUp(KeyCode.Space))
+        if ((flightState == true && Input.GetKeyUp(KeyCode.Space)) || !playerStatus.MpCostDecision(playerStatus.flightCost))
             flightState = false;
+
+        playerAnimator.SetBool("FlightState", flightState);
 
         controller.Move(velocity * Time.deltaTime);
 
@@ -157,6 +162,7 @@ public class PlayerMove : MonoBehaviour
         playerAnimator.SetFloat("LockonAxis", Input.GetAxis("Horizontal"));
         playerAnimator.SetBool("KnockBackState", knockBackState);
         playerAnimator.SetBool("WindMove", windMove);
+        playerAnimator.SetBool("GroundHit", currentGroundHit);
 
         AnimatorStateInfo aniStateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
         if (aniStateInfo.nameHash == Animator.StringToHash("Base Layer.Wait"))
@@ -527,6 +533,8 @@ public class PlayerMove : MonoBehaviour
         stop = true;
         knockBackState = true;
         velocity = Vector3.zero;
+        if (currentGroundHit == false && flightState == false) velocityY -= gravity * Time.deltaTime;
+        velocity.y = velocityY;
     }
 
     public void Blow()
