@@ -76,7 +76,6 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         stateProcessor.Execute(); //設定されている移動状態を実行
-        print(groundDistance);
 
         //if (currentGroundHit == false && flightState == false) velocityY -= gravity * Time.deltaTime;
         //velocity.y = velocityY;
