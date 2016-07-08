@@ -338,6 +338,7 @@ GameObject:
   - 224: {fileID: 503571549}
   - 222: {fileID: 503571551}
   - 114: {fileID: 503571550}
+  - 95: {fileID: 503571552}
   m_Layer: 5
   m_Name: Title_Logo_2
   m_TagString: Untagged
@@ -395,6 +396,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 503571548}
+--- !u!95 &503571552
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 503571548}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b4502ce63befdb40bf9a387d6cae1e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &543628942
 Prefab:
   m_ObjectHideFlags: 0

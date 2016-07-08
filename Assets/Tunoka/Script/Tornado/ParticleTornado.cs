@@ -7,9 +7,14 @@ public class ParticleTornado : MonoBehaviour
 
     private ParticleSystem[] particles;
     public Vector3 direction;
+    [SerializeField, Header("吹っ飛ばし力")]
     public float power;
+    [SerializeField, Header("攻撃ダメージ")]
     public int damage = 20;
-    public bool Free = false;
+
+    [SerializeField, Header("前進するスピード")]
+    private float AdvanceSpeed = 1;
+    private bool bostr;
 
     void Start()
     {
@@ -17,6 +22,11 @@ public class ParticleTornado : MonoBehaviour
         particles[0].startColor = new Color(0, 0, 0, 0);
         iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 2f, "onupdate", "SetValue"));
 
+    }
+    void Update()
+    {
+        if (transform.root.gameObject.GetComponent<Tornado>().Free == true) return;
+        transform.localPosition += new Vector3(0, 0, AdvanceSpeed * Time.deltaTime);
     }
     public void FadeOut(float Time)
     {
@@ -47,15 +57,16 @@ public class ParticleTornado : MonoBehaviour
         {
             other.GetComponent<EnemyRoutine>().Damage(damage);
         }
-        else if (other.tag == "Boss")
+        else if (other.tag == "Boss" && bostr == false)
         {
             other.GetComponent<BossRoutine>().Damage(damage);
+            bostr = true;
         }
     }
     void SetValue(float alpha)
     {
         // iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
-        if (Free == true)
+        if (transform.root.gameObject.GetComponent<Tornado>().Free == true)
         {
             particles[0].startColor = new Color(0, 255, 0, alpha);
             return;

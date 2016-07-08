@@ -749,7 +749,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472062, guid: 70dddf9ddc0c5f842bc4415226ea4057, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 461164, guid: 70dddf9ddc0c5f842bc4415226ea4057, type: 2}
       propertyPath: m_RootOrder
@@ -967,7 +967,8 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 15418942, guid: 70dddf9ddc0c5f842bc4415226ea4057, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 70dddf9ddc0c5f842bc4415226ea4057, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &461904985
@@ -1286,7 +1287,7 @@ Light:
   serializedVersion: 6
   m_Type: 1
   m_Color: {r: 0.9264706, g: 1, b: 0.9726166, a: 1}
-  m_Intensity: 1.56
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1305,7 +1306,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 4
-  m_BounceIntensity: 0.81
+  m_BounceIntensity: 0.39
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
@@ -1358,7 +1359,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 468718, guid: 2d3489efa1a70f24093326e2a8430947, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11400266, guid: 2d3489efa1a70f24093326e2a8430947, type: 2}
       propertyPath: target
@@ -2069,7 +2070,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472394, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 13570766, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
       propertyPath: m_IsTrigger
@@ -2537,7 +2538,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455866, guid: 669afe5711c384949a73835a7e954c4a, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 669afe5711c384949a73835a7e954c4a, type: 2}
