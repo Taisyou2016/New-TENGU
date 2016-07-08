@@ -2317,6 +2317,9 @@ MonoBehaviour:
   lockOnRotateSpeed: 45
   lockDistanceY: 10
   gravity: 10
+  flightGravity: 10
+  flightGravityDeltaTimeMagnification: 0.1
+  flightGroundDistance: 4
   jampPower: 10
   knockBackPower: 0
   knockBackState: 0
