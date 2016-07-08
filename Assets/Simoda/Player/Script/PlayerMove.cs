@@ -76,6 +76,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         stateProcessor.Execute(); //設定されている移動状態を実行
+        print(groundDistance);
 
         //if (currentGroundHit == false && flightState == false) velocityY -= gravity * Time.deltaTime;
         //velocity.y = velocityY;
@@ -276,7 +277,7 @@ public class PlayerMove : MonoBehaviour
         //return Physics.Raycast(ray, tolerance, 1 << 8);
         ////return Physics.BoxCast(ray.origin, new Vector3(0.1f, 0.05f, 0.1f), ray.direction, transform.rotation, tolerance, 1 << 8);
 
-        if (groundDistance < 1.10)
+        if (groundDistance < 1.3f)
         {
             return true;
         }
