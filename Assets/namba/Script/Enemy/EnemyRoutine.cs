@@ -188,7 +188,6 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             if (owner.Pflag)
             {
                 owner.Switch(0);
-                owner.Switch(1);
                 owner.ChangeState(EnemyState.Pursuit);
             }
 
@@ -197,6 +196,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         public override void End()
         {
+            owner.Switch(0);
         }
 
     }
