@@ -478,7 +478,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             owner.fall(vel);
             if (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
             {
-                Destroy(owner.gameObject);
+                // Destroy(owner.gameObject);
             }
         }
 
