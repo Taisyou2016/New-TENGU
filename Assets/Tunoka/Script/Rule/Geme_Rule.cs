@@ -47,8 +47,9 @@ public class Geme_Rule : MonoBehaviour {
             if (boss.nowlife <= 0)
             {
                 Finish = true;
+                _GameClear.transform.localPosition = Vector3.zero;
                 GameObject.FindGameObjectWithTag("CameraController").transform.GetComponent<BossCamera>().enabled = true;
-                //GameClear();
+                gameObject.GetComponent<ReturnToTitle>().enabled = false;
             }
         }
         
