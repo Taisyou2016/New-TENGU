@@ -29,7 +29,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     private bool flag = false;
     public string state;                // デバッグ用State確認
     private float rotateSmooth = 3.0f;  // 振り向きにかかる時間
-    private float AttackLenge;       // 攻撃移行範囲
+    private float AttackLenge;          // 攻撃移行範囲
     private Vector3 StartPos;
     private Vector3 lostPos;
     private Transform player;
@@ -50,7 +50,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         life = maxlife;
         StartPos = this.transform.position;
         lostPos = StartPos;
-        Switch(0);
+        Switch(1);
 
         if (LengeType == 1) AttackLenge = FT_Leng;
         else if (LengeType == 2) AttackLenge = MG_Leng;
@@ -130,6 +130,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
     public void Damage(int dmg)
     {
+        Switch(0);
         life -= dmg;
         if (life > 0)
         {
@@ -147,6 +148,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     {
         anima.SetTrigger("movedown");
         yield return new WaitForSeconds(3);
+        if (agent.enabled == false) { yield break; }
 
         anima.SetTrigger("Move");
         agent.SetDestination(StartPos);
@@ -176,6 +178,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         public override void Initialize()
         {
             owner.state = "wait";
+            owner.Switch(1);
         }
 
         public override void Execute()
@@ -185,6 +188,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
             if (owner.Pflag)
             {
                 owner.Switch(0);
+                owner.Switch(1);
                 owner.ChangeState(EnemyState.Pursuit);
             }
 
@@ -206,7 +210,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
 
         public override void Initialize()
         {
-            owner.Switch(0);
+            //owner.Switch(0);
             owner.state = "pursuit";
             owner.anima.SetTrigger("Move");
         }
@@ -293,6 +297,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         public override void Initialize()
         {
             owner.Switch(0);
+            owner.Switch(1);
             owner.state = "attack";
 
         }
@@ -403,7 +408,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         IEnumerator move()
         {
 
-            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+            while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.8f)
             {
                 yield return null;
             }

@@ -100,6 +100,7 @@ public class PlayerMove : MonoBehaviour
         if ((flightState == true && Input.GetKeyUp(KeyCode.Space))
             || knockBackState == true
             || windMove == true
+            || velocityY > -1.0f
             || !playerStatus.MpCostDecision(playerStatus.flightCost)
             || groundDistance < flightGroundDistance)
         {
