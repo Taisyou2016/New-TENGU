@@ -33,6 +33,12 @@ public class FadeInOut : MonoBehaviour {
         // SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
         iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", m_fadeTime, "onupdate", "SetValue"));
     }
+    public void HalfFadeIn()
+    {
+        // SetValue()を毎フレーム呼び出して、１秒間に０から0.5までの値の中間値を渡す
+        iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 0.9f, "time", m_fadeTime, "onupdate", "SetValue"));
+    }
+   
     public void FadeIn(string name)
     {
         m_scenechange = name;

@@ -59,6 +59,12 @@ public class Geme_Rule : MonoBehaviour {
         FadeInOut.GetComponent<FadeInOut>().FadeIn("GameOver");
 
     }
+
+    void bosGameClear()
+    {
+
+    }
+
     public void GameClear()
     {
         _GameClear.transform.localPosition = Vector3.zero;

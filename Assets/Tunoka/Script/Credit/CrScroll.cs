@@ -5,7 +5,10 @@ public class CrScroll : MonoBehaviour {
 
     [SerializeField]
     private int scollTime = 8;
-    public GameObject fade;
+    [SerializeField]
+    private GameObject Logo;
+    [SerializeField]
+    private GameObject Fade;
     void Start () {
         iTween.MoveTo(gameObject, iTween.Hash("y", 1301, 
             "delay", 4 ,"islocal" , true ,
@@ -17,10 +20,12 @@ public class CrScroll : MonoBehaviour {
     }
     void EndAction()
     {
-        Invoke("FadeIn", 2);
+        Fade.GetComponent<FadeInOut>().HalfFadeIn();
+        Logo.GetComponent<LogoIn>().enabled = true;
+        Invoke("LogoIn", 0.5f);
     }
-    void FadeIn()
+    void LogoIn()
     {
-        GameObject.Find("FadeInOut").GetComponent<FadeInOut>().FadeIn();
+        Destroy(gameObject);
     }
 }
