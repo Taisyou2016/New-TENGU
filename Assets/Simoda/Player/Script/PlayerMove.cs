@@ -169,7 +169,7 @@ public class PlayerMove : MonoBehaviour
 
         if (knockBackState == false && jampState == false && Input.GetKeyDown(KeyCode.Space))
         {
-            velocityY = 10;
+            velocityY = jampPower;
             jampState = true;
             playerAnimator.SetTrigger("Jump");
             audioSource.PlayOneShot(jump);
