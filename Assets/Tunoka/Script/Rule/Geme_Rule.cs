@@ -9,7 +9,7 @@ public class Geme_Rule : MonoBehaviour {
     private GameObject player;
     private PlayerStatus playerStatus;
     private BossRoutine boss;
-    private bool des = false;
+    private bool Finish = false;
 
 
     public GameObject _GameOvera;
@@ -17,7 +17,7 @@ public class Geme_Rule : MonoBehaviour {
     public GameObject FadeInOut;
     // Use this for initialization
     void Start () {
-        des = false;
+        Finish = false;
         Cursor.visible = false;
         if (GameObject.Find("Player") == null) return;
 
@@ -33,20 +33,22 @@ public class Geme_Rule : MonoBehaviour {
 	void Update () {
 
         if (GameObject.Find("Player") == null) return;
-        if (des == true) return;
+        if (Finish == true) return;
 
 
         if (m_p_Hp <= 0 )
         {
             _GameOvera.transform.localPosition = Vector3.zero;
-            des = true;
+            Finish = true;
             Invoke("Gameovera", 3f);
         }
         if (boss != null)
         {
             if (boss.nowlife <= 0)
             {
-                GameClear();
+                Finish = true;
+                GameObject.FindGameObjectWithTag("CameraController").transform.GetComponent<BossCamera>().enabled = true;
+                //GameClear();
             }
         }
         
