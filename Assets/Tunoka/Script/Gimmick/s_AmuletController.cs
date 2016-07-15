@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class s_AmuletController : MonoBehaviour {
 
@@ -8,12 +9,25 @@ public class s_AmuletController : MonoBehaviour {
     bool One = true;
 
     public GameObject BreakAmu;
-    public GameObject Center;
-    public GameObject WindPoint;
+    private GameObject Center;
+    private GameObject openGate;
+    private Text AmuletCountText;
+    private int Maxcount;
     // Use this for initialization
     void Start () {
-	
-	}
+        Center = transform.FindChild("CenterBarrier").gameObject;
+
+        if (GameObject.Find("Gate") != null)
+        {
+            openGate = GameObject.Find("Gate");
+        }
+        if (GameObject.Find("AmuletCountText") != null)
+        {
+            AmuletCountText = GameObject.Find("AmuletCountText").GetComponent<Text>();
+        }
+
+        Maxcount = transform.childCount - 1;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,7 +42,9 @@ public class s_AmuletController : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-	}
+        AmuletCountText.text =  (-1*(AmuletCount - 1 - Maxcount)).ToString() +  "/" + Maxcount.ToString();
+
+    }
     void Gimmick()
     {
         if (One)
@@ -36,6 +52,7 @@ public class s_AmuletController : MonoBehaviour {
             BreakAmu.GetComponent<Talkpos>().textOn();
             GetComponent<SphereCollider>().enabled = false;
             iTween.ScaleTo(gameObject, iTween.Hash("x", 0, "y", 0, "z", 0, "time", 10));
+            openGate.GetComponent<BoxCollider>().enabled = true;
             print("護符用ギミック作動");
             One = false;
         }

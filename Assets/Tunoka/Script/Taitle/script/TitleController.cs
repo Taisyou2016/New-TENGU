@@ -9,6 +9,7 @@ public class TitleController : MonoBehaviour
     private Vector3 _center = Vector3.zero;
     public GameObject _leaf;
     private ParticleSystem _particle;
+    public int Movetime = 3;
 
     void Start()
     {
@@ -35,9 +36,9 @@ public class TitleController : MonoBehaviour
         {
             print(_mousePosition);
             print("OK");
-            iTween.MoveTo(_leaf, iTween.Hash("x", -68.3, "y", 31, "time", 3f, "isLocal", true));
+            iTween.MoveTo(_leaf, iTween.Hash("x", -68.3, "y", 31, "time", Movetime, "isLocal", true));
 
-            iTween.MoveTo(gameObject, iTween.Hash("x", -576, "y", 576, "time", 3f, "isLocal", true));
+            iTween.MoveTo(gameObject, iTween.Hash("x", -576, "y", 576, "time", Movetime, "isLocal", true));
             Invoke("FadeIn", 1);
         }
         else

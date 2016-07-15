@@ -73,7 +73,7 @@ public class Liquor : MonoBehaviour {
     {
         if (recovery <= playerStatus.maxMp - playerStatus.currentMp)
         {
-            playerStatus.currentMp += recovery;
+            playerStatus.currentMp += (float)recovery;
         }
         else
         {

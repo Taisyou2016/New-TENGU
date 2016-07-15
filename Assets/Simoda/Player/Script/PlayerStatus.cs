@@ -4,14 +4,15 @@ using System.Collections;
 public class PlayerStatus : MonoBehaviour
 {
     public int maxHp = 10; //最大HP
-    public int maxMp = 100; //最大妖力
     public int currentHp; //現在のHP
-    public int currentMp; //現在の妖力
-    public int windCost = 5; //気流発生に必要なcost
-    public int kamaitachiCost = 10; //かまいたち発生に必要なcost
-    public int tornadoCost = 60; //竜巻発生に必要なcost;
+    public float maxMp = 100; //最大妖力
+    public float currentMp; //現在の妖力
+    public float windCost = 5; //気流発生に必要なcost
+    public float kamaitachiCost = 10; //かまいたち発生に必要なcost
+    public float tornadoCost = 60; //竜巻発生に必要なcost;
+    public float flightCost = 1; //滞空に必要なcost;
 
-    public int mpAutoRecoveryCost = 1; //自動回復するときの妖力の量
+    public float mpAutoRecoveryCost = 1; //自動回復するときの妖力の量
     public float defaultMpAutoRecoveryTime = 1.0f; //自動回復の間隔
     public float overMpAutoRecoveryTime = 0.1f; //自動回復の間隔
     public bool invincible = false; //無敵化どうか
@@ -68,7 +69,7 @@ public class PlayerStatus : MonoBehaviour
         //現在のMPが最大値を超えていたら最大値にする
         if (currentMp > maxMp) currentMp = 100;
 
-        if (currentMp < 10) //妖力が0になったらmpOverをtrueに
+        if (currentMp < 10.0f) //妖力が10以下になったらmpOverをtrueに
         {
             mpOver = true;
             mpAutoRecoveryTime = overMpAutoRecoveryTime;
@@ -84,10 +85,10 @@ public class PlayerStatus : MonoBehaviour
         if (currentInvincibleTime <= 0) //currentInvincibleTimeが0より小さくなったら無敵を解除
             invincible = false;
 
-        //if (Input.GetKeyDown(KeyCode.K))
-        //    HpDamage(1);
-        //if (Input.GetKeyDown(KeyCode.L))
-        //    HpDamage(3);
+        if (Input.GetKeyDown(KeyCode.K))
+            HpDamage(1);
+        if (Input.GetKeyDown(KeyCode.L))
+            HpDamage(3);
         //if (Input.GetKeyDown(KeyCode.J))
         //{
         //    playerAnimator.SetTrigger("Joy");
@@ -169,6 +170,7 @@ public class PlayerStatus : MonoBehaviour
         {
             currentHp = 0;
             transform.LookAt(damageObject.transform.position); // gameObjectの方を向く
+            gameObject.GetComponent<PlayerMove>().knockBackState = true;
             playerAnimator.SetTrigger("Dead");
             gameObject.GetComponent<PlayerMove>().ChangeStop();
             audioSource.PlayOneShot(dead); // 対応SE再生
@@ -201,12 +203,13 @@ public class PlayerStatus : MonoBehaviour
 
         invincible = true; //無敵に
     }
-    public void MpConsumption(int cost) //cost分現在のMPを消費する
+
+    public void MpConsumption(float cost) //cost分現在のMPを消費する
     {
         currentMp -= cost;
     }
 
-    public bool MpCostDecision(int cost)
+    public bool MpCostDecision(float cost)
     {
         if (mpOver == true) //一度妖力が0になったら100になるまで使えない
         {

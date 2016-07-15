@@ -58,8 +58,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161392}
-  m_LocalRotation: {x: 0, y: -0.28206804, z: 0, w: 0.95939445}
-  m_LocalPosition: {x: -3.27, y: -1, z: 6.91}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.3, y: 10.56, z: 9.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489178}
@@ -83,7 +83,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118110}
-  m_LocalRotation: {x: -0.6783943, y: 0.19945219, z: 0.19945219, w: 0.6783943}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -113,8 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b824a31ddbabe34d9c6e6a6d4c01973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Time: 10
+  time: 10
   TornadoSize: {x: 3, y: 6, z: 3}
+  SpinSpeed: 2
+  Free: 0
 --- !u!114 &11429154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,6 +131,8 @@ MonoBehaviour:
   direction: {x: 0, y: 5, z: 0}
   power: 10
   damage: 100
+  Free: 0
+  AdvanceSpeed: 0.3
 --- !u!198 &19802056
 ParticleSystem:
   m_ObjectHideFlags: 1

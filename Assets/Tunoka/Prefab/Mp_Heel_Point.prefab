@@ -9,7 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 470450}
   - 136: {fileID: 13646022}
-  m_Layer: 9
+  - 114: {fileID: 11437294}
+  m_Layer: 0
   m_Name: Mp_Heel_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,11 +24,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167006}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 14.05, y: 12.18, z: 15.14}
+  m_LocalPosition: {x: -17.226585, y: 12.498844, z: 4.0938215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11437294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332f04f04781d1d4399c6437dc3677bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpTime: 1
 --- !u!136 &13646022
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -37,8 +50,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2.87
-  m_Height: 11.21
+  m_Radius: 3.74
+  m_Height: 32.64
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000

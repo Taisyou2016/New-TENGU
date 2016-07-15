@@ -2262,7 +2262,7 @@ Animator:
   m_GameObject: {fileID: 126220}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 43de8809069a3d84a8f48593bd983f19, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9ee7826d85cfdb74b8540374c434980f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d0d405fb0e19ad14dad0ef5a7f09b43a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2317,6 +2317,9 @@ MonoBehaviour:
   lockOnRotateSpeed: 45
   lockDistanceY: 10
   gravity: 10
+  flightGravity: 10
+  flightGravityDeltaTimeMagnification: 0.1
+  flightGroundDistance: 4
   jampPower: 10
   knockBackPower: 0
   knockBackState: 0
@@ -2327,8 +2330,6 @@ MonoBehaviour:
   WaitMotinChangeTime: 10
   blowPower: 0
   lockEnemy: {fileID: 0}
-  jump: {fileID: 8300000, guid: da5169f9c5f156c4ca05955d5e036e87, type: 3}
-  glide: {fileID: 8300000, guid: ae4b2540c4364614c9ee85ae060b7813, type: 3}
   blowCurve:
     serializedVersion: 2
     m_Curve:
@@ -2351,6 +2352,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   blowStartTime: 0
+  jump: {fileID: 8300000, guid: da5169f9c5f156c4ca05955d5e036e87, type: 3}
+  glide: {fileID: 8300000, guid: ae4b2540c4364614c9ee85ae060b7813, type: 3}
 --- !u!114 &11452316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2401,7 +2404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockCursorPrefab: {fileID: 154480, guid: b7720a81e21e52d40b19b6ff60e72c4b, type: 2}
-  cursorEnemyPosY: 2
+  cursorEnemyPosY: 2.5
   cursorBossPosY: 6.5
   cursorBossShortPosY: 2.5
 --- !u!114 &11486516
@@ -2430,12 +2433,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 10
-  maxMp: 100
   currentHp: 0
+  maxMp: 100
   currentMp: 0
   windCost: 5
   kamaitachiCost: 10
   tornadoCost: 60
+  flightCost: 0.1
   mpAutoRecoveryCost: 1
   defaultMpAutoRecoveryTime: 0.7
   overMpAutoRecoveryTime: 0.1

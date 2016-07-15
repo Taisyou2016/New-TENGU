@@ -8,11 +8,10 @@ public class Kamaitachi : MonoBehaviour
     public Vector3 moveVector;
 
     private bool hit = false;
-    private int cost;
+    private float cost;
 
     private GameObject player;
     private PlayerStatus playerStatus;
-
     //private AudioSource audioSource;
 
     void Start()
