@@ -17,20 +17,26 @@ public class ohuda : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if(!flag)
+        if (!flag)
             rd.velocity = transform.forward * speed;
+        else
+            gameObject.layer = LayerMask.NameToLayer("PlayerAttack");
     }
 
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag != "Enemy")
+        if(col.gameObject.tag == "Player")
         {
-            if(col.gameObject.tag == "Player")
-            {
-                col.gameObject.GetComponent<PlayerStatus>().HpDamage(damage);
-            }
-            Died();
+            col.gameObject.GetComponent<PlayerStatus>().HpDamage(damage);
         }
+
+        if (col.gameObject.tag == "Enemy")
+        {
+            col.gameObject.GetComponent<EnemyRoutine>().Damage(damage * 10);
+        }
+
+        Died();
+
     }
 
     void Died()
