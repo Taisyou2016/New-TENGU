@@ -21,7 +21,7 @@ public class TitleController : MonoBehaviour
     void Update()
     {
         var a = _particle.forceOverLifetime.x;
-        Cursor.visible = true; //カーソル表示
+        //Cursor.visible = true; //カーソル表示
         if (Input.GetMouseButtonDown(1))
         {
             Cursor.lockState = CursorLockMode.Locked; //中央にロック
