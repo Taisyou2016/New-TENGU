@@ -13,11 +13,14 @@ public class BossCamera : MonoBehaviour {
     [SerializeField, Header("ボスが映るまでの時間")]
     private float scollTime = 1;
 
+    public FadeInOut m_fade;
     // Use this for initialization
     void Start () {
         transform.GetComponent<CameraTest>().enabled = false;
         Player = GameObject.Find("Player");
         Player.GetComponent<PlayerStatus>().currentHp = 10;
+        Player.GetComponent<SphereCollider>().enabled = false;
+        
 
         iTween.MoveTo(gameObject, iTween.Hash(
             "x", Boss.transform.position.x ,
@@ -34,6 +37,7 @@ public class BossCamera : MonoBehaviour {
     float JumpTime = 0;
     void Update()
     {
+        Player.GetComponent<PlayerStatus>().currentHp = 10;
         if (JumpTime == 0)
         {
             transform.LookAt(Boss.transform.root.gameObject.transform.position);
@@ -46,9 +50,13 @@ public class BossCamera : MonoBehaviour {
         if (JumpTime == 2)
         {
             Player.transform.LookAt(new Vector3(-158.37f,Player.transform.position.y, -3.28f));
-            Player.GetComponent<SphereCollider>().isTrigger = false;
             Player.GetComponent<PlayerMove>().SetVelocityY(4);
             
+        }
+        Enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < Enemys.Length; i++)
+        {
+            Enemys[i].GetComponent<EnemyRoutine>().Damage(10);
         }
 
     }
@@ -56,11 +64,7 @@ public class BossCamera : MonoBehaviour {
 
     public void FastAction()
     {
-        Enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        for (int i = 0; i < Enemys.Length; i++)
-        {
-            Enemys[i].GetComponent<EnemyRoutine>().Damage(10);
-        }
+       
         iTween.MoveTo(gameObject, iTween.Hash(
             "x", Player.transform.position.x - 5,
             "y", Player.transform.position.y +5,
@@ -74,11 +78,6 @@ public class BossCamera : MonoBehaviour {
     }
     public void SecondAction()
     {
-        Enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        for (int i = 0; i < Enemys.Length; i++)
-        {
-            Enemys[i].GetComponent<EnemyRoutine>().Damage(10);
-        }
         Player.GetComponent<PlayerMove>().walkSpeed = 0;
         Player.GetComponent<PlayerMove>().transform.FindChild("Tengu_Default").GetComponent<Animator>().SetTrigger("Jump");
         JumpTime = 2;
@@ -92,7 +91,13 @@ public class BossCamera : MonoBehaviour {
                "z", -3.28,
                "time", 3,
                "easeType", iTween.EaseType.linear,
+               "oncomplete", "FadeIn",
                "oncompletetarget", gameObject
                ));
+
+    }
+    void FadeIn()
+    {
+        m_fade.GetComponent<FadeInOut>().FadeIn();
     }
 }

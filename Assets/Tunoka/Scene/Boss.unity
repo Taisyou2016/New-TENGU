@@ -2249,6 +2249,10 @@ Prefab:
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 11439612, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
+      propertyPath: life
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02c7d8a4a9d02bc41a531500495d37a6, type: 2}
   m_IsPrefabParent: 0
@@ -2526,7 +2530,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1620522877}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a48e8cb257cae541b05328bc742e5c2, type: 3}
   m_Name: 
@@ -2534,6 +2538,7 @@ MonoBehaviour:
   Boss: {fileID: 1313059310}
   Enemys: []
   scollTime: 1
+  m_fade: {fileID: 478461682}
 --- !u!1001 &1700196959
 Prefab:
   m_ObjectHideFlags: 0
@@ -2657,11 +2662,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22427574, guid: 94da56f20fd80aa499e7d633a1896f81, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22427574, guid: 94da56f20fd80aa499e7d633a1896f81, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94da56f20fd80aa499e7d633a1896f81, type: 2}
