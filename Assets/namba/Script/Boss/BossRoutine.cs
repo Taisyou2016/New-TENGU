@@ -38,6 +38,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     private float animaSpeed = 1.2f;
     private bool Madness = false;
     private bool flag = false;
+    private bool die = false;
 
     private Transform player;
     private CharacterController charcon;
@@ -471,6 +472,8 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
         {
             owner.state = "Died";
             owner.anima.SetTrigger("Death");
+            owner.die = true;
+            owner.StopAllCoroutines();
         }
 
         public override void Execute()
@@ -515,6 +518,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             while (owner.anima.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
             {
                 yield return null;
+                if (owner.die) yield break;
             }
             owner.ChangeState(BossState.Move);
         }
