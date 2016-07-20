@@ -12,6 +12,9 @@ public class Production_Camera : MonoBehaviour {
     private float _moveTime;
     private float startTime;
 
+    [SerializeField, Header("操作しないと戻るscript")]
+    private GameObject teturm;
+
     float counter;
 
     public void Start()
@@ -64,6 +67,7 @@ public class Production_Camera : MonoBehaviour {
             transform.rotation = Quaternion.Euler(_cameraSetRot[_cameraSetPoint.Length - 1]);
 
             transform.GetComponent<CameraTest>().enabled = true;
+            teturm.transform.GetComponent<ReturnToTitle>().enabled = true;
             playerMove.walkSpeed = walkspeed;
 
             enabled = false;

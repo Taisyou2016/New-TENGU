@@ -11,14 +11,14 @@ public class Geme_Rule : MonoBehaviour {
     private BossRoutine boss;
     private bool Finish = false;
 
-
     public GameObject _GameOvera;
     public GameObject _GameClear;
     public GameObject FadeInOut;
-    // Use this for initialization
+
     void Start () {
         Finish = false;
         Cursor.visible = false;
+
         if (GameObject.Find("Player") == null) return;
 
         player = GameObject.Find("Player");
@@ -58,15 +58,9 @@ public class Geme_Rule : MonoBehaviour {
     }
     void Gameovera()
     {
-
         FadeInOut.GetComponent<FadeInOut>().FadeIn("GameOver");
-
     }
 
-    void bosGameClear()
-    {
-
-    }
 
     public void GameClear()
     {

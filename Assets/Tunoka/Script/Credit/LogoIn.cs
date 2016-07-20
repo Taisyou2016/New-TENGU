@@ -8,7 +8,10 @@ public class LogoIn : MonoBehaviour {
     [SerializeField]
     private int PlayerGoTime = 0;
     [SerializeField]
-    private GameObject ply ;
+    private GameObject ply;
+
+    [SerializeField]
+    private GameObject Back;
     void Start () {
         iTween.MoveTo(gameObject, iTween.Hash("y", 0,
                 "delay", 4, "islocal", true,
@@ -21,6 +24,7 @@ public class LogoIn : MonoBehaviour {
 
     void EndAction()
     {
+        Destroy(Back);
         Invoke("TENGU_Go", PlayerGoTime);
     }
     void TENGU_Go()

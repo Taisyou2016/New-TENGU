@@ -20,7 +20,7 @@ public class BossCamera : MonoBehaviour {
         Player = GameObject.Find("Player");
         Player.GetComponent<PlayerStatus>().currentHp = 10;
         Player.GetComponent<SphereCollider>().enabled = false;
-        
+        Player.GetComponent<PlayerStatus>().enabled = false;
 
         iTween.MoveTo(gameObject, iTween.Hash(
             "x", Boss.transform.position.x ,

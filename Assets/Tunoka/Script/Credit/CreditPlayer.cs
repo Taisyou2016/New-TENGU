@@ -27,7 +27,6 @@ public class CreditPlayer : MonoBehaviour {
 
         for (int i = 1; i <= _production_Camera_Pos.transform.childCount; i++)
         {
-            print(i);
             _cameraSetPoint[i - 1] = _production_Camera_Pos.transform.FindChild(i.ToString()).gameObject.transform;
             _cameraSetRot[i - 1] = _production_Camera_Pos.transform.FindChild(i.ToString()).gameObject.transform.eulerAngles;
         }

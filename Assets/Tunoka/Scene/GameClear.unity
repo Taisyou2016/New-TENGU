@@ -780,8 +780,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 1954468932}
-  - 114: {fileID: 1954468931}
   - 82: {fileID: 1954468930}
+  - 114: {fileID: 1954468931}
   m_Layer: 5
   m_Name: GameClear_Configuration
   m_TagString: Untagged
@@ -871,10 +871,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1954468929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 381336d12820aa04294b77cdff4b28a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 88887c29026846c47b2d4947ee079615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeTime: 6
+  FadeTime: 5
 --- !u!224 &1954468932
 RectTransform:
   m_ObjectHideFlags: 0

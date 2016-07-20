@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveTime: 10
+  teturm: {fileID: 1478575237}
 --- !u!1001 &121475246
 Prefab:
   m_ObjectHideFlags: 0
@@ -5775,7 +5776,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1478575237}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2bc5ca265f4664eb6c03756e873351, type: 3}
   m_Name: 
@@ -5861,6 +5862,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1478575241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1478575237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ab8d7bef0bfd24484e4d81afb3a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Load: 1
+  sceneNum: 2
 --- !u!4 &1478684016 stripped
 Transform:
   m_PrefabParentObject: {fileID: 498728, guid: 7076ce12d76b5c5469afd9cbea8f89cf, type: 2}
