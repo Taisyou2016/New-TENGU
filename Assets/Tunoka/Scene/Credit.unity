@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d503dad1eaeff764dab3bb51ad3277b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scollTime: 6
+  scollTime: 8
   Logo: {fileID: 250024187}
   Fade: {fileID: 342468813}
 --- !u!1 &1002189905 stripped
