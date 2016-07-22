@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Counter: 0
-  LimitTime: 10
+  LimitTime: 5
 --- !u!114 &565610379
 MonoBehaviour:
   m_ObjectHideFlags: 0
