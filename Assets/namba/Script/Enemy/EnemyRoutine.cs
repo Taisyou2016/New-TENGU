@@ -21,8 +21,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
     [SerializeField]
     private float FT_Leng, MG_Leng, AT_Leng;
 
-    [SerializeField]
-    private int life;
+    public int life;
     public bool Pflag = false;          // プレイヤーを見つけたか
     private bool Gflag = false;         // 地面に足がついているか
     private bool Hflag = false;         // 攻撃を受けたか
@@ -50,7 +49,7 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         life = maxlife;
         StartPos = this.transform.position;
         lostPos = StartPos;
-        Switch(1);
+        Switch(0);
 
         if (LengeType == 1) AttackLenge = FT_Leng;
         else if (LengeType == 2) AttackLenge = MG_Leng;
@@ -178,7 +177,12 @@ public class EnemyRoutine : EnemyBase<EnemyRoutine, EnemyState>
         public override void Initialize()
         {
             owner.state = "wait";
-            owner.Switch(1);
+            int mask = LayerMask.GetMask(new string[] { "Field" });
+            RaycastHit hit;
+            if (Physics.Raycast(owner.transform.position, owner.transform.up * -1, out hit, 1, mask))
+            {
+                owner.Switch(1);
+            }
         }
 
         public override void Execute()

@@ -29,10 +29,10 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     public float displeDis = 2;
 
     [SerializeField]
-    private string state;
-    public int nowlife;
+    private string state;                               // 現在のState
+    public int nowlife;                                 // 現在HP
 
-    private float rotateSmooth = 4.0f;  // 振り向きにかかる時間
+    private float rotateSmooth = 4.0f;                  // 振り向きにかかる時間
     private float angle = 60.0f;
     private float dt;
     private float animaSpeed = 1.2f;
