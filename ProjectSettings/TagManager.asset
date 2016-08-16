@@ -11,6 +11,8 @@ TagManager:
   - Wind
   - Amulet
   - Boss
+  - Field
+  - Kamaitachi
   layers:
   - Default
   - TransparentFX

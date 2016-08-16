@@ -131,7 +131,7 @@ public class PlayerMove : MonoBehaviour
 
         lockEnemyList.Sort(LengthSort); //lockEnemyListをプレイヤーからの距離が短い順にソート
 
-        if (Input.GetKeyDown(KeyCode.Q) && lockEnemyList.Count > 0)//ロックオンする、しない
+        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftShift)) && lockEnemyList.Count > 0)//ロックオンする、しない
         {
             if (lockOn == false)
             {
@@ -232,7 +232,7 @@ public class PlayerMove : MonoBehaviour
     {
         //if (windMove == false) return;
 
-        if (hit.gameObject.tag == "Terrain")
+        if (hit.gameObject.tag == "Field")
         {
             windPower = 0;
             blowPower = 0;

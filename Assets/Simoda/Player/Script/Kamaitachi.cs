@@ -37,7 +37,7 @@ public class Kamaitachi : MonoBehaviour
         transform.GetComponent<Rigidbody>().velocity = moveVector;
         //particle.transform.right = moveVector.normalized;
 
-        if (hit == true) //linePrefabがPlayer以外に当たったら自分を消す
+        if (hit == true) //CollitionがPlayer以外に当たったら自分を消す
             Destroy(gameObject);
     }
 
