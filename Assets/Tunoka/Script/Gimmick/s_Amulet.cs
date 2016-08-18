@@ -4,7 +4,7 @@ using System.Collections;
 public class s_Amulet : MonoBehaviour {
 
     private GameObject player;
-
+    public GameObject Effect;
     public GameObject catchEnem;
     private bool setEnem;
     void Start()
@@ -38,6 +38,7 @@ public class s_Amulet : MonoBehaviour {
         if (other.tag == "Player" && setEnem == false)
         {
             print("お札解除");
+            Instantiate(Effect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
