@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     private bool flightState = false;
     private bool windMove = false;
     private bool stop = false;
-    private List<GameObject> lockEnemyList = new List<GameObject>();
+    public List<GameObject> lockEnemyList = new List<GameObject>();
     private bool lockOn = false;
     private bool lockOnBoss = false;
     private GameObject bossEnemy;
@@ -307,13 +307,13 @@ public class PlayerMove : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) //ロックオン範囲に入った敵をListに追加
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Kakashi")
             lockEnemyList.Add(other.gameObject);
     }
 
     public void OnTriggerExit(Collider other) //ロックオン範囲から出た敵をListから削除
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Kakashi")
         {
             if (lockEnemy == other.gameObject) //範囲外出た敵がロックしている敵だったら　ロックを解除
             {
@@ -503,13 +503,13 @@ public class PlayerMove : MonoBehaviour
         }
 
         //回避
-        if ((Input.mousePosition.y <= 0 || Input.mousePosition.y >= Screen.height) && avoidanceDecision == false && inAvoidance == false)
+        if ((Input.mousePosition.y <= 10.0f || Input.mousePosition.y >= Screen.height - 10.0f) && avoidanceDecision == false && inAvoidance == false && walkSpeed != 0.0f)
         {
             if (Input.GetMouseButton(1) || Input.GetMouseButton(2)) return;
 
             avoidanceDecision = true;
             avoidanceTime = 0.0f;
-            if (Input.mousePosition.y <= 10) avoidanceMousePositionY = 0.0f;
+            if (Input.mousePosition.y <= 10.0f) avoidanceMousePositionY = 0.0f;
             else avoidanceMousePositionY = Screen.height;
         }
 
@@ -531,7 +531,7 @@ public class PlayerMove : MonoBehaviour
 
             if (avoidanceMousePositionY == 0)
             {
-                if (Input.mousePosition.y >= Screen.height)
+                if (Input.mousePosition.y >= Screen.height - 10.0f)
                 {
                     inAvoidance = true;
                     velocity = transform.forward * 10.0f;
@@ -544,7 +544,7 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-                if (Input.mousePosition.y <= 0.0f)
+                if (Input.mousePosition.y <= 10.0f)
                 {
                     inAvoidance = true;
                     velocity = transform.forward * 10.0f;

@@ -29,7 +29,7 @@ public class GameOverScene : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.D)) cursorNom += 1;
         if (cursorNom > 1) cursorNom = 0;
         cursor.transform.eulerAngles = new Vector3(0, 0, (180 * cursorNom));
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             //Skip
             if (cursorNom == 0)
