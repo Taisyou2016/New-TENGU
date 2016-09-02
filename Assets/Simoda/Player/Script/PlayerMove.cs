@@ -9,7 +9,8 @@ public class PlayerMove : MonoBehaviour
     public GameObject lockPosition; //ロック時左右移動の際の回転位置
     public float walkSpeed = 4.0f; //歩くスピード（メートル/秒）
     public float lockOnRotateSpeed = 45.0f; //ロックオンしているときの横移動
-    public float lockDistanceY = 10.0f;
+    public float bossLockDistanceY = 10.0f;
+    public float bossLockDistance = 20.0f;
     public float gravity = 10.0f; //重力加速度
     public float flightGravity = 10.0f; //滞空中の重力加速度
     public float flightGravityDeltaTimeMagnification = 0.1f; //滞空中の重力の計算に使うdeltaTimeに掛ける倍率
@@ -157,29 +158,52 @@ public class PlayerMove : MonoBehaviour
 
         lockEnemyList.Sort(LengthSort); //lockEnemyListをプレイヤーからの距離が短い順にソート
 
-        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftShift)) && lockEnemyList.Count > 0)//ロックオンする、しない
+        //if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftShift)) && lockEnemyList.Count > 0)//ロックオンする、しない
+        //{
+        //    if (lockOn == false)
+        //    {
+        //        lockOn = true;
+        //        lockOnBoss = false;
+        //        lockEnemy = lockEnemyList[0];
+        //        transform.LookAt(lockEnemy.transform.position); //ロックした敵の方を向く
+        //        cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
+        //        print("ロックオン開始");
+        //    }
+        //    else
+        //    {
+        //        lockOn = false;
+        //        lockOnBoss = false;
+        //        print("ロックオン終了");
+        //    }
+        //}
+
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftShift))//ロックオンする、しない
         {
-            if (lockOn == false)
+            lockOnBoss = false;
+
+            if (lockEnemyList.Count > 0)
             {
-                lockOn = true;
-                lockOnBoss = false;
-                lockEnemy = lockEnemyList[0];
-                transform.LookAt(lockEnemy.transform.position); //ロックした敵の方を向く
-                cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
-                print("ロックオン開始");
-            }
-            else
-            {
-                lockOn = false;
-                lockOnBoss = false;
-                print("ロックオン終了");
+                if (lockOn == false)
+                {
+                    lockOn = true;
+                    lockEnemy = lockEnemyList[0];
+                    transform.LookAt(lockEnemy.transform.position); //ロックした敵の方を向く
+                    cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
+                    print("ロックオン開始");
+                }
+                else
+                {
+                    lockOn = false;
+                    print("ロックオン終了");
+                }
             }
         }
 
         //ボスをLockEnemyListに追加する、消す
         if (bossEnemy != null)
         {
-            if (Vector3.Distance(transform.position, bossEnemy.transform.position) <= lockDistanceY)
+            if (Vector3.Distance(transform.position, bossEnemy.transform.position) <= bossLockDistance
+                && Mathf.Abs(transform.position.y - bossEnemy.transform.position.y) <= bossLockDistanceY)
             {
                 int index = lockEnemyList.IndexOf(bossEnemy);
                 if (index == -1)
@@ -196,7 +220,7 @@ public class PlayerMove : MonoBehaviour
         //プレイヤーとロックしている敵とY軸が離れすぎたらロックを終了させる
         if (lockEnemy != null && lockEnemy.tag == "Boss" && lockOnBoss == false && lockOn == true)
         {
-            if (Mathf.Abs(transform.position.y - lockEnemy.transform.position.y) > lockDistanceY)
+            if (Mathf.Abs(transform.position.y - lockEnemy.transform.position.y) > bossLockDistanceY)
             {
                 lockOnBoss = true;
                 lockOn = false;
@@ -212,9 +236,10 @@ public class PlayerMove : MonoBehaviour
             //    lockOn = false;
             //}
 
-            if (Mathf.Abs(transform.position.y - lockEnemy.transform.position.y) <= lockDistanceY)
+            if (Mathf.Abs(transform.position.y - lockEnemy.transform.position.y) <= bossLockDistanceY)
             {
                 lockOn = true;
+                lockOnBoss = false;
                 lockEnemy = bossEnemy;
             }
         }

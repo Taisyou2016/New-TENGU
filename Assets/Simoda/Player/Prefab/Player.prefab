@@ -2315,7 +2315,8 @@ MonoBehaviour:
   lockPosition: {fileID: 131400}
   walkSpeed: 5
   lockOnRotateSpeed: 45
-  lockDistanceY: 10
+  bossLockDistanceY: 10
+  bossLockDistance: 20
   gravity: 10
   flightGravity: 10
   flightGravityDeltaTimeMagnification: 0.1
