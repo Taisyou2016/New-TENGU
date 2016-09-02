@@ -56,6 +56,12 @@ public class CameraTest : MonoBehaviour
             targetRotationZzoro.z = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotationZzoro, cameraRotateSpeed * Time.deltaTime);
         }
+        else if(target.GetComponent<PlayerMove>().inAvoidance == true)
+        {
+            Quaternion targetRotationZzoro = Quaternion.Euler(target.transform.rotation.eulerAngles.x, target.transform.rotation.eulerAngles.y, 0.0f);
+            //targetRotationZzoro.z = 0.0f;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotationZzoro, cameraRotateSpeed * Time.deltaTime);
+        }
         else
         {
             if (Input.GetAxis("Horizontal") != 0) flag = true;
