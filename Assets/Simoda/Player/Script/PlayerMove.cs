@@ -194,7 +194,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         //プレイヤーとロックしている敵とY軸が離れすぎたらロックを終了させる
-        if (lockEnemy != null && lockEnemy.tag == "Boss" && lockOnBoss == false)
+        if (lockEnemy != null && lockEnemy.tag == "Boss" && lockOnBoss == false && lockOn == true)
         {
             if (Mathf.Abs(transform.position.y - lockEnemy.transform.position.y) > lockDistanceY)
             {
@@ -465,6 +465,7 @@ public class PlayerMove : MonoBehaviour
         else
         {
             inAvoidanceTime += Time.deltaTime;
+            //gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 6.0f);
             if (inAvoidanceTime >= 1.0f)
             {
                 inAvoidance = false;
@@ -502,7 +503,6 @@ public class PlayerMove : MonoBehaviour
             {
                 if (Input.mousePosition.y >= Screen.height)
                 {
-                    //回避の処理
                     inAvoidance = true;
                     velocity = transform.forward * 10.0f;
 
@@ -515,7 +515,6 @@ public class PlayerMove : MonoBehaviour
             {
                 if (Input.mousePosition.y <= 0.0f)
                 {
-                    //回避の処理
                     inAvoidance = true;
                     velocity = transform.forward * 10.0f;
 
