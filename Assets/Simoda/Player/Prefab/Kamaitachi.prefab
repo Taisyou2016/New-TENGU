@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11474732}
   m_Layer: 9
   m_Name: Collision
-  m_TagString: Untagged
+  m_TagString: Kamaitachi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   - 114: {fileID: 11425992}
   m_Layer: 9
   m_Name: Field Colllision
-  m_TagString: Untagged
+  m_TagString: Kamaitachi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,7 @@ GameObject:
   - 4: {fileID: 441898}
   m_Layer: 9
   m_Name: ParticlePosition
-  m_TagString: Untagged
+  m_TagString: Kamaitachi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
