@@ -22,7 +22,6 @@ public class FastPoint : MonoBehaviour {
     }
     void Update()
     {
-        int count = transform.childCount;
     }
 
     public void OnTriggerEnter(Collider other)
