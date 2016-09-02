@@ -131,17 +131,28 @@ public class PlayerMove : MonoBehaviour
         /*****************************************************************/
         foreach (var e in lockEnemyList)
         {
-            if (e.gameObject.GetComponent<EnemyRoutine>().life <= 0)
-            {
-                lockEnemyList.Remove(e);
-                return;
-            }
-
             if (e == null)
             {
                 lockEnemyList.Remove(e);
                 return;
             }
+
+            if (e.gameObject.tag == "Enemy")
+            {
+                if (e.gameObject.GetComponent<EnemyRoutine>().life <= 0)
+                {
+                    lockEnemyList.Remove(e);
+                    return;
+                }
+            }
+            //else if (e.gameObject.tag == "Boss")
+            //{
+            //    if (e.gameObject.GetComponent<BossRoutine>().life <= 0)
+            //    {
+            //        lockEnemyList.Remove(e);
+            //        return;
+            //    }
+            //}
         }
 
         lockEnemyList.Sort(LengthSort); //lockEnemyListをプレイヤーからの距離が短い順にソート
