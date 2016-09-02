@@ -503,13 +503,13 @@ public class PlayerMove : MonoBehaviour
         }
 
         //回避
-        if ((Input.mousePosition.y <= 0 || Input.mousePosition.y >= Screen.height) && avoidanceDecision == false && inAvoidance == false && walkSpeed != 0.0f)
+        if ((Input.mousePosition.y <= 10.0f || Input.mousePosition.y >= Screen.height - 10.0f) && avoidanceDecision == false && inAvoidance == false && walkSpeed != 0.0f)
         {
             if (Input.GetMouseButton(1) || Input.GetMouseButton(2)) return;
 
             avoidanceDecision = true;
             avoidanceTime = 0.0f;
-            if (Input.mousePosition.y <= 10) avoidanceMousePositionY = 0.0f;
+            if (Input.mousePosition.y <= 10.0f) avoidanceMousePositionY = 0.0f;
             else avoidanceMousePositionY = Screen.height;
         }
 
@@ -531,7 +531,7 @@ public class PlayerMove : MonoBehaviour
 
             if (avoidanceMousePositionY == 0)
             {
-                if (Input.mousePosition.y >= Screen.height)
+                if (Input.mousePosition.y >= Screen.height - 10.0f)
                 {
                     inAvoidance = true;
                     velocity = transform.forward * 10.0f;
@@ -544,7 +544,7 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-                if (Input.mousePosition.y <= 0.0f)
+                if (Input.mousePosition.y <= 10.0f)
                 {
                     inAvoidance = true;
                     velocity = transform.forward * 10.0f;
