@@ -465,10 +465,15 @@ public class PlayerMove : MonoBehaviour
         else
         {
             inAvoidanceTime += Time.deltaTime;
-            //gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 6.0f);
+            transform.LookAt(transform.position + velocity);
+            //gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 360.0f * inAvoidanceTime);
+            transform.LookAt(transform.position + velocity);
+            transform.Rotate(new Vector3(0, 0, 1), 360.0f * inAvoidanceTime);
             if (inAvoidanceTime >= 1.0f)
             {
                 inAvoidance = false;
+                //gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                transform.Rotate(new Vector3(0, 0, 1), 0.0f);
             }
         }
 
@@ -509,6 +514,7 @@ public class PlayerMove : MonoBehaviour
                     avoidanceDecision = false;
                     avoidanceTime = 0.0f;
                     inAvoidanceTime = 0.0f;
+                    playerStatus.Avoidance();
                 }
             }
             else
@@ -521,6 +527,7 @@ public class PlayerMove : MonoBehaviour
                     avoidanceDecision = false;
                     avoidanceTime = 0.0f;
                     inAvoidanceTime = 0.0f;
+                    playerStatus.Avoidance();
                 }
             }
         }

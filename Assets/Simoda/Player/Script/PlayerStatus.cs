@@ -254,4 +254,10 @@ public class PlayerStatus : MonoBehaviour
             }
         }
     }
+
+    public void Avoidance()
+    {
+        invincible = true;
+        currentInvincibleTime = 1.0f;
+    }
 }
