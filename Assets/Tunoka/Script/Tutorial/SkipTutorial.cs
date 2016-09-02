@@ -39,7 +39,7 @@ public class SkipTutorial : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.D)) selectNom += 1;
         if (selectNom > 1) selectNom = 0;
         cursor.transform.eulerAngles = new Vector3(0, 0,  (180 * selectNom));
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             //Skip
             if (selectNom == 0)
