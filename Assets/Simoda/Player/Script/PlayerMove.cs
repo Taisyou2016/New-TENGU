@@ -503,7 +503,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         //回避
-        if ((Input.mousePosition.y <= 0 || Input.mousePosition.y >= Screen.height) && avoidanceDecision == false && inAvoidance == false)
+        if ((Input.mousePosition.y <= 0 || Input.mousePosition.y >= Screen.height) && avoidanceDecision == false && inAvoidance == false && walkSpeed != 0.0f)
         {
             if (Input.GetMouseButton(1) || Input.GetMouseButton(2)) return;
 
