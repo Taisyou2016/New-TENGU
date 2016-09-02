@@ -2354,6 +2354,10 @@ MonoBehaviour:
   blowStartTime: 0
   jump: {fileID: 8300000, guid: da5169f9c5f156c4ca05955d5e036e87, type: 3}
   glide: {fileID: 8300000, guid: ae4b2540c4364614c9ee85ae060b7813, type: 3}
+  lockEnemyList: []
+  lockOn: 0
+  lockOnBoss: 0
+  bossEnemy: {fileID: 0}
 --- !u!114 &11452316
 MonoBehaviour:
   m_ObjectHideFlags: 1

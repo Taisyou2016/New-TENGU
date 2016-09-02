@@ -28,6 +28,11 @@ public class PlayerMove : MonoBehaviour
     public float blowStartTime;
     public AudioClip jump;
     public AudioClip glide;
+    public bool avoidanceDecision = false;
+    public bool inAvoidance = false;
+    public float avoidanceTime = 0.0f;
+    public float inAvoidanceTime = 0.0f;
+    public float avoidanceMousePositionY = 0.0f;
 
     private CharacterController controller;
     private GameObject cameraController;
@@ -41,6 +46,8 @@ public class PlayerMove : MonoBehaviour
     private bool stop = false;
     private List<GameObject> lockEnemyList = new List<GameObject>();
     private bool lockOn = false;
+    private bool lockOnBoss = false;
+    private GameObject bossEnemy;
     private PlayerStatus playerStatus;
     private Animator playerAnimator;
     private float WaitTime;
@@ -62,6 +69,8 @@ public class PlayerMove : MonoBehaviour
         playerStatus = gameObject.GetComponent<PlayerStatus>();
         playerAnimator = transform.FindChild("Tengu_Default").GetComponent<Animator>();
         audioSource = transform.GetComponent<AudioSource>();
+
+        bossEnemy = GameObject.FindGameObjectWithTag("Boss");
 
         stateProcessor.State = stateDefault;
         stateDefault.exeDelegate = Default;
@@ -122,6 +131,12 @@ public class PlayerMove : MonoBehaviour
         /*****************************************************************/
         foreach (var e in lockEnemyList)
         {
+            if (e.gameObject.GetComponent<EnemyRoutine>().life <= 0)
+            {
+                lockEnemyList.Remove(e);
+                return;
+            }
+
             if (e == null)
             {
                 lockEnemyList.Remove(e);
@@ -136,6 +151,7 @@ public class PlayerMove : MonoBehaviour
             if (lockOn == false)
             {
                 lockOn = true;
+                lockOnBoss = false;
                 lockEnemy = lockEnemyList[0];
                 transform.LookAt(lockEnemy.transform.position); //ロックした敵の方を向く
                 cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
@@ -144,7 +160,51 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 lockOn = false;
+                lockOnBoss = false;
                 print("ロックオン終了");
+            }
+        }
+
+        //ボスをLockEnemyListに追加する、消す
+        if (bossEnemy != null)
+        {
+            if (Vector3.Distance(transform.position, bossEnemy.transform.position) <= lockDistanceY)
+            {
+                int index = lockEnemyList.IndexOf(bossEnemy);
+                if (index == -1)
+                    lockEnemyList.Add(bossEnemy);
+            }
+            else
+            {
+                int index = lockEnemyList.IndexOf(bossEnemy);
+                if (index != -1)
+                    lockEnemyList.Remove(bossEnemy);
+            }
+        }
+
+        //プレイヤーとロックしている敵とY軸が離れすぎたらロックを終了させる
+        if (lockEnemy != null && lockEnemy.tag == "Boss" && lockOnBoss == false)
+        {
+            if (Mathf.Abs(transform.position.y - lockEnemy.transform.position.y) > lockDistanceY)
+            {
+                lockOnBoss = true;
+                lockOn = false;
+                print("上下の距離が離れすぎたロック終了");
+            }
+        }
+
+        if (lockOnBoss == true)
+        {
+            //if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftShift))//ロックオンする、しない
+            //{
+            //    lockOnBoss = false;
+            //    lockOn = false;
+            //}
+
+            if (Mathf.Abs(transform.position.y - lockEnemy.transform.position.y) <= lockDistanceY)
+            {
+                lockOn = true;
+                lockEnemy = bossEnemy;
             }
         }
 
@@ -211,13 +271,13 @@ public class PlayerMove : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) //ロックオン範囲に入った敵をListに追加
     {
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
+        if (other.gameObject.tag == "Enemy")
             lockEnemyList.Add(other.gameObject);
     }
 
     public void OnTriggerExit(Collider other) //ロックオン範囲から出た敵をListから削除
     {
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
+        if (other.gameObject.tag == "Enemy")
         {
             if (lockEnemy == other.gameObject) //範囲外出た敵がロックしている敵だったら　ロックを解除
             {
@@ -368,24 +428,91 @@ public class PlayerMove : MonoBehaviour
         //    transform.LookAt(transform.position + velocity);
         //}
 
-        Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
-        Vector3 right = Camera.main.transform.TransformDirection(Vector3.right);
 
-        velocity = Input.GetAxis("Horizontal") * right + Input.GetAxis("Vertical") * forward;
-        velocity *= walkSpeed;
-
-        Vector3 velocityYzero = velocity;
-        velocityYzero.y = 0;
-
-        //ベクトルの２乗の長さを返しそれが0.001以上なら方向を変える（０に近い数字なら方向を変えない） 
-        if (velocityYzero.magnitude > 0)
+        if (inAvoidance == false)
         {
+            Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
+            Vector3 right = Camera.main.transform.TransformDirection(Vector3.right);
 
-            //２点の角度をなだらかに繋げながら回転していく処理（stepがその変化するスピード） 
-            float step = 5.0f * Time.deltaTime;
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, velocityYzero, step, 0f);
+            velocity = Input.GetAxis("Horizontal") * right + Input.GetAxis("Vertical") * forward;
+            velocity *= walkSpeed;
 
-            transform.rotation = Quaternion.LookRotation(newDir);
+            Vector3 velocityYzero = velocity;
+            velocityYzero.y = 0;
+
+            //ベクトルの２乗の長さを返しそれが0.001以上なら方向を変える（０に近い数字なら方向を変えない） 
+            if (velocityYzero.magnitude > 0)
+            {
+
+                //２点の角度をなだらかに繋げながら回転していく処理（stepがその変化するスピード） 
+                float step = 5.0f * Time.deltaTime;
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, velocityYzero, step, 0f);
+
+                transform.rotation = Quaternion.LookRotation(newDir);
+            }
+        }
+        else
+        {
+            inAvoidanceTime += Time.deltaTime;
+            if (inAvoidanceTime >= 1.0f)
+            {
+                inAvoidance = false;
+            }
+        }
+
+        //回避
+        if ((Input.mousePosition.y <= 0 || Input.mousePosition.y >= Screen.height) && avoidanceDecision == false && inAvoidance == false)
+        {
+            if (Input.GetMouseButton(1) || Input.GetMouseButton(2)) return;
+
+            avoidanceDecision = true;
+            avoidanceTime = 0.0f;
+            if (Input.mousePosition.y <= 10) avoidanceMousePositionY = 0.0f;
+            else avoidanceMousePositionY = Screen.height;
+        }
+
+        if (avoidanceDecision == true)
+        {
+            if (Input.GetMouseButton(1) || Input.GetMouseButton(2))
+            {
+                avoidanceDecision = false;
+                return;
+            }
+
+            avoidanceTime += Time.deltaTime;
+            if (avoidanceTime >= 1.0f && inAvoidance == false)
+            {
+                avoidanceDecision = false;
+                avoidanceTime = 0.0f;
+                return;
+            }
+
+            if (avoidanceMousePositionY == 0)
+            {
+                if (Input.mousePosition.y >= Screen.height)
+                {
+                    //回避の処理
+                    inAvoidance = true;
+                    velocity = transform.forward * 10.0f;
+
+                    avoidanceDecision = false;
+                    avoidanceTime = 0.0f;
+                    inAvoidanceTime = 0.0f;
+                }
+            }
+            else
+            {
+                if (Input.mousePosition.y <= 0.0f)
+                {
+                    //回避の処理
+                    inAvoidance = true;
+                    velocity = transform.forward * 10.0f;
+
+                    avoidanceDecision = false;
+                    avoidanceTime = 0.0f;
+                    inAvoidanceTime = 0.0f;
+                }
+            }
         }
 
         if (lockOn == true)
@@ -468,16 +595,7 @@ public class PlayerMove : MonoBehaviour
             transform.LookAt(lockEnemy.transform.position); //ロックした敵の方を向く
             cameraController.GetComponent<CameraTest>().CameraInitialize(); //プレイヤーの後ろに回る
         }
-        //プレイヤーとロックしている敵とY軸が離れすぎたらロックを終了させる
-        if (lockEnemyList != null && lockEnemy != null)
-        {
-            if (Mathf.Abs(transform.position.y - lockEnemy.transform.position.y) > lockDistanceY)
-            {
-                lockOn = false;
-                print("上下の距離が離れすぎたロック終了");
-                return;
-            }
-        }
+
         if (lockEnemyList != null && lockEnemy == null)
         {
             lockEnemy = lockEnemyList[0];
