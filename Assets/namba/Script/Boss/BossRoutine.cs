@@ -146,7 +146,7 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
     {
         Vector3 vec = transform.forward * Vx + transform.up * (Vy - (9.8f * dt));
         vec = vec / 2;
-        charcon.Move(vec * speed * Time.deltaTime);
+        charcon.Move(vec * (speed * 0.6f) * Time.deltaTime);
         dt += Time.deltaTime;
         if(dt >= 3)
         {
@@ -372,8 +372,11 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             owner.state = "WindSlash";
             owner.anima.SetBool("Cutter", true);
 
+            Vector3 vec2 = (owner.player.position - owner.transform.position).normalized;
+            vec2.y *= 0.5f;
+            owner.transform.rotation = Quaternion.LookRotation(vec2);
             dis = Vector3.Distance(owner.player.position, owner.transform.position) / 2;
-            vec = owner.transform.position + owner.transform.forward * dis;
+            vec = owner.transform.forward * dis;
             owner.StartCoroutine(Attack());
         }
 
@@ -400,8 +403,12 @@ public class BossRoutine : EnemyBase<BossRoutine, BossState> {
             }
 
             owner.anima.speed = 0;
-            iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec, "easeType", iTween.EaseType.linear));
             yield return new WaitForSeconds(0.5f);
+
+
+            //iTween.MoveTo(owner.gameObject, iTween.Hash("position", vec));
+            owner.charcon.Move(vec);
+
             owner.anima.speed = owner.animaSpeed;
 
             owner.attack.Attack(3);
