@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     private bool flightState = false;
     private bool windMove = false;
     private bool stop = false;
-    private List<GameObject> lockEnemyList = new List<GameObject>();
+    public List<GameObject> lockEnemyList = new List<GameObject>();
     private bool lockOn = false;
     private bool lockOnBoss = false;
     private GameObject bossEnemy;
@@ -307,13 +307,13 @@ public class PlayerMove : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) //ロックオン範囲に入った敵をListに追加
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Kakashi")
             lockEnemyList.Add(other.gameObject);
     }
 
     public void OnTriggerExit(Collider other) //ロックオン範囲から出た敵をListから削除
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Kakashi")
         {
             if (lockEnemy == other.gameObject) //範囲外出た敵がロックしている敵だったら　ロックを解除
             {

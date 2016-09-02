@@ -29,7 +29,7 @@ public class LockCursor : MonoBehaviour
             lockCursor.SetActive(true);
             lookAtPosition = Camera.main.transform.position;
 
-            if (playerMove.lockEnemy.tag == "Enemy")
+            if (playerMove.lockEnemy.tag == "Enemy"|| playerMove.lockEnemy.tag == "Kakashi")
             {
                 cursorPosY = cursorEnemyPosY;
                 lookAtPosition.y = cursorPosY;
