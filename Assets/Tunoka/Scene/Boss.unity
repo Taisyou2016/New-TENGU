@@ -195,7 +195,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Counter: 0
-  LimitTime: 10
+  LimitTime: 20
   m_fade: {fileID: 478461682}
 --- !u!114 &14790090
 MonoBehaviour:
@@ -2426,6 +2426,10 @@ Prefab:
     - target: {fileID: 11435836, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
       propertyPath: gravity
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435836, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
+      propertyPath: bossLockDistanceY
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ffe0ed0d26e47f441b03dd26b790c23f, type: 2}
