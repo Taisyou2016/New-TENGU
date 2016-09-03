@@ -2187,7 +2187,8 @@ AudioSource:
   m_GameObject: {fileID: 199778}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24393296, guid: 89aebd9733942e94f9e93fe780337287,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2360,6 +2361,7 @@ MonoBehaviour:
   avoidanceTime: 0
   inAvoidanceTime: 0
   avoidanceMousePositionY: 0
+  lockEnemyList: []
 --- !u!114 &11452316
 MonoBehaviour:
   m_ObjectHideFlags: 1
