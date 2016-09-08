@@ -12,8 +12,7 @@ public class BossAttack : MonoBehaviour {
 
     void Start()
     {
-        se = gameObject.AddComponent<AudioSource>();
-
+        se = gameObject.GetComponent<AudioSource>();
     }
 
     // 1:六芒星 2:吹き飛ばし 3:かまいたち 4:竜巻

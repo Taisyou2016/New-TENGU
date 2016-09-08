@@ -22,7 +22,7 @@ public class EnemyAttack : MonoBehaviour {
         cooltime_M = 3.0f;
         cooltime_L = 3.0f;
 
-        se = gameObject.AddComponent<AudioSource>();
+        se = gameObject.GetComponent<AudioSource>();
     }
 
     /// <summary>
