@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Counter: 0
-  LimitTime: 10
+  LimitTime: 60
   m_fade: {fileID: 1252337031}
 --- !u!1 &1536772081
 GameObject:
@@ -1146,7 +1146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2083330760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1210,7 +1210,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "(A\u304BD\u3067\u30AB\u30FC\u30BD\u30EB\u79FB\u52D5 \u5DE6\u30AF\u30EA\u30C3\u30AF\u3067\u6C7A\u5B9A)"
+  m_Text: "(\u30B9\u30C6\u30A3\u30AF\u5DE6\u53F3\u3067\u5207\u308A\u66FF\u3048 A\u30DC\u30BF\u30F3\u3067\u6C7A\u5B9A)"
 --- !u!222 &2083330763
 CanvasRenderer:
   m_ObjectHideFlags: 0
