@@ -1211,7 +1211,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "(\u30B9\u30C6\u30A3\u30AF\u5DE6\u53F3\u3067\u5207\u308A\u66FF\u3048 A\u30DC\u30BF\u30F3\u3067\u6C7A\u5B9A)"
+  m_Text: "(\u30B9\u30C6\u30A3\u30C3\u30AF\u5DE6\u53F3\u3067\u5207\u308A\u66FF\u3048
+    A\u30DC\u30BF\u30F3\u3067\u6C7A\u5B9A)"
 --- !u!222 &2083330763
 CanvasRenderer:
   m_ObjectHideFlags: 0

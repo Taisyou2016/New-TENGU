@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Geme_Rule : MonoBehaviour {
 
@@ -31,7 +32,10 @@ public class Geme_Rule : MonoBehaviour {
     }
     // Update is called once per frame
 	void Update () {
-
+         if (Input.GetKeyDown(KeyCode.Escape))
+         {
+             SceneManager.LoadScene("title", LoadSceneMode.Single);
+         }
         if (GameObject.Find("Player") == null) return;
         if (Finish == true) return;
 

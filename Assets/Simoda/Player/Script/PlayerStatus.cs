@@ -85,10 +85,10 @@ public class PlayerStatus : MonoBehaviour
         if (currentInvincibleTime <= 0) //currentInvincibleTimeが0より小さくなったら無敵を解除
             invincible = false;
 
-        if (Input.GetKeyDown(KeyCode.K))
-            HpDamage(1);
-        if (Input.GetKeyDown(KeyCode.L))
-            HpDamage(3);
+        //if (Input.GetKeyDown(KeyCode.K))
+        //    HpDamage(1);
+        //if (Input.GetKeyDown(KeyCode.L))
+        //    HpDamage(3);
         //if (Input.GetKeyDown(KeyCode.J))
         //{
         //    playerAnimator.SetTrigger("Joy");
